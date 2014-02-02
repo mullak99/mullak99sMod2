@@ -12,8 +12,8 @@ Requirements:
 - 1) Download the Latest Minecraft Forge SRC for 1.6.4 http://files.minecraftforge.net/ and
 click "Download Zip" on the right on Github (For my mod SRC)
 - 2) Put the files in a folder of your choice and run "install.cmd" (Or whichever one for your OS)
-3) Let it install
-4) Once its finished go to "/mcp/src/minecraft" and drag the all the files from my mod SRC into there
+- 3) Let it install
+- 4) Once its finished go to "/mcp/src/minecraft" and drag the all the files from my mod SRC into there
 
 ~ Optional if you want to tweak the mod ~
 - 5) Launch eclipse (Or what ever you used)
