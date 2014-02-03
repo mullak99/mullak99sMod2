@@ -6,18 +6,20 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 
-public class oreAlpha extends Block {
+public class alphaStone extends Block {
 
-	public oreAlpha(int id, Material material) {
+	public alphaStone(int id, Material material) {
 		super(id, material);
+	
+		
+		
 		
 	}
 	
 	public int idDropped(int par1, Random par2Random, int par3) {
-		return mullak99.mullak99sMod.mullak99.dustAlpha.itemID;
+		return mullak99.mullak99sMod.mullak99.alphaCobble.blockID;
 	}
 	public int quantityDropped(Random random) {
-		return 8;
+		return 1;
 	}
-
 }

@@ -1,0 +1,22 @@
+[
+{
+  "modid": "mullak99's Mod",
+  "name": "mullak99's Mod",
+  "description": "mullak99's Mod adds many things to Minecraft, such as tools, armor and blocks",
+  "version": "Alpha 0.0.1",
+  "mcversion": "1.6.4",
+  "url": "",
+  "updateUrl": "",
+  "authors": [
+    "mullak99"
+  ],
+  "credits": "All credits go to mullak99, the coding, textures and idea",
+  "logoFile": "/assets/mullak99/logo/logo.png",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  "mod_MinecraftForge"
+  ]
+}
+]

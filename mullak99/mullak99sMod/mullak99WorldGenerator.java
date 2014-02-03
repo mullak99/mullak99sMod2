@@ -19,29 +19,20 @@ public class mullak99WorldGenerator implements IWorldGenerator {
 	}
 
 	private void generateSurface(World world, Random random, int BlockX, int BlockZ) {
-		for(int i =0; i<3; i++) {
+		for(int i =0; i<1; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(16);
+			int Ycoord = random.nextInt(12);
 			
-			(new WorldGenMinable (mullak99.oreMullite.blockID, 4)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			(new WorldGenMinable (mullak99.oreMullite.blockID, 2)).generate(world, random, Xcoord, Ycoord, Zcoord);
 		}
 		
-		for(int i =0; i<3; i++) {
+		for(int i =0; i<1; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(16);
+			int Ycoord = random.nextInt(12);
 			
-			(new WorldGenMinable (mullak99.oreRoxite.blockID, 4)).generate(world, random, Xcoord, Ycoord, Zcoord);
-		}
-		
-		for(int i =0; i<10; i++) {
-			int Xcoord = BlockX + random.nextInt(16);
-			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(63);
-				
-			(new WorldGenMinable (mullak99.oreCopper.blockID, 11)).generate(world, random, Xcoord, Ycoord, Zcoord);
-			
+			(new WorldGenMinable (mullak99.oreRoxite.blockID, 2)).generate(world, random, Xcoord, Ycoord, Zcoord);
 		}
 		
 		for(int i =0; i<10; i++) {
@@ -49,16 +40,25 @@ public class mullak99WorldGenerator implements IWorldGenerator {
 			int Zcoord = BlockZ + random.nextInt(16);
 			int Ycoord = random.nextInt(63);
 				
-			(new WorldGenMinable (mullak99.oreTin.blockID, 9)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			(new WorldGenMinable (mullak99.oreCopper.blockID, 10)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			
+		}
+		
+		for(int i =0; i<9; i++) {
+			int Xcoord = BlockX + random.nextInt(16);
+			int Zcoord = BlockZ + random.nextInt(16);
+			int Ycoord = random.nextInt(63);
+				
+			(new WorldGenMinable (mullak99.oreTin.blockID, 8)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			
 		}	
 		
-		for(int i =0; i<10; i++) {
+		for(int i =0; i<9; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
 			int Ycoord = random.nextInt(50);
 				
-			(new WorldGenMinable (mullak99.oreAlpha.blockID, 10)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			(new WorldGenMinable (mullak99.oreAlpha.blockID, 6)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			
 		}
 		
