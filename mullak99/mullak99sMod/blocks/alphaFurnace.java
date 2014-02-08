@@ -2,8 +2,12 @@ package mullak99.mullak99sMod.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.List;
 import java.util.Random;
 import mullak99.mullak99sMod.mullak99;
+import mullak99.mullak99sMod.mobs.mullak99EntityPlayer;
+import mullak99.mullak99sMod.tileentity.TileEntityAlphaFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -128,7 +132,7 @@ public class alphaFurnace extends BlockContainer
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, mullak99EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
         if (par1World.isRemote)
         {
@@ -136,11 +140,11 @@ public class alphaFurnace extends BlockContainer
         }
         else
         {
-            TileEntityFurnace tileentityfurnace = (TileEntityFurnace)par1World.getBlockTileEntity(par2, par3, par4);
+        	TileEntityAlphaFurnace tilefurnace = (TileEntityAlphaFurnace)par1World.getBlockTileEntity(par2, par3, par4);
 
-            if (tileentityfurnace != null)
+            if (tilefurnace != null)
             {
-                par5EntityPlayer.displayGUIFurnace(tileentityfurnace);
+                par5EntityPlayer.displayGUIFurnace(tilefurnace);
             }
 
             return true;
@@ -158,11 +162,11 @@ public class alphaFurnace extends BlockContainer
 
         if (par0)
         {
-            par1World.setBlock(par2, par3, par4, Block.furnaceBurning.blockID);
+            par1World.setBlock(par2, par3, par4, mullak99.alphaFurnaceBurning.blockID);
         }
         else
         {
-            par1World.setBlock(par2, par3, par4, Block.furnaceIdle.blockID);
+            par1World.setBlock(par2, par3, par4, mullak99.alphaFurnaceIdle.blockID);
         }
 
         keepFurnaceInventory = false;
@@ -219,7 +223,7 @@ public class alphaFurnace extends BlockContainer
      */
     public TileEntity createNewTileEntity(World par1World)
     {
-        return new TileEntityFurnace();
+        return new TileEntityAlphaFurnace();
     }
 
     /**
@@ -251,7 +255,7 @@ public class alphaFurnace extends BlockContainer
 
         if (par6ItemStack.hasDisplayName())
         {
-            ((TileEntityFurnace)par1World.getBlockTileEntity(par2, par3, par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
+            ((TileEntityAlphaFurnace)par1World.getBlockTileEntity(par2, par3, par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
         }
     }
 
@@ -264,7 +268,7 @@ public class alphaFurnace extends BlockContainer
     {
         if (!keepFurnaceInventory)
         {
-            TileEntityFurnace tileentityfurnace = (TileEntityFurnace)par1World.getBlockTileEntity(par2, par3, par4);
+        	TileEntityAlphaFurnace tileentityfurnace = (TileEntityAlphaFurnace)par1World.getBlockTileEntity(par2, par3, par4);
 
             if (tileentityfurnace != null)
             {
@@ -336,6 +340,12 @@ public class alphaFurnace extends BlockContainer
      */
     public int idPicked(World par1World, int par2, int par3, int par4)
     {
-        return Block.furnaceIdle.blockID;
+        return mullak99.alphaFurnaceIdle.blockID;
     }
+    
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    {
+    par3List.add("Currently not working!");
+    }
+
 }

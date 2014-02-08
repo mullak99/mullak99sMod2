@@ -56,8 +56,6 @@ public class enchantedMelon extends ItemFood
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
     par3List.add("Reference to a friend :)");
-    par3List.add("");
-    par3List.add("MELON");
     }
 
 }

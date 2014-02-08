@@ -20,8 +20,10 @@ import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import mullak99.mullak99sMod.CommonProxy;
 import mullak99.mullak99sMod.mullak99;
+import mullak99.mullak99sMod.registerMullak99Sounds;
 import mullak99.mullak99sMod.mobs.RenderMullak99Mob;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
 
@@ -42,6 +44,7 @@ public class ClientProxy extends CommonProxy
     {
     	
 		RenderingRegistry.registerEntityRenderingHandler(mullak99Mob.class, new RenderMullak99Mob(new ModelBiped(), 0.4F, 0));
+		MinecraftForge.EVENT_BUS.register(new registerMullak99Sounds());
     }
  
     @Override

@@ -15,6 +15,12 @@ public class mullak99FuelHandler implements IFuelHandler {
 				return 1600;
 				
 				}
+			
+			/*if(fuel.itemID == mullak99.redstoneBattery.itemID){
+				return 1600;
+				
+				}*/
+			
 			else
 			return 0;
 

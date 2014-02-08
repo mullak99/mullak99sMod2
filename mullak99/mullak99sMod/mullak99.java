@@ -9,7 +9,9 @@ import mullak99.mullak99sMod.mobs.mullak99Mob;
 import mullak99.mullak99sMod.armor.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,6 +27,7 @@ import net.minecraft.item.ItemAppleGold;
 import net.minecraft.item.ItemBucketMilk;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
@@ -48,7 +51,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.biome.BiomeGenBase;
-import mullak99.mullak99sMod.mullak99Util;
 
 @Mod (modid="mullak99's Mod", name="mullak99's Mod", version="")
 @NetworkMod (clientSideRequired=true, serverSideRequired=false)
@@ -73,6 +75,7 @@ public class mullak99 {
     public static Item dustCopper;
     public static Item dustTin;
     public static Item ingotBronze;
+    public static Item redstoneBattery;
     
     //Food
     public static Item enchantedMelon;
@@ -139,6 +142,8 @@ public class mullak99 {
     public static Block alphaFurnaceIdle;
     public static Block alphaFurnaceBurning;
     public static alphaLeaves alphaLeaves;
+    public static Block alphaGrass;
+    
     
 	
 	@Instance ("mullak99's Mod")
@@ -178,6 +183,14 @@ public class mullak99 {
 			return new ItemStack(roxite);	
 		}
 	};
+	
+	//DIM ID
+	
+		/*public static int DimID = 10;
+		
+		
+	//Biomes
+		public static final BiomeGenBase AlphaBiome = new AlphaBiome(10);*/
 	
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event) {
@@ -230,6 +243,8 @@ public class mullak99 {
 		dustTin = new Dust(1016).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustTin").setUnlocalizedName("tinDust");
 		ingotBronze = new ingotSteel(1017).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotBronze").setUnlocalizedName("ingotBronze");
 		
+		
+		redstoneBattery = new Battery(1032).setMaxStackSize(1).setMaxDamage(10).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:redstoneBattery").setUnlocalizedName("redstoneBattery");
 			
 			//Food
 			enchantedMelon = new enchantedMelon(1030, 20, 1.2F, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.id, 2400, 16, 1.0F).setPotionEffect(Potion.resistance.id, 2400, 16, 1.0F).setPotionEffect(Potion.fireResistance.id, 2400, 16, 1.0F).setCreativeTab(tabMullak99sModWIP).setUnlocalizedName("enchantedMelon").setTextureName("melon");
@@ -308,7 +323,8 @@ public class mullak99 {
 		alphaFurnaceIdle = new alphaFurnace(912, false).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModWIP).setUnlocalizedName("alphaFurnace").setCreativeTab(CreativeTabs.tabDecorations);
 	    alphaFurnaceBurning = new alphaFurnace(913, true).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setLightValue(0.875F).setUnlocalizedName("alphaFurnace");
 	    alphaLeaves = (alphaLeaves)(new alphaLeaves(914)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("alphaLeaves").setTextureName("mullak99:leaves");
-		
+	    alphaGrass = new alphaGrass(915).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("alphaGrass");
+	    
 		//Creative Tabs
 		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModI", "en_US", "mullak99's Mod Items");
 		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModB", "en_US", "mullak99's Mod Blocks");
@@ -332,6 +348,8 @@ public class mullak99 {
 		LanguageRegistry.addName(dustCopper, "Copper Dust");
 		LanguageRegistry.addName(dustTin, "Tin Dust");
 		LanguageRegistry.addName(ingotBronze, "Bronze Ingot");
+		
+		LanguageRegistry.addName(redstoneBattery, "Redstone Battery");
 		
 			//Food
 			LanguageRegistry.addName(enchantedMelon, "Michael Melon");
@@ -452,11 +470,18 @@ public class mullak99 {
 		GameRegistry.registerBlock(alphaLeaves, "alphaLeaves");
 		LanguageRegistry.addName(alphaLeaves, "Nostalgia Leaves");
 		
+		GameRegistry.registerBlock(alphaGrass, "alphaGrass");
+		LanguageRegistry.addName(alphaGrass, "Nostalgia Grass");
 		
 		
 		
-		//Crafting Handler
+		
+		//Handler
+		
+		GameRegistry.registerFuelHandler(new mullak99FuelHandler());
+		
 		GameRegistry.registerCraftingHandler(new mortarPestleHandler());
+		GameRegistry.registerCraftingHandler(new batteryHandler());
 		
 		//Container Item
 		
@@ -499,6 +524,14 @@ public class mullak99 {
 			GameRegistry.addRecipe(new ItemStack(alphaStone, 8), "SSS", "SDS", "SSS",
 					'S', Block.stone, 'D', dustAlpha);
 			
+			GameRegistry.addRecipe(new ItemStack(alphaGrass, 8), "GGG", "GDG", "GGG",
+					'G', Block.grass, 'D', dustAlpha);
+			
+			GameRegistry.addRecipe(new ItemStack(alphaLeaves, 8), "LLL", "LDL", "LLL",
+					'L', Block.leaves, 'D', dustAlpha);
+			
+			GameRegistry.addShapelessRecipe(new ItemStack(Block.grass), Block.dirt, (new ItemStack(Item.dyePowder, 2, 15)));
+			
 			/*GameRegistry.addRecipe(new ItemStack(alphaFurnaceIdle), "CCC", "C C", "CCC",
 					'C', alphaCobble);
 			*/
@@ -520,14 +553,11 @@ public class mullak99 {
 			GameRegistry.addShapelessRecipe(new ItemStack(ingotSteel), dustCharcoal, dustCharcoal, Item.ingotIron);
 			GameRegistry.addShapelessRecipe(new ItemStack(ingotSteel), dustCoal, dustCharcoal, Item.ingotIron);
 			
+			GameRegistry.addRecipe(new ItemStack(redstoneBattery), " C ", "TRT", "TCT",
+					'C', ingotCopper, 'T', ingotTin, 'R', Item.redstone);
+			
 			
 			//Mortar and Pestle
-			GameRegistry.addShapelessRecipe(new ItemStack(dustMullite), mullite, (new ItemStack(mortarPestle, 1, 32767)));
-			GameRegistry.addShapelessRecipe(new ItemStack(dustMullite, 2), oreMullite, (new ItemStack(mortarPestle, 1, 32767)));
-			
-			GameRegistry.addShapelessRecipe(new ItemStack(dustRoxite), roxite, (new ItemStack(mortarPestle, 1, 32767)));
-			GameRegistry.addShapelessRecipe(new ItemStack(dustRoxite, 2), oreRoxite, (new ItemStack(mortarPestle, 1, 32767)));
-			
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(dustCoal), Item.coal, (new ItemStack(mortarPestle, 1, 32767)));
 			GameRegistry.addShapelessRecipe(new ItemStack(dustCoal, 2), Block.oreCoal, (new ItemStack(mortarPestle, 1, 32767)));
@@ -686,6 +716,12 @@ public class mullak99 {
 		
 		//Render Register
 		proxy.registerRenderInformation();
+		
+		
+		/*//DIM
+		DimensionManager.registerProviderType(DimID, WorldProviderMullak99.class, true);
+		DimensionManager.registerDimension(DimID, DimID);*/
+		
 		
 
 	}
