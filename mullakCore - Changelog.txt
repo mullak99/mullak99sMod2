@@ -1,0 +1,6 @@
+~~~~~ mullak99Core ~~~~~
+
+-----------------------
+| - Alpha 0.0.1 - |
+
+- Initial Release

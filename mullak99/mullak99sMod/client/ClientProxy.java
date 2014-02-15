@@ -23,9 +23,11 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import mullak99.mullak99sMod.CommonProxy;
 import mullak99.mullak99sMod.mullak99;
+import mullak99.mullak99sMod.mullakUtil;
 import mullak99.mullak99sMod.registerMullak99Sounds;
 import mullak99.mullak99sMod.mobs.RenderMullak99Mob;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
+import mullak99.mullakCore.mullakCore;
 
 public class ClientProxy extends CommonProxy
 {
@@ -33,18 +35,16 @@ public class ClientProxy extends CommonProxy
 	@Override
     public void init(FMLInitializationEvent event)
     {
-        ClientProxy.setupCapes();
+        
     }
-	
-	public static Map<String, String> capeMap = new HashMap<String, String>();
-	
-	
 	
     public void registerRenderInformation()
     {
     	
 		RenderingRegistry.registerEntityRenderingHandler(mullak99Mob.class, new RenderMullak99Mob(new ModelBiped(), 0.4F, 0));
 		MinecraftForge.EVENT_BUS.register(new registerMullak99Sounds());
+		MinecraftForge.EVENT_BUS.register(new mullakCore());
+		MinecraftForge.EVENT_BUS.register(new mullakUtil());
     }
  
     @Override
@@ -54,41 +54,24 @@ public class ClientProxy extends CommonProxy
     }
     
 	
-	public static void setupCapes()
+	public void setupCapes()
     {
         try
         {
-            ClientProxy.updateCapeList();
+            mullak99.addDevCapes();
+            mullak99.addTesterCapes();
+            mullak99.addYoutuberCapes();
+            mullak99.addDonatorCapes1();
+            mullak99.addDonatorCapes2();
+            mullak99.addDonatorCapes3();
         }
         catch (Exception e)
         {
-            FMLLog.severe("Error while setting up mullak99's Mod donor capes");
+            FMLLog.severe("Error while setting up mullak99's Mod capes");
             e.printStackTrace();
         }
 
        
     }
 
-    private static void updateCapeList() throws Exception
-    {
-        int timeout = 10000;
-        URL capeListUrl = new URL("https://raw.github.com/mullak99/mullak99sMod2/master/capes.txt");
-        URLConnection connection = capeListUrl.openConnection();
-        connection.setConnectTimeout(timeout);
-        connection.setReadTimeout(timeout);
-        InputStream stream = connection.getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-
-        String line;
-        while ((line = reader.readLine()) != null)
-        {
-            if (line.contains(":"))
-            {
-                int splitLocation = line.indexOf(":");
-                String username = line.substring(0, splitLocation);
-                String capeUrl = "https://raw.github.com/mullak99/mullak99sMod2/master/capes" + line.substring(splitLocation + 1) + ".png";
-                ClientProxy.capeMap.put(username, capeUrl);
-            }
-        }
-    }
 }

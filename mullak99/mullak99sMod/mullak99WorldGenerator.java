@@ -22,7 +22,7 @@ public class mullak99WorldGenerator implements IWorldGenerator {
 		for(int i =0; i<1; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(12);
+			int Ycoord = random.nextInt(11);
 			
 			(new WorldGenMinable (mullak99.oreMullite.blockID, 2)).generate(world, random, Xcoord, Ycoord, Zcoord);
 		}
@@ -30,35 +30,35 @@ public class mullak99WorldGenerator implements IWorldGenerator {
 		for(int i =0; i<1; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(12);
+			int Ycoord = random.nextInt(11);
 			
 			(new WorldGenMinable (mullak99.oreRoxite.blockID, 2)).generate(world, random, Xcoord, Ycoord, Zcoord);
 		}
 		
-		for(int i =0; i<10; i++) {
+		for(int i =0; i<9; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(63);
+			int Ycoord = random.nextInt(64);
 				
-			(new WorldGenMinable (mullak99.oreCopper.blockID, 10)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			(new WorldGenMinable (mullak99.oreCopper.blockID, 8)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			
 		}
 		
 		for(int i =0; i<9; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(63);
+			int Ycoord = random.nextInt(64);
 				
 			(new WorldGenMinable (mullak99.oreTin.blockID, 8)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			
 		}	
 		
-		for(int i =0; i<9; i++) {
+		for(int i =0; i<8; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(50);
+			int Ycoord = random.nextInt(45);
 				
-			(new WorldGenMinable (mullak99.oreAlpha.blockID, 6)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			(new WorldGenMinable (mullak99.oreAlpha.blockID, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			
 		}
 		

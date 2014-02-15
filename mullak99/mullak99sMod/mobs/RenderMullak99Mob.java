@@ -22,7 +22,7 @@ public class RenderMullak99Mob extends RenderBiped {
 	}
 	
 	
-	
+	@SuppressWarnings(value = { "RenderMullak99Mob" })
 	public void RenderMullak99Mob(mullak99Mob par1, double par2, double par4, double par6, float par8, float par9)
 	{
 	super.doRenderLiving(par1, par2, par4, par6, par8, par9);

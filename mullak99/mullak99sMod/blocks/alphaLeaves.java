@@ -238,7 +238,7 @@ public class alphaLeaves extends BlockLeavesBase implements IShearable
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return Block.sapling.blockID;
+        return mullak99.alphaSapling.blockID;
     }
 
     /**
@@ -295,14 +295,6 @@ public class alphaLeaves extends BlockLeavesBase implements IShearable
         super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
     }
 
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-     */
-    public boolean isOpaqueCube()
-    {
-        return this.graphicsLevel;
-    }
 
     @SideOnly(Side.CLIENT)
 
@@ -323,6 +315,15 @@ public class alphaLeaves extends BlockLeavesBase implements IShearable
     {
         this.graphicsLevel = par1;
         this.iconType = par1 ? 0 : 1;
+    }
+    
+    /**
+     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
+     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+     */
+    public boolean isOpaqueCube()
+    {
+    	return this.graphicsLevel;
     }
 
     @SideOnly(Side.CLIENT)
@@ -366,7 +367,7 @@ public class alphaLeaves extends BlockLeavesBase implements IShearable
     @Override
     public boolean isShearable(ItemStack item, World world, int x, int y, int z)
     {
-        return false;
+        return true;
     }
 
     @Override

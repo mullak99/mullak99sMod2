@@ -7,13 +7,21 @@ import mullak99.mullak99sMod.items.*;
 import mullak99.mullak99sMod.mobs.RenderMullak99Mob;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
 import mullak99.mullak99sMod.armor.*;
+import mullak99.mullakCore.EntitySheepOverride;
+import mullak99.mullakCore.mullakCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
+import net.minecraft.block.BlockGlass;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPane;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.ThreadDownloadImageData;
+import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityEggInfo;
@@ -25,6 +33,7 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAppleGold;
 import net.minecraft.item.ItemBucketMilk;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
@@ -46,9 +55,11 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -79,6 +90,8 @@ public class mullak99 {
     
     //Food
     public static Item enchantedMelon;
+    public static Item muttonRaw;
+    public static Item muttonCooked;
     
     //Item
     public static Item bucketChocMilk;
@@ -134,6 +147,8 @@ public class mullak99 {
     public static Block blockCopper;
     public static Block oreTin;
     public static Block blockTin;
+    public static Block clearGlass;
+    /*public static Block thinClearGlass;*/
     public static Block oreAlpha;
     public static Block alphaCobble;
     public static Block alphaStone;
@@ -143,6 +158,7 @@ public class mullak99 {
     public static Block alphaFurnaceBurning;
     public static alphaLeaves alphaLeaves;
     public static Block alphaGrass;
+    public static Block alphaSapling;
     
     
 	
@@ -183,6 +199,11 @@ public class mullak99 {
 			return new ItemStack(roxite);	
 		}
 	};
+	public static CreativeTabs tabMullak99sModFood = new CreativeTabs("mullak99sModFood") {
+		public ItemStack getIconItemStack() {
+			return new ItemStack(muttonCooked);	
+		}
+	};
 	
 	//DIM ID
 	
@@ -218,66 +239,159 @@ public class mullak99 {
 	@SidedProxy (clientSide="mullak99.mullak99sMod.client.ClientProxy", serverSide="mullak99.mullak99sMod.CommonProxy")
 	public static CommonProxy proxy;
 	
+	@SideOnly(Side.CLIENT)
+	public static void addDevCapes() {
 
+		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DevCape/DevCape.png";
+		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DevCape/DevCapes.txt";
+		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		
+
+		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
+
+		for (String username : devs) {
+
+		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (TextureObject) image);
+		}
+		}
+	@SideOnly(Side.CLIENT)
+	public static void addTesterCapes() {
+
+		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/TesterCape/TesterCape.png";
+		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/TesterCape/TesterCapes.txt";
+		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		
+
+		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
+
+		for (String username : devs) {
+
+		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (TextureObject) image);
+		}
+		}
+	@SideOnly(Side.CLIENT)
+	public static void addYoutuberCapes() {
+
+		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/YoutuberCape/YoutuberCape.png";
+		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/YoutuberCape/YoutuberCapes.txt";
+		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		
+
+		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
+
+		for (String username : devs) {
+
+		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (TextureObject) image);
+		}
+		}
+	@SideOnly(Side.CLIENT)
+	public static void addDonatorCapes1() {
+
+		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape1.png";
+		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape1.txt";
+		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		
+
+		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
+
+		for (String username : devs) {
+
+		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (TextureObject) image);
+		}
+		}
+	@SideOnly(Side.CLIENT)
+	public static void addDonatorCapes2() {
+
+		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape2.png";
+		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape2.txt";
+		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		
+
+		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
+
+		for (String username : devs) {
+
+		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (TextureObject) image);
+		}
+		}
+	@SideOnly(Side.CLIENT)
+	public static void addDonatorCapes3() {
+
+		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape3.png";
+		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape3.txt";
+		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		
+
+		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
+
+		for (String username : devs) {
+
+		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (TextureObject) image);
+		}
+		}
 
 	@EventHandler
 	public void load (FMLInitializationEvent event) {
 		
 		
+		proxy.setupCapes();
 		
 		//Items
-		mullite = new mullite(1000).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:Mullite").setUnlocalizedName("mullite");
-		roxite = new roxite(1001).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:Roxite").setUnlocalizedName("roxite");
-		ingotCopper = new ingotCopper(1002).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotCopper").setUnlocalizedName("ingotCopper");
-		ingotSteel = new ingotSteel(1003).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotSteel").setUnlocalizedName("ingotSteel");
-		ingotTin = new ingotTin(1004).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotTin").setUnlocalizedName("ingotTin");
-		dustAlpha = new alphaDust(900).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:alphaDust").setUnlocalizedName("alphaDust");
-		mortarPestle = new mortarPestle(1005).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:mortarPestle").setUnlocalizedName("mortarPestle");
-		mortarPestleReinf = new mortarPestle(1006).setMaxStackSize(1).setMaxDamage(1024).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:mortarPestleReinf").setUnlocalizedName("mortarPestleReinf");
-		dustMullite = new Dust(1010).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustMullite").setUnlocalizedName("mulliteDust");
-		dustRoxite = new Dust(1011).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustRoxite").setUnlocalizedName("roxiteDust");
-		dustCoal = new Dust(1012).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustCoal").setUnlocalizedName("coalDust");
-		dustCharcoal = new Dust(1013).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustCoal").setUnlocalizedName("charcoalDust");
-		dustBronze = new Dust(1014).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustBronze").setUnlocalizedName("bronzeDust");
-		dustCopper = new Dust(1015).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustCopper").setUnlocalizedName("copperDust");
-		dustTin = new Dust(1016).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustTin").setUnlocalizedName("tinDust");
-		ingotBronze = new ingotSteel(1017).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotBronze").setUnlocalizedName("ingotBronze");
+		mullite = new mullite(1000).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:Mullite").setUnlocalizedName("mullak99:mullite");
+		roxite = new roxite(1001).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:Roxite").setUnlocalizedName("mullak99:roxite");
+		ingotCopper = new ingotCopper(1002).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotCopper").setUnlocalizedName("mullak99:ingotCopper");
+		ingotSteel = new ingotSteel(1003).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotSteel").setUnlocalizedName("mullak99:ingotSteel");
+		ingotTin = new ingotTin(1004).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotTin").setUnlocalizedName("mullak99:ingotTin");
+		dustAlpha = new alphaDust(900).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:alphaDust").setUnlocalizedName("mullak99:alphaDust");
+		dustMullite = new Dust(1010).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustMullite").setUnlocalizedName("mullak99:mulliteDust");
+		dustRoxite = new Dust(1011).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustRoxite").setUnlocalizedName("rmullak99:oxiteDust");
+		dustCoal = new Dust(1012).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustCoal").setUnlocalizedName("mullak99:coalDust");
+		dustCharcoal = new Dust(1013).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustCoal").setUnlocalizedName("mullak99:charcoalDust");
+		dustBronze = new Dust(1014).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustBronze").setUnlocalizedName("mullak99:bronzeDust");
+		dustCopper = new Dust(1015).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustCopper").setUnlocalizedName("mullak99:copperDust");
+		dustTin = new Dust(1016).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:dustTin").setUnlocalizedName("mullak99:tinDust");
+		ingotBronze = new ingotSteel(1017).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotBronze").setUnlocalizedName("mullak99:ingotBronze");
 		
 		
-		redstoneBattery = new Battery(1032).setMaxStackSize(1).setMaxDamage(10).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:redstoneBattery").setUnlocalizedName("redstoneBattery");
+		redstoneBattery = new Battery(1032).setMaxStackSize(1).setMaxDamage(10).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:redstoneBattery").setUnlocalizedName("mullak99:redstoneBattery");
 			
 			//Food
-			enchantedMelon = new enchantedMelon(1030, 20, 1.2F, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.id, 2400, 16, 1.0F).setPotionEffect(Potion.resistance.id, 2400, 16, 1.0F).setPotionEffect(Potion.fireResistance.id, 2400, 16, 1.0F).setCreativeTab(tabMullak99sModWIP).setUnlocalizedName("enchantedMelon").setTextureName("melon");
+			enchantedMelon = new enchantedMelon(1030, 20, 1.2F, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.id, 2400, 16, 1.0F).setPotionEffect(Potion.resistance.id, 2400, 16, 1.0F).setPotionEffect(Potion.fireResistance.id, 2400, 16, 1.0F).setCreativeTab(tabMullak99sModFood).setUnlocalizedName("mullak99:enchantedMelon").setTextureName("melon");
+			muttonRaw = (new ItemFood(1032, 3, 0.3F, true)).setCreativeTab(tabMullak99sModFood).setUnlocalizedName("mullak99:muttonRaw").setTextureName("mullak99:muttonRaw");
+			muttonCooked = (new ItemFood(1033, 8, 0.8F, true)).setCreativeTab(tabMullak99sModFood).setUnlocalizedName("mullak99:muttonCooked").setTextureName("mullak99:muttonCooked");
 		
 			//Drink
 			bucketChocMilk = new bucketChocMilk(1031).setUnlocalizedName("bucketChocMilk").setCreativeTab(tabMullak99sModWIP).setContainerItem(Item.bucketEmpty).setTextureName("mullak99:bucketChocMilk");
 		
 			
 			//Tools
-			pickaxeMullite = new pickaxeMullite(1500, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeMullite").setUnlocalizedName("pickaxeMullite");
-			shovelMullite = new shovelMullite(1501, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelMullite").setUnlocalizedName("shovelMullite");
-			swordMullite = new swordMullite(1502, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordMullite").setUnlocalizedName("swordMullite");
-			axeMullite = new axeMullite(1503, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeMullite").setUnlocalizedName("axeMullite");
-			hoeMullite = new hoeMullite(1504, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:hoeMullite").setUnlocalizedName("hoeMullite");
-			swordMulliteDE = new swordMulliteDE(1505, mulliteToolsDE).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordMulliteDE").setUnlocalizedName("swordMulliteDE");
+			pickaxeMullite = new pickaxeMullite(1500, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeMullite").setUnlocalizedName("mullak99:pickaxeMullite");
+			shovelMullite = new shovelMullite(1501, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelMullite").setUnlocalizedName("mullak99:shovelMullite");
+			swordMullite = new swordMullite(1502, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordMullite").setUnlocalizedName("mullak99:swordMullite");
+			axeMullite = new axeMullite(1503, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeMullite").setUnlocalizedName("mullak99:axeMullite");
+			hoeMullite = new hoeMullite(1504, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:hoeMullite").setUnlocalizedName("mullak99:hoeMullite");
+			swordMulliteDE = new swordMulliteDE(1505, mulliteToolsDE).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordMulliteDE").setUnlocalizedName("mullak99:swordMulliteDE");
 			
-			pickaxeRoxite = new pickaxeMullite(2500, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeRoxite").setUnlocalizedName("pickaxeRoxite");
-			shovelRoxite = new shovelMullite(2501, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelRoxite").setUnlocalizedName("shovelRoxite");
-			swordRoxite = new swordMullite(2502, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordRoxite").setUnlocalizedName("swordRoxite");
-			axeRoxite = new axeMullite(2503, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeRoxite").setUnlocalizedName("axeRoxite");
-			hoeRoxite = new hoeMullite(2504, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:hoeRoxite").setUnlocalizedName("hoeRoxite");
-			swordRoxiteDE = new swordMulliteDE(2505, mulliteToolsDE).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordRoxiteDE").setUnlocalizedName("swordRoxiteDE");
+			pickaxeRoxite = new pickaxeMullite(2500, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeRoxite").setUnlocalizedName("mullak99:pickaxeRoxite");
+			shovelRoxite = new shovelMullite(2501, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelRoxite").setUnlocalizedName("mullak99:shovelRoxite");
+			swordRoxite = new swordMullite(2502, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordRoxite").setUnlocalizedName("mullak99:swordRoxite");
+			axeRoxite = new axeMullite(2503, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeRoxite").setUnlocalizedName("mullak99:axeRoxite");
+			hoeRoxite = new hoeMullite(2504, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:hoeRoxite").setUnlocalizedName("mullak99:hoeRoxite");
+			swordRoxiteDE = new swordMulliteDE(2505, mulliteToolsDE).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordRoxiteDE").setUnlocalizedName("mullak99:swordRoxiteDE");
 			
-			pickaxeBronze = new pickaxeMullite(3500, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeBronze").setUnlocalizedName("pickaxeBronze");
-			shovelBronze = new shovelMullite(3501, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelBronze").setUnlocalizedName("shovelBronze");
-			swordBronze = new swordMullite(3502, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordBronze").setUnlocalizedName("swordBronze");
-			axeBronze = new axeMullite(3503, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeBronze").setUnlocalizedName("axeBronze");
-			hoeBronze = new hoeMullite(3504, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:hoeBronze").setUnlocalizedName("hoeBronze");
+			pickaxeBronze = new pickaxeMullite(3500, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeBronze").setUnlocalizedName("mullak99:pickaxeBronze");
+			shovelBronze = new shovelMullite(3501, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelBronze").setUnlocalizedName("mullak99:shovelBronze");
+			swordBronze = new swordMullite(3502, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordBronze").setUnlocalizedName("mullak99:swordBronze");
+			axeBronze = new axeMullite(3503, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeBronze").setUnlocalizedName("mullak99:axeBronze");
+			hoeBronze = new hoeMullite(3504, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:hoeBronze").setUnlocalizedName("mullak99:hoeBronze");
 			
-			pickaxeBedrock = new pickaxeMullite(4000, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeBedrock").setUnlocalizedName("pickaxeBedrock");
-			shovelBedrock = new shovelMullite(4001, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelBedrock").setUnlocalizedName("shovelBedrock");
-			swordBedrock = new swordMullite(4002, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordBedrock").setUnlocalizedName("sworBedrock");
-			axeBedrock = new axeMullite(4003, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeBedrock").setUnlocalizedName("axeBedrock");
+			pickaxeBedrock = new pickaxeMullite(4000, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeBedrock").setUnlocalizedName("mullak99:pickaxeBedrock");
+			shovelBedrock = new shovelMullite(4001, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelBedrock").setUnlocalizedName("mullak99:shovelBedrock");
+			swordBedrock = new swordMullite(4002, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordBedrock").setUnlocalizedName("mullak99:swordBedrock");
+			axeBedrock = new axeMullite(4003, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeBedrock").setUnlocalizedName("mullak99:axeBedrock");
+			
+			mortarPestle = new mortarPestle(1005).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:mortarPestle").setUnlocalizedName("mullak99:mortarPestle");
+			mortarPestleReinf = new mortarPestle(1006).setMaxStackSize(1).setMaxDamage(1024).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:mortarPestleReinf").setUnlocalizedName("mullak99:mortarPestleReinf");
 			
 			//Armor
 			
@@ -287,49 +401,53 @@ public class mullak99 {
 			int renderBronzeArmor = proxy.addArmor("bronzeArmor");
 			
 			
-			helmetMullite = new mulliteArmor(1600, mulliteArmor, renderMulliteArmor, 0).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:helmetMullite").setUnlocalizedName("helmetMullite");
-			chestMullite = new mulliteArmor(1601, mulliteArmor, renderMulliteArmor, 1).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:chestMullite").setUnlocalizedName("chestMullite");
-			legsMullite = new mulliteArmor(1602, mulliteArmor, renderMulliteArmor, 2).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:legsMullite").setUnlocalizedName("legsMullite");
-			bootsMullite = new mulliteArmor(1603, mulliteArmor, renderMulliteArmor, 3).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:bootsMullite").setUnlocalizedName("bootsMullite");
+			helmetMullite = new mulliteArmor(1600, mulliteArmor, renderMulliteArmor, 0).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:helmetMullite").setUnlocalizedName("mullak99:helmetMullite");
+			chestMullite = new mulliteArmor(1601, mulliteArmor, renderMulliteArmor, 1).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:chestMullite").setUnlocalizedName("mullak99:chestMullite");
+			legsMullite = new mulliteArmor(1602, mulliteArmor, renderMulliteArmor, 2).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:legsMullite").setUnlocalizedName("mullak99:legsMullite");
+			bootsMullite = new mulliteArmor(1603, mulliteArmor, renderMulliteArmor, 3).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:bootsMullite").setUnlocalizedName("mullak99:bootsMullite");
 			
-			helmetRoxite = new roxiteArmor(1610, mulliteArmor, renderRoxiteArmor, 0).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:helmetRoxite").setUnlocalizedName("helmetRoxite");
-			chestRoxite = new roxiteArmor(1611, mulliteArmor, renderRoxiteArmor, 1).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:chestRoxite").setUnlocalizedName("chestRoxite");
-			legsRoxite = new roxiteArmor(1612, mulliteArmor, renderRoxiteArmor, 2).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:legsRoxite").setUnlocalizedName("legsRoxite");
-			bootsRoxite = new roxiteArmor(1613, mulliteArmor, renderRoxiteArmor, 3).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:bootsRoxite").setUnlocalizedName("bootsRoxite");
+			helmetRoxite = new roxiteArmor(1610, mulliteArmor, renderRoxiteArmor, 0).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:helmetRoxite").setUnlocalizedName("mullak99:helmetRoxite");
+			chestRoxite = new roxiteArmor(1611, mulliteArmor, renderRoxiteArmor, 1).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:chestRoxite").setUnlocalizedName("mullak99:chestRoxite");
+			legsRoxite = new roxiteArmor(1612, mulliteArmor, renderRoxiteArmor, 2).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:legsRoxite").setUnlocalizedName("mullak99:legsRoxite");
+			bootsRoxite = new roxiteArmor(1613, mulliteArmor, renderRoxiteArmor, 3).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:bootsRoxite").setUnlocalizedName("mullak99:bootsRoxite");
 			
-			helmetBronze = new bronzeArmor(1620, bronzeArmor, renderBronzeArmor, 0).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:helmetBronze").setUnlocalizedName("helmetBronze");
-			chestBronze = new bronzeArmor(1621, bronzeArmor, renderBronzeArmor, 1).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:chestBronze").setUnlocalizedName("chestBronze");
-			legsBronze = new bronzeArmor(1622, bronzeArmor, renderBronzeArmor, 2).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:legsBronze").setUnlocalizedName("legsBronze");
-			bootsBronze = new bronzeArmor(1623, bronzeArmor, renderBronzeArmor, 3).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:bootsBronze").setUnlocalizedName("bootsBronze");
+			helmetBronze = new bronzeArmor(1620, bronzeArmor, renderBronzeArmor, 0).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:helmetBronze").setUnlocalizedName("mullak99:helmetBronze");
+			chestBronze = new bronzeArmor(1621, bronzeArmor, renderBronzeArmor, 1).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:chestBronze").setUnlocalizedName("mullak99:chestBronze");
+			legsBronze = new bronzeArmor(1622, bronzeArmor, renderBronzeArmor, 2).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:legsBronze").setUnlocalizedName("mullak99:legsBronze");
+			bootsBronze = new bronzeArmor(1623, bronzeArmor, renderBronzeArmor, 3).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:bootsBronze").setUnlocalizedName("mullak99:bootsBronze");
 			
 		//Blocks
-		oreMullite = new oreMullite(500, Material.rock).setHardness(4.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreMullite").setUnlocalizedName("oreMullite");
-		blockMullite = new genericBlock(501, Material.iron).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockMullite").setUnlocalizedName("blockMullite");
+		oreMullite = new oreMullite(500, Material.rock).setHardness(4.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreMullite").setUnlocalizedName("mullak99:oreMullite");
+		blockMullite = new genericBlock(501, Material.iron).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockMullite").setUnlocalizedName("mullak99:blockMullite");
 		
-		oreRoxite = new oreRoxite(502, Material.rock).setHardness(4.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreRoxite").setUnlocalizedName("oreRoxite");
-		blockRoxite = new genericBlock(503, Material.iron).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockRoxite").setUnlocalizedName("blockRoxite");
+		oreRoxite = new oreRoxite(502, Material.rock).setHardness(4.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreRoxite").setUnlocalizedName("mullak99:oreRoxite");
+		blockRoxite = new genericBlock(503, Material.iron).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockRoxite").setUnlocalizedName("mullak99:blockRoxite");
 		
-		oreCopper = new oreCopper(504, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreCopper").setUnlocalizedName("oreCopper");
-		blockCopper = new genericBlock(505, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockCopper").setUnlocalizedName("blockCopper");
+		oreCopper = new oreCopper(504, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreCopper").setUnlocalizedName("mullak99:oreCopper");
+		blockCopper = new genericBlock(505, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockCopper").setUnlocalizedName("mullak99:blockCopper");
 		
-		oreTin = new oreTin(506, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreTin").setUnlocalizedName("oreTin");
-		blockTin = new genericBlock(507, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockTin").setUnlocalizedName("blockTin");
+		oreTin = new oreTin(506, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreTin").setUnlocalizedName("mullak99:oreTin");
+		blockTin = new genericBlock(507, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockTin").setUnlocalizedName("mullak99:blockTin");
 		
 		blockBronze = new genericBlock(510, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockBronze").setUnlocalizedName("blockBronze");
+		clearGlass = new clearGlass(511, Material.glass, false).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setCreativeTab(tabMullak99sModB).setUnlocalizedName("mullak99:clearGlass").setTextureName("mullak99:clearGlass");
+		/*thinClearGlass = new clearGlassPane(512, "mullak99:clearGlass", "mullak99:clearGlass_pane_top", Material.glass, false).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("mullak99:thinClearGlass");*/
 		
-		oreAlpha = new oreAlpha(508, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreAlpha").setUnlocalizedName("oreAlpha");
-		alphaCobble = new genericBlock(910, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setResistance(10.0F).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:alphaCobble").setUnlocalizedName("alphaCobble");
-		alphaStone = new alphaStone(911, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setResistance(10.0F).setCreativeTab(tabMullak99sModWIP).setTextureName("stone").setUnlocalizedName("alphaStone");
-		alphaFurnaceIdle = new alphaFurnace(912, false).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModWIP).setUnlocalizedName("alphaFurnace").setCreativeTab(CreativeTabs.tabDecorations);
-	    alphaFurnaceBurning = new alphaFurnace(913, true).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setLightValue(0.875F).setUnlocalizedName("alphaFurnace");
-	    alphaLeaves = (alphaLeaves)(new alphaLeaves(914)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("alphaLeaves").setTextureName("mullak99:leaves");
-	    alphaGrass = new alphaGrass(915).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("alphaGrass");
+		oreAlpha = new oreAlpha(508, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreAlpha").setUnlocalizedName("mullak99:oreAlpha");
+		alphaCobble = new genericBlock(910, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setResistance(10.0F).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:alphaCobble").setUnlocalizedName("mullak99:alphaCobble");
+		alphaStone = new alphaStone(911, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setResistance(10.0F).setCreativeTab(tabMullak99sModWIP).setTextureName("stone").setUnlocalizedName("mullak99:alphaStone");
+		alphaFurnaceIdle = new alphaFurnace(912, false).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModWIP).setUnlocalizedName("mullak99:alphaFurnace").setCreativeTab(CreativeTabs.tabDecorations);
+	    alphaFurnaceBurning = new alphaFurnace(913, true).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setLightValue(0.875F).setUnlocalizedName("mullak99:alphaFurnace");
+	    alphaLeaves = (alphaLeaves)(new alphaLeaves(914)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaLeaves").setTextureName("mullak99:leaves");
+	    alphaGrass = new alphaGrass(915).setHardness(0.2F).setCreativeTab(tabMullak99sModWIP).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaGrass");
+	    alphaSapling = new alphaSapling(916).setHardness(0.0F).setCreativeTab(tabMullak99sModWIP).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaSapling").setTextureName("mullak99:alphaSapling");
 	    
 		//Creative Tabs
-		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModI", "en_US", "mullak99's Mod Items");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModB", "en_US", "mullak99's Mod Blocks");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWP", "en_US", "mullak99's Mod Weaponry");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWIP", "en_US", "mullak99's Mod WIP");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModI", "en_US", "mullak99's Mod | Items");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModB", "en_US", "mullak99's Mod | Blocks");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWP", "en_US", "mullak99's Mod | Tools");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWIP", "en_US", "mullak99's Mod | WIP");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModFood", "en_US", "mullak99's Mod | Food");
 		
 		//Items
 		LanguageRegistry.addName(mullite, "Mullite");
@@ -353,6 +471,9 @@ public class mullak99 {
 		
 			//Food
 			LanguageRegistry.addName(enchantedMelon, "Michael Melon");
+			LanguageRegistry.addName(muttonRaw, "Raw Mutton");
+			LanguageRegistry.addName(muttonCooked, "Cooked Mutton");
+			
 			
 			//Drink
 			LanguageRegistry.addName(bucketChocMilk, "Chocolate Milk");
@@ -443,6 +564,12 @@ public class mullak99 {
 		LanguageRegistry.addName(blockTin, "Tin Block");
 		MinecraftForge.setBlockHarvestLevel(blockTin, "pickaxe", 1);
 		
+		GameRegistry.registerBlock(clearGlass, "clearGlass");
+		LanguageRegistry.addName(clearGlass, "Clear Glass");
+		
+		/*GameRegistry.registerBlock(thinClearGlass, "thinClearGlass");
+		//LanguageRegistry.addName(thinClearGlass, "Clear Glass Pane");*/
+		
 		GameRegistry.registerBlock(alphaCobble, "alphaCobble");
 		LanguageRegistry.addName(alphaCobble, "Nostalgia Cobblestone");
 		MinecraftForge.setBlockHarvestLevel(alphaCobble, "pickaxe", 0);
@@ -472,6 +599,9 @@ public class mullak99 {
 		
 		GameRegistry.registerBlock(alphaGrass, "alphaGrass");
 		LanguageRegistry.addName(alphaGrass, "Nostalgia Grass");
+		
+		GameRegistry.registerBlock(alphaSapling, "alphaSapling");
+		LanguageRegistry.addName(alphaSapling, "Nostalgia Sapling");
 		
 		
 		
@@ -514,8 +644,8 @@ public class mullak99 {
 					'C', ingotCopper);
 			GameRegistry.addShapelessRecipe(new ItemStack(ingotCopper, 9), blockCopper);
 		
-			GameRegistry.addRecipe(new ItemStack(blockTin), "TTT", "TTT", "TTT",
-					'T', ingotTin);
+			/*GameRegistry.addRecipe(new ItemStack(thinClearGlass, 16), "GGG", "GGG",
+					'G', clearGlass);*/
 			GameRegistry.addShapelessRecipe(new ItemStack(ingotTin, 9), blockTin);
 			
 			GameRegistry.addRecipe(new ItemStack(alphaCobble, 8), "CCC", "CDC", "CCC",
@@ -529,6 +659,9 @@ public class mullak99 {
 			
 			GameRegistry.addRecipe(new ItemStack(alphaLeaves, 8), "LLL", "LDL", "LLL",
 					'L', Block.leaves, 'D', dustAlpha);
+			
+			GameRegistry.addRecipe(new ItemStack(alphaSapling, 8), "SSS", "SDS", "SSS",
+					'S', Block.sapling, 'D', dustAlpha);
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(Block.grass), Block.dirt, (new ItemStack(Item.dyePowder, 2, 15)));
 			
@@ -573,6 +706,8 @@ public class mullak99 {
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(dustBronze), ingotBronze, (new ItemStack(mortarPestle, 1, 32767)));
 			
+			GameRegistry.addShapelessRecipe(new ItemStack(Block.cobblestone), alphaCobble, (new ItemStack(mortarPestle, 1, 32767)));
+			
 			//Reinforced Mortar and Pestle
 			GameRegistry.addShapelessRecipe(new ItemStack(dustMullite), mullite, (new ItemStack(mortarPestleReinf, 1, 32767)));
 			GameRegistry.addShapelessRecipe(new ItemStack(dustMullite, 2), oreMullite, (new ItemStack(mortarPestleReinf, 1, 32767)));
@@ -594,6 +729,8 @@ public class mullak99 {
 			GameRegistry.addShapelessRecipe(new ItemStack(dustTin, 2), oreTin, (new ItemStack(mortarPestleReinf, 1, 32767)));
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(dustBronze), ingotBronze, (new ItemStack(mortarPestleReinf, 1, 32767)));
+			
+			GameRegistry.addShapelessRecipe(new ItemStack(Block.cobblestone), alphaCobble, (new ItemStack(mortarPestleReinf, 1, 32767)));
 			
 			//Food
 			GameRegistry.addRecipe(new ItemStack(enchantedMelon), "DAG", "AMA", "GAD",
@@ -689,8 +826,9 @@ public class mullak99 {
 		GameRegistry.addSmelting(oreRoxite.blockID, new ItemStack(roxite), 0.1F);
 		GameRegistry.addSmelting(oreCopper.blockID, new ItemStack(ingotCopper), 0.1F);
 		GameRegistry.addSmelting(oreTin.blockID, new ItemStack(ingotTin), 0.1F);
+		GameRegistry.addSmelting(muttonRaw.itemID, new ItemStack(muttonCooked), 0.1F);
 		
-		GameRegistry.addSmelting(alphaCobble.blockID, new ItemStack(Block.stone), 0F);
+		//GameRegistry.addSmelting(alphaCobble.blockID, new ItemStack(Block.stone), 0F);
 		
 		GameRegistry.addSmelting(dustMullite.itemID, new ItemStack(mullite), 0F);
 		GameRegistry.addSmelting(dustRoxite.itemID, new ItemStack(roxite), 0F);
@@ -699,6 +837,7 @@ public class mullak99 {
 		GameRegistry.addSmelting(dustBronze.itemID, new ItemStack(ingotBronze), 0F);
 		GameRegistry.addSmelting(dustCoal.itemID, new ItemStack(Item.coal), 0F);
 		GameRegistry.addSmelting(dustCharcoal.itemID, new ItemStack(Item.coal, 1, 1), 0F);
+		GameRegistry.addSmelting(Block.glass.blockID, new ItemStack(clearGlass), 0.1F);
 		
 		
 		//World Gen
