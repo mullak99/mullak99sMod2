@@ -3,7 +3,7 @@
   "modid": "mullak99's Mod",
   "name": "mullak99's Mod",
   "description": "mullak99's Mod adds many things to Minecraft, such as tools, armor and blocks",
-  "version": "Pre-Alpha 0.0.1",
+  "version": "Alpha 0.0.1",
   "mcversion": "1.6.4",
   "url": "",
   "updateUrl": "",
@@ -16,7 +16,8 @@
   ],
   "parent":"",
   "dependencies": [
-  "mod_MinecraftForge"
+  "mod_MinecraftForge
+  mullakCore Alpha 0.0.1"
   ]
 }
 ]
