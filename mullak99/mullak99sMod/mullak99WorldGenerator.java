@@ -62,6 +62,15 @@ public class mullak99WorldGenerator implements IWorldGenerator {
 			
 		}
 		
+		for(int i =0; i<6; i++) {
+			int Xcoord = BlockX + random.nextInt(16);
+			int Zcoord = BlockZ + random.nextInt(16);
+			int Ycoord = random.nextInt(45);
+				
+			(new WorldGenMinable (mullak99.oreAluminium.blockID, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			
+		}
+		
 	}
 
 }

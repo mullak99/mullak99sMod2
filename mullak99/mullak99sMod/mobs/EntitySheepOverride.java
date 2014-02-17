@@ -1,4 +1,4 @@
-package mullak99.mullakCore;
+package mullak99.mullak99sMod.mobs;
 
 import java.util.Random;
 

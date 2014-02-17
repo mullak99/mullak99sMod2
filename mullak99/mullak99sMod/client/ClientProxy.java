@@ -12,6 +12,8 @@ import java.util.Map;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -25,6 +27,9 @@ import mullak99.mullak99sMod.CommonProxy;
 import mullak99.mullak99sMod.mullak99;
 import mullak99.mullak99sMod.mullakUtil;
 import mullak99.mullak99sMod.registerMullak99Sounds;
+import mullak99.mullak99sMod.feature.AlphaTreeBonemeal;
+import mullak99.mullak99sMod.gui.MCraftingGUIHandler;
+import mullak99.mullak99sMod.mobs.EntitySheepOverride;
 import mullak99.mullak99sMod.mobs.RenderMullak99Mob;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
 import mullak99.mullakCore.mullakCore;
@@ -42,9 +47,12 @@ public class ClientProxy extends CommonProxy
     {
     	
 		RenderingRegistry.registerEntityRenderingHandler(mullak99Mob.class, new RenderMullak99Mob(new ModelBiped(), 0.4F, 0));
+		NetworkRegistry.instance().registerGuiHandler(mullak99.instance, (IGuiHandler) new MCraftingGUIHandler());
 		MinecraftForge.EVENT_BUS.register(new registerMullak99Sounds());
 		MinecraftForge.EVENT_BUS.register(new mullakCore());
 		MinecraftForge.EVENT_BUS.register(new mullakUtil());
+		MinecraftForge.EVENT_BUS.register(new EntitySheepOverride(null));
+		MinecraftForge.EVENT_BUS.register(new AlphaTreeBonemeal());
     }
  
     @Override
@@ -64,10 +72,12 @@ public class ClientProxy extends CommonProxy
             mullak99.addDonatorCapes1();
             mullak99.addDonatorCapes2();
             mullak99.addDonatorCapes3();
+            
+            FMLLog.fine("[mullak99's Mod] Done: Loaded Capes Sucsessfully");
         }
         catch (Exception e)
         {
-            FMLLog.severe("Error while setting up mullak99's Mod capes");
+            FMLLog.severe("[mullak99's Mod] Error: while setting up mullak99's Mod capes");
             e.printStackTrace();
         }
 

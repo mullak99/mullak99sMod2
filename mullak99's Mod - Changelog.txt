@@ -16,3 +16,28 @@
 - Almost added Clear Glass Panes
 
 *- mullak99's Mod is now dependant on mullakCore
+
+-------------------
+| - Alpha 0.0.2 - |
+
+- Nostalgia Trees now grow
+- Added Advanced Crating Table
+- Added Paxels
+- Added Grates
+- Added Steel Hammer (Repairing)
+- Added Essence Extracter
+- Added Bauxite Ore
+- Added Bauxite
+- Added Aluminium Ingot
+- Added Aluminium Dust
+- Added Aluminium Oxide
+- Added Aluminium Block
+- Added Steel Armor
+- Added Steel Tools
+- Added Clear Glass Panes
+
+- Changed Steel Ingot Recipes
+- Changed ore spawning rates
+- Changed Mutton item ID due to conflict with the Redstone Battery (All Cooked Mutton will turn into Raw Mutton)
+
+- Removed Nostalgia Leaves crafting recipe, Nostalgia Trees can be grown then shorn

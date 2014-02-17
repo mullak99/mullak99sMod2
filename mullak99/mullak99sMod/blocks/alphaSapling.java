@@ -5,7 +5,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
+import mullak99.mullak99sMod.mullak99;
 import mullak99.mullak99sMod.feature.WorldGenAlphaTree;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -141,6 +143,16 @@ public class alphaSapling extends BlockFlower
             }
         }
     }
+    
+    /**
+     * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
+     * blockID passed in. Args: blockID
+     */
+    protected boolean canThisPlantGrowOnThisBlockID(int par1)
+    {
+        return par1 == Block.grass.blockID || par1 == Block.dirt.blockID || par1 == Block.tilledField.blockID || par1 == mullak99.alphaGrass.blockID;
+    }
+
 
     /**
      * Determines if the same sapling is present at the given location.

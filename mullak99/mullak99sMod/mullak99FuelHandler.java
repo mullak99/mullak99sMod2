@@ -21,6 +21,11 @@ public class mullak99FuelHandler implements IFuelHandler {
 				
 				}*/
 			
+			if(fuel.itemID == mullak99.alphaSapling.blockID){
+				return 100;
+				
+				}
+			
 			else
 			return 0;
 

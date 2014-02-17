@@ -1,6 +1,17 @@
 ~~~~~ mullak99Core ~~~~~
 
------------------------
+-------------------
 | - Alpha 0.0.1 - |
 
 - Initial Release
+
+
+-------------------
+| - Alpha 0.0.2 - |
+
+- Added ToolPaxel
+
+- Removed EntitySheepOverride (It's now part of mullak99sMod2 main classes)
+- Removed all imports from mullak99.mullak99sMod.* (So mullakCore can be run standalone)
+
+*- mullakCore can be used as a Core of any other mod that anyone is creating by adding its source to your mod files

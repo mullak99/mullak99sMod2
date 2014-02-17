@@ -16,9 +16,6 @@ public class WorldGenAlphaTree extends WorldGenerator
     /** The minimum height of a generated tree. */
     private final int minTreeHeight;
 
-    /** True if this tree should grow Vines. */
-    private final boolean vinesGrow;
-
     /** The metadata value of the wood to use in tree generation. */
     private final int metaWood;
 
@@ -36,8 +33,9 @@ public class WorldGenAlphaTree extends WorldGenerator
         this.minTreeHeight = par2;
         this.metaWood = par3;
         this.metaLeaves = par4;
-        this.vinesGrow = par5;
     }
+    
+    
 
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
@@ -78,6 +76,7 @@ public class WorldGenAlphaTree extends WorldGenerator
                             if (!par1World.isAirBlock(l1, i1, j1) &&
                                 !block.isLeaves(par1World, l1, i1, j1) &&
                                  k1 != Block.dirt.blockID &&
+                                 k1 != Block.grass.blockID &&
                                  k1 != mullak99.alphaGrass.blockID &&
                                 !block.isWood(par1World, l1, i1, j1))
                             {
