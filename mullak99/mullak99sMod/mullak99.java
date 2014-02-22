@@ -5,9 +5,12 @@ import mullak99.mullak99sMod.blocks.*;
 import mullak99.mullak99sMod.client.ClientProxy;
 import mullak99.mullak99sMod.container.MCraftingManager;
 import mullak99.mullak99sMod.feature.AlphaTreeBonemeal;
+import mullak99.mullak99sMod.gui.MCraftingGUIHandler;
 import mullak99.mullak99sMod.items.*;
+import mullak99.mullak99sMod.mobs.EntitySheepOverride;
 import mullak99.mullak99sMod.mobs.RenderMullak99Mob;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
+import mullak99.mullak99sMod.mobs.ThundercoyoteMob;
 import mullak99.mullak99sMod.armor.*;
 import mullak99.mullakCore.mullakCore;
 import net.minecraft.block.Block;
@@ -52,7 +55,9 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -64,6 +69,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.biome.BiomeGenBase;
+import mullak99.mullakCore.HandTool;
 import mullak99.mullakCore.mullakCore;
 import mullak99.mullakCore.ToolPaxel;
 
@@ -100,6 +106,9 @@ public class mullak99 {
     public static Item ingotAluminium;
     public static Item dustAluminium;
     public static Item bauxite;
+    public static Item blood;
+    public static Item mullak99Spawn;
+    public static Item ThundercoyoteSpawn;
     
     public static Item ingotSteelRaw;
     public static Item grate;
@@ -208,7 +217,6 @@ public class mullak99 {
 	public static EnumToolMaterial bronzeTools = EnumHelper.addToolMaterial("Bronze", 2, 300, 6.0F, 2.0F, 14);
 	public static EnumToolMaterial steelTools = EnumHelper.addToolMaterial("Steel", 2, 500, 7.5F, 3.0F, 15);
 	public static EnumToolMaterial bedrockTools = EnumHelper.addToolMaterial("Bedrock", 10, -1, 99999999999999999999999999999999999999.9F, 999999999, 999999999);
-	public static EnumToolMaterial nullTool = EnumHelper.addToolMaterial("Null", 1, 1, 1.0F, 1, 1);
 	
 	//Enum Armor Material
 	public static EnumArmorMaterial mulliteArmor = EnumHelper.addArmorMaterial("Mullite", 40, new int[]{4, 8, 6, 4}, 25);
@@ -245,7 +253,7 @@ public class mullak99 {
 		}
 	};
 	
-		
+	
 		
 	//Biome's
 	//public static final BiomeGenBase alphaBiome = new alphaBiomeGen(alphaID);
@@ -254,24 +262,16 @@ public class mullak99 {
 	public void PreInit (FMLPreInitializationEvent event) {
 
 		
-		
-		registerEntity(mullak99Mob.class, "mullak99", 0x000FF00, 0x000000);
+		NetworkRegistry.instance().registerGuiHandler(mullak99.instance, (IGuiHandler) new MCraftingGUIHandler());
+		mullakCore.registerEntity(mullak99Mob.class, "mullak99", 0x000FF00, 0x000000);
+		mullakCore.registerEntity(ThundercoyoteMob.class, "Thundercoyote", 0x7F7F7F, 0x000000);
 		LanguageRegistry.instance().addStringLocalization("entity.mullak99.name", "mullak99");
-		
+		LanguageRegistry.instance().addStringLocalization("entity.Thundercoyote.name", "Thundercoyote");
+
 	}
 		
-		public void registerEntity(Class<? extends Entity> entityClass, String entityName, int bkEggColor, int fgEggColor) {
-			int id = EntityRegistry.findGlobalUniqueEntityId();
-
-			EntityRegistry.registerGlobalEntityID(entityClass, entityName, id);
-			EntityList.entityEggs.put(Integer.valueOf(id), new EntityEggInfo(id, bkEggColor, fgEggColor));
-			}
-
-			public void addSpawn(Class<? extends EntityLiving> entityClass, int spawnProb, int min, int max, BiomeGenBase[] biomes) {
-			if (spawnProb > 0) {
-			EntityRegistry.addSpawn(entityClass, spawnProb, min, max, EnumCreatureType.creature, biomes);
-			}
-	}
+		
+	
 						
 			
 	@SidedProxy (clientSide="mullak99.mullak99sMod.client.ClientProxy", serverSide="mullak99.mullak99sMod.CommonProxy")
@@ -410,7 +410,7 @@ public class mullak99 {
 		
 			//Drink
 			bucketChocMilk = new bucketChocMilk(1031).setUnlocalizedName("bucketChocMilk").setCreativeTab(tabMullak99sModWIP).setContainerItem(Item.bucketEmpty).setTextureName("mullak99:bucketChocMilk");
-		
+			blood = new blood(1036).setMaxStackSize(64).setCreativeTab(tabMullak99sModWIP).setTextureName("mullak99:blood").setUnlocalizedName("mullak99:blood");
 			
 			//Tools
 			pickaxeMullite = new pickaxeMullite(1500, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeMullite").setUnlocalizedName("mullak99:pickaxeMullite");
@@ -455,8 +455,8 @@ public class mullak99 {
 			
 			mortarPestle = new mortarPestle(1005).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:mortarPestle").setUnlocalizedName("mullak99:mortarPestle");
 			mortarPestleReinf = new mortarPestle(1006).setMaxStackSize(1).setMaxDamage(1024).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:mortarPestleReinf").setUnlocalizedName("mullak99:mortarPestleReinf");
-			steelHammer = new HandTool(1007, nullTool).setMaxStackSize(1).setMaxDamage(16).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:steelHammer").setUnlocalizedName("mullak99:steelHammer");
-			essenceExtractor = new HandTool(1008, nullTool).setMaxStackSize(1).setMaxDamage(16).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:essenceExtractor").setUnlocalizedName("mullak99:essenceExtractor");
+			steelHammer = new HandTool(1007, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(16).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:steelHammer").setUnlocalizedName("mullak99:steelHammer");
+			essenceExtractor = new HandTool(1008, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(16).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:essenceExtractor").setUnlocalizedName("mullak99:essenceExtractor");
 			
 			//Armor
 			
@@ -567,6 +567,7 @@ public class mullak99 {
 			
 			//Drink
 			LanguageRegistry.addName(bucketChocMilk, "Chocolate Milk");
+			LanguageRegistry.addName(blood, "Blood");
 		
 			//Tools
 			LanguageRegistry.addName(pickaxeMullite, "Mullite Pickaxe");
@@ -635,10 +636,10 @@ public class mullak99 {
 			//Mob
 			
 			
-			EntityRegistry.registerModEntity(mullak99Mob.class, "mullak99", 5, this, 10, 10, true);
-
-
-			LanguageRegistry.instance().addStringLocalization("entity.mullak99Mob.name", "mullak99");
+			//EntityRegistry.registerModEntity(mullak99Mob.class, "mullak99", 5, this, 10, 10, true);
+			MinecraftForge.EVENT_BUS.register(new EntitySheepOverride(null));
+			LanguageRegistry.instance().addStringLocalization("entity.mullak99.name", "mullak99");
+			LanguageRegistry.instance().addStringLocalization("entity.Thundercoyote.name", "Thundercoyote");
 			
 		
 		//Blocks
@@ -725,7 +726,7 @@ public class mullak99 {
 		LanguageRegistry.addName(blockAluminium, "Aluminium Block");
 		MinecraftForge.setBlockHarvestLevel(blockAluminium, "pickaxe", 1);
 		
-		
+		MinecraftForge.EVENT_BUS.register(new AlphaTreeBonemeal());
 		
 		
 		//Handlers
@@ -1086,6 +1087,7 @@ public class mullak99 {
 		
 		//Render Register
 		proxy.registerRenderInformation();
+		
 		
 		
 		/*//DIM

@@ -106,12 +106,12 @@ import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.client.entity.AbstractClientPlayer;
 
-public class mullak99Mob extends EntityMob
+public class ThundercoyoteMob extends EntityMob
 {
 
 
 
-	public mullak99Mob(World par1World) {
+	public ThundercoyoteMob(World par1World) {
 		
 		super(par1World);
 		
@@ -119,31 +119,35 @@ public class mullak99Mob extends EntityMob
 		this.getNavigator().setBreakDoors(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityPlayer.class, 4.0D, false));
-		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, ThundercoyoteMob.class, 4.0D, false));
+		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, mullak99Mob.class, 4.0D, false));
 		this.tasks.addTask(5, new EntityAIBreakDoor(this));
 		this.tasks.addTask(5, new EntityAIWander(this, 2.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, ThundercoyoteMob.class, 8.0F));
+		this.tasks.addTask(6, new EntityAIWatchClosest(this, mullak99Mob.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, ThundercoyoteMob.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, mullak99Mob.class, 0, true));
 		this.targetTasks.addTask(3, new EntityAIMoveTowardsTarget(this, 2.0D, 0.1F));
 	
 	}    
+	
+	@Override
+    public boolean canAttackClass(Class par1Class)
+    {
+      return mullak99Mob.class != null;
+    }
 
-    
+
+    protected int getDropItemId()
+    {
+        return mullak99.dustAlpha.itemID;
+    }
+
     protected boolean isAIEnabled()
     {
         return false;
     }
-    
-    @Override
-    public boolean canAttackClass(Class par1Class)
-    {
-      return ThundercoyoteMob.class != null;
-    }
-
 
     protected void dropFewItems(boolean par1, int par2)
     {
@@ -159,28 +163,27 @@ public class mullak99Mob extends EntityMob
         }
     }
     
-	    @Override
-	    protected boolean canDespawn()
-	    {
-	    return false;
-	    }
-    
-    
+    @Override
+    protected boolean canDespawn()
+    {
+    return false;
+    }
+
 	    protected String getLivingSound()
 	    {
-	        return "mullak99:mob/mullak99_Living";
+	        return "mullak99:mob/Thundercoyote_Living";
 	    }
 
 
 	    protected String getHurtSound()
 	    {
-	        return "mullak99:mob/mullak99_Hurt";
+	        return "mullak99:mob/Thundercoyote_Hurt";
 	    }
 
 
 	    protected String getDeathSound()
 	    {
-	        return "mullak99:mob/mullak99_Death";
+	        return "mullak99:mob/Thundercoyote_Death";
 	    }
 
 	    @Override
@@ -199,7 +202,7 @@ public class mullak99Mob extends EntityMob
 	    }
 	    
 	    public String getDisplayName(){
-	    	return "mullak99";
+	    	return "Thundercoyote";
 	    	}
 	    
 

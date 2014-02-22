@@ -15,3 +15,8 @@
 - Removed all imports from mullak99.mullak99sMod.* (So mullakCore can be run standalone)
 
 *- mullakCore can be used as a Core of any other mod that anyone is creating by adding its source to your mod files
+
+-------------------
+| - Alpha 0.0.3 - |
+
+- Added registerEntity()

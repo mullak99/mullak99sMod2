@@ -8,7 +8,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -31,7 +30,9 @@ import mullak99.mullak99sMod.feature.AlphaTreeBonemeal;
 import mullak99.mullak99sMod.gui.MCraftingGUIHandler;
 import mullak99.mullak99sMod.mobs.EntitySheepOverride;
 import mullak99.mullak99sMod.mobs.RenderMullak99Mob;
+import mullak99.mullak99sMod.mobs.RenderThundercoyoteMob;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
+import mullak99.mullak99sMod.mobs.ThundercoyoteMob;
 import mullak99.mullakCore.mullakCore;
 
 public class ClientProxy extends CommonProxy
@@ -46,13 +47,12 @@ public class ClientProxy extends CommonProxy
     public void registerRenderInformation()
     {
     	
-		RenderingRegistry.registerEntityRenderingHandler(mullak99Mob.class, new RenderMullak99Mob(new ModelBiped(), 0.4F, 0));
-		NetworkRegistry.instance().registerGuiHandler(mullak99.instance, (IGuiHandler) new MCraftingGUIHandler());
 		MinecraftForge.EVENT_BUS.register(new registerMullak99Sounds());
 		MinecraftForge.EVENT_BUS.register(new mullakCore());
 		MinecraftForge.EVENT_BUS.register(new mullakUtil());
-		MinecraftForge.EVENT_BUS.register(new EntitySheepOverride(null));
-		MinecraftForge.EVENT_BUS.register(new AlphaTreeBonemeal());
+		RenderingRegistry.registerEntityRenderingHandler(mullak99Mob.class, new RenderMullak99Mob(new ModelBiped(), 0.5F, 0));
+		RenderingRegistry.registerEntityRenderingHandler(ThundercoyoteMob.class, new RenderThundercoyoteMob(new ModelBiped(), 0.5F, 0));
+		
     }
  
     @Override

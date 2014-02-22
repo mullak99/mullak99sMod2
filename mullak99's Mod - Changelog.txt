@@ -41,3 +41,18 @@
 - Changed Mutton item ID due to conflict with the Redstone Battery (All Cooked Mutton will turn into Raw Mutton)
 
 - Removed Nostalgia Leaves crafting recipe, Nostalgia Trees can be grown then shorn
+
+-------------------
+| - Alpha 0.0.3 - |
+
+- Added Blood
+- Added Thundercoyote Mob
+- Added nametags above mullak99 and Thundercoyote mobs
+- Fixed Advanced Crafting Table in multiplayer
+- Fixed mullak99 Mob name in multiplayer
+- Fixed mullak99 Mob getting unloaded after ~20 blocks
+- Fixed Alpha Trees not growing by bonemeal in multiplayer
+
+- Other minor bug fixes
+
+

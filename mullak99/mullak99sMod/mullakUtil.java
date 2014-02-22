@@ -79,5 +79,7 @@ public static String[] getArrayFromUrl(String url)
    list.add("");
    return (String[]) list.toArray(new String[list.size()]);
   }
+  
 }
+
 }

@@ -7,7 +7,13 @@ public class registerMullak99Sounds {
 	
 	@ForgeSubscribe
 	public void onSound(SoundLoadEvent event) {
-		event.manager.addSound("mullak99:sound/disc/time.ogg");
+		event.manager.addSound("mullak99:mob/mullak99_Living.ogg");
+		event.manager.addSound("mullak99:mob/mullak99_Death.ogg");
+		event.manager.addSound("mullak99:mob/mullak99_Hurt.ogg");
+		
+		event.manager.addSound("mullak99:mob/Thundercoyote_Living.ogg");
+		event.manager.addSound("mullak99:mob/Thundercoyote_Death.ogg");
+		event.manager.addSound("mullak99:mob/Thundercoyote_Hurt.ogg");
 	}
 
 }
