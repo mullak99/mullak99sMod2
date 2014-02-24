@@ -55,4 +55,9 @@
 
 - Other minor bug fixes
 
+----------------------
+| - Alpha 0.0.3_01 - |
 
+- Added Pro_Ninja_Gamer mob
+
+- Minor bugfixes

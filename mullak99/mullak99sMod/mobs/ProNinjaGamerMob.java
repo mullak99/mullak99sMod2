@@ -106,12 +106,12 @@ import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.client.entity.AbstractClientPlayer;
 
-public class ThundercoyoteMob extends EntityMob
+public class ProNinjaGamerMob extends EntityMob
 {
 
 
 
-	public ThundercoyoteMob(World par1World) {
+	public ProNinjaGamerMob(World par1World) {
 		
 		super(par1World);
 		
@@ -128,23 +128,14 @@ public class ThundercoyoteMob extends EntityMob
 		this.targetTasks.addTask(3, new EntityAIMoveTowardsTarget(this, 2.0D, 0.1F));
 	
 	}    
-	
-	@Override
-    public boolean canAttackClass(Class par1Class)
-    {
-      return mullak99Mob.class != null;
-    }
 
-
-    protected int getDropItemId()
-    {
-        return mullak99.dustAlpha.itemID;
-    }
-
+    
     protected boolean isAIEnabled()
     {
         return false;
     }
+    
+
 
     protected void dropFewItems(boolean par1, int par2)
     {
@@ -160,27 +151,28 @@ public class ThundercoyoteMob extends EntityMob
         }
     }
     
-    @Override
-    protected boolean canDespawn()
-    {
-    return false;
-    }
-
+	    @Override
+	    protected boolean canDespawn()
+	    {
+	    return false;
+	    }
+    
+    
 	    protected String getLivingSound()
 	    {
-	        return "mullak99:mob/Thundercoyote_Living";
+	        return "mullak99:mob/ProNinjaGamer_Living";
 	    }
 
 
 	    protected String getHurtSound()
 	    {
-	        return "mullak99:mob/Thundercoyote_Hurt";
+	        return "mullak99:mob/ProNinjaGamer_Hurt";
 	    }
 
 
 	    protected String getDeathSound()
 	    {
-	        return "mullak99:mob/Thundercoyote_Death";
+	        return "mullak99:mob/ProNinjaGamer_Death";
 	    }
 
 	    @Override
@@ -199,7 +191,7 @@ public class ThundercoyoteMob extends EntityMob
 	    }
 	    
 	    public String getDisplayName(){
-	    	return "Thundercoyote";
+	    	return "Pro_Ninja_Gamer";
 	    	}
 	    
 

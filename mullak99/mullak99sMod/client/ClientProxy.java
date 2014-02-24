@@ -29,8 +29,11 @@ import mullak99.mullak99sMod.registerMullak99Sounds;
 import mullak99.mullak99sMod.feature.AlphaTreeBonemeal;
 import mullak99.mullak99sMod.gui.MCraftingGUIHandler;
 import mullak99.mullak99sMod.mobs.EntitySheepOverride;
+import mullak99.mullak99sMod.mobs.ProNinjaGamerMob;
 import mullak99.mullak99sMod.mobs.RenderMullak99Mob;
+import mullak99.mullak99sMod.mobs.RenderProNinjaGamerMob;
 import mullak99.mullak99sMod.mobs.RenderThundercoyoteMob;
+import mullak99.mullak99sMod.mobs.mullak99EntityPlayer;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
 import mullak99.mullak99sMod.mobs.ThundercoyoteMob;
 import mullak99.mullakCore.mullakCore;
@@ -52,6 +55,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new mullakUtil());
 		RenderingRegistry.registerEntityRenderingHandler(mullak99Mob.class, new RenderMullak99Mob(new ModelBiped(), 0.5F, 0));
 		RenderingRegistry.registerEntityRenderingHandler(ThundercoyoteMob.class, new RenderThundercoyoteMob(new ModelBiped(), 0.5F, 0));
+		RenderingRegistry.registerEntityRenderingHandler(ProNinjaGamerMob.class, new RenderProNinjaGamerMob(new ModelBiped(), 0.5F, 0));
 		
     }
  

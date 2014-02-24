@@ -8,6 +8,7 @@ import mullak99.mullak99sMod.feature.AlphaTreeBonemeal;
 import mullak99.mullak99sMod.gui.MCraftingGUIHandler;
 import mullak99.mullak99sMod.items.*;
 import mullak99.mullak99sMod.mobs.EntitySheepOverride;
+import mullak99.mullak99sMod.mobs.ProNinjaGamerMob;
 import mullak99.mullak99sMod.mobs.RenderMullak99Mob;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
 import mullak99.mullak99sMod.mobs.ThundercoyoteMob;
@@ -73,7 +74,7 @@ import mullak99.mullakCore.HandTool;
 import mullak99.mullakCore.mullakCore;
 import mullak99.mullakCore.ToolPaxel;
 
-@Mod (modid="mullak99's Mod", name="mullak99's Mod", version="", dependencies="after:*")
+@Mod (modid="mullak99's Mod", name="mullak99's Mod", version="COULDNT FIND VERSION!", dependencies="after:*")
 @NetworkMod (clientSideRequired=true, serverSideRequired=false)
 
 public class mullak99 {
@@ -265,9 +266,7 @@ public class mullak99 {
 		NetworkRegistry.instance().registerGuiHandler(mullak99.instance, (IGuiHandler) new MCraftingGUIHandler());
 		mullakCore.registerEntity(mullak99Mob.class, "mullak99", 0x000FF00, 0x000000);
 		mullakCore.registerEntity(ThundercoyoteMob.class, "Thundercoyote", 0x7F7F7F, 0x000000);
-		LanguageRegistry.instance().addStringLocalization("entity.mullak99.name", "mullak99");
-		LanguageRegistry.instance().addStringLocalization("entity.Thundercoyote.name", "Thundercoyote");
-
+		mullakCore.registerEntity(ProNinjaGamerMob.class, "Pro_Ninja_Gamer", 0x6600CC, 0x000000);
 	}
 		
 		
@@ -526,6 +525,11 @@ public class mullak99 {
 		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWP", "en_US", "mullak99's Mod | Tools");
 		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWIP", "en_US", "mullak99's Mod | WIP");
 		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModFood", "en_US", "mullak99's Mod | Food");
+		
+		//Mobs
+		LanguageRegistry.instance().addStringLocalization("entity.mullak99.name", "en_US", "mullak99");
+		LanguageRegistry.instance().addStringLocalization("entity.Thundercoyote.name", "en_US", "Thundercoyote");
+		LanguageRegistry.instance().addStringLocalization("entity.Pro_Ninja_Gamer.name", "en_US", "Pro_Ninja_Gamer");
 		
 		//Items
 		LanguageRegistry.addName(mullite, "Mullite");
@@ -1040,6 +1044,9 @@ public class mullak99 {
 			
 			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(redstoneBattery), new Object[] {" C ", "ARA", "ARA", "ARA", "ACA", 'C', ingotCopper, 'A', ingotAluminium, 'R', Item.redstone});
 
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 3), new Object[] {"BBB", "B-B", "BMB", "B-B", "BBB", 'M', mullite, 'B', blood, '-', Item.bone});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 4), new Object[] {"BBB", "B-B", "BSB", "B-B", "BBB", 'S', Item.sign, 'B', blood, '-', Item.bone});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 5), new Object[] {"BBB", "B-B", "BCB", "B-B", "BBB", 'C', Item.cookie, 'B', blood, '-', Item.bone});
 			
 			
 		//Smelting

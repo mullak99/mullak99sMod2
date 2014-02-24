@@ -1,7 +1,11 @@
 package mullak99.mullak99sMod.mobs;
 
+import org.lwjgl.util.Color;
+
 import mullak99.mullak99sMod.tileentity.TileEntityAlphaFurnace;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.ChunkCoordinates;
@@ -33,5 +37,11 @@ public class mullak99EntityPlayer extends EntityPlayer {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public void onUpdate() {
+		if (this.username.equals("mullak99"))
+	    {
+	        this.username.equals(Color.GREEN + "mullak99");
+	    }
 
+	}
 }

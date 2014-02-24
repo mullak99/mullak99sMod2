@@ -20,3 +20,8 @@
 | - Alpha 0.0.3 - |
 
 - Added registerEntity()
+
+----------------------
+| - Alpha 0.0.3_01 - |
+
+- Minor bugfixes
