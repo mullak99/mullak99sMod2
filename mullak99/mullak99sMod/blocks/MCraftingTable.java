@@ -13,30 +13,30 @@ import mullak99.mullak99sMod.mullak99;
 public class MCraftingTable extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private Icon workbenchIconTop;
+	private Icon MCraftingIconTop;
 	@SideOnly(Side.CLIENT)
-	private Icon workbenchIconFront;
+	private Icon MCraftingIconFront;
 	@SideOnly(Side.CLIENT)
-	private Icon workbenchIconBottom;
+	private Icon MCraftingIconBottom;
 	
 	public MCraftingTable(int par1)
 	{
-		super(par1, Material.wood);
+		super(par1, Material.iron);
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int par1, int par2)
 	{
-		return par1 == 1 ? this.workbenchIconTop : (par1 == 0 ? this.workbenchIconBottom : (par1 != 2 && par1 != 4 ? this.blockIcon : this.workbenchIconFront));
+		return par1 == 1 ? this.MCraftingIconTop : (par1 == 0 ? this.MCraftingIconBottom : (par1 != 2 && par1 != 4 ? this.blockIcon : this.MCraftingIconFront));
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
 	{
 		this.blockIcon = par1IconRegister.registerIcon("mullak99:MCrafting_Front");
-		this.workbenchIconTop = par1IconRegister.registerIcon("mullak99:MCrafting_Top");
-		this.workbenchIconFront = par1IconRegister.registerIcon("mullak99:MCrafting_Front");
-		this.workbenchIconBottom = par1IconRegister.registerIcon("mullak99:MCrafting");
+		this.MCraftingIconTop = par1IconRegister.registerIcon("mullak99:MCrafting_Top");
+		this.MCraftingIconFront = par1IconRegister.registerIcon("mullak99:MCrafting_Front");
+		this.MCraftingIconBottom = par1IconRegister.registerIcon("mullak99:MCrafting");
 	}
 	
 	public boolean onBlockActivated(World var1, int var2, int var3, int var4, EntityPlayer player, int var6, float var7, float var8, float var9)
@@ -50,5 +50,6 @@ public class MCraftingTable extends Block {
 		{
 			return false;
 		}
+		
 	}
 }

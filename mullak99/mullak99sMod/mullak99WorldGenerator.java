@@ -35,7 +35,7 @@ public class mullak99WorldGenerator implements IWorldGenerator {
 			(new WorldGenMinable (mullak99.oreRoxite.blockID, 2)).generate(world, random, Xcoord, Ycoord, Zcoord);
 		}
 		
-		for(int i =0; i<9; i++) {
+		for(int i =0; i<10; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
 			int Ycoord = random.nextInt(64);
@@ -62,12 +62,12 @@ public class mullak99WorldGenerator implements IWorldGenerator {
 			
 		}
 		
-		for(int i =0; i<6; i++) {
+		for(int i =0; i<7; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
 			int Ycoord = random.nextInt(45);
 				
-			(new WorldGenMinable (mullak99.oreAluminium.blockID, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			(new WorldGenMinable (mullak99.oreBauxite.blockID, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			
 		}
 		

@@ -1,10 +1,11 @@
-package mullak99.mullak99sMod.gui;
+package mullak99.mullak99sMod.handler;
 
+import mullak99.mullak99sMod.mullak99;
+import mullak99.mullak99sMod.container.ContainerMCrafting;
+import mullak99.mullak99sMod.gui.MCraftingGUI;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
-import mullak99.mullak99sMod.mullak99;
-import mullak99.mullak99sMod.container.ContainerMCrafting;
 
 public class MCraftingGUIHandler implements IGuiHandler {
 

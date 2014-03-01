@@ -1,8 +1,10 @@
 package mullak99.mullak99sMod.items;
 
+import cpw.mods.fml.common.ICraftingHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,6 +21,7 @@ public class bucketChocMilk extends Item
         super(par1);
         this.setMaxStackSize(1);
         this.setCreativeTab(mullak99.mullak99sMod.mullak99.tabMullak99sModWIP);
+        
     }
 
     public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
@@ -35,6 +38,7 @@ public class bucketChocMilk extends Item
 
         return par1ItemStack.stackSize <= 0 ? new ItemStack(Item.bucketEmpty) : par1ItemStack;
     }
+    
 
     /**
      * How long it takes to use or consume an item

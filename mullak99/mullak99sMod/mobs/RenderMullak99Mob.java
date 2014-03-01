@@ -45,7 +45,7 @@ public class RenderMullak99Mob extends RenderBiped {
 	
 	protected void renderLabel(mullak99Mob mullak99EntityLiving, double par2, double par4, double par6)
 	{
-	int distanceToEntity = 32;//if you're less then 32 blocks x-y-z away from this entity,it will display the entity's name.
+	int distanceToEntity = 32;
 	this.renderLivingLabel(mullak99EntityLiving, mullak99EntityLiving.getDisplayName(), par2, par4, par6, distanceToEntity);
 	par4 += (double)((float)this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * par6);
 	}

@@ -1,4 +1,4 @@
-package mullak99.mullak99sMod;
+package mullak99.mullakCore;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.util.ResourceLocation;
 
-public class mullakUtil
+public class CapeCore
 {
 
 /**

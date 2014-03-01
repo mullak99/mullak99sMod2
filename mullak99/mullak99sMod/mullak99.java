@@ -1,52 +1,85 @@
 package mullak99.mullak99sMod;
 
-import java.util.logging.Level;
-import mullak99.mullak99sMod.blocks.*;
-import mullak99.mullak99sMod.client.ClientProxy;
+import mullak99.mullak99sMod.armor.alphaArmor;
+import mullak99.mullak99sMod.armor.bronzeArmor;
+import mullak99.mullak99sMod.armor.mulliteArmor;
+import mullak99.mullak99sMod.armor.roxiteArmor;
+import mullak99.mullak99sMod.armor.steelArmor;
+import mullak99.mullak99sMod.blocks.MCraftingTable;
+import mullak99.mullak99sMod.blocks.alphaFurnace;
+import mullak99.mullak99sMod.blocks.alphaGrass;
+import mullak99.mullak99sMod.blocks.alphaLeaves;
+import mullak99.mullak99sMod.blocks.alphaSapling;
+import mullak99.mullak99sMod.blocks.alphaStone;
+import mullak99.mullak99sMod.blocks.clearGlass;
+import mullak99.mullak99sMod.blocks.clearGlassPane;
+import mullak99.mullak99sMod.blocks.genericBlock;
+import mullak99.mullak99sMod.blocks.oreAlpha;
+import mullak99.mullak99sMod.blocks.oreBauxite;
+import mullak99.mullak99sMod.blocks.oreCopper;
+import mullak99.mullak99sMod.blocks.oreMullite;
+import mullak99.mullak99sMod.blocks.oreRoxite;
+import mullak99.mullak99sMod.blocks.oreTin;
 import mullak99.mullak99sMod.container.MCraftingManager;
-import mullak99.mullak99sMod.feature.AlphaTreeBonemeal;
-import mullak99.mullak99sMod.gui.MCraftingGUIHandler;
-import mullak99.mullak99sMod.items.*;
+import mullak99.mullak99sMod.event.mullak99TreeBonemealEvent;
+import mullak99.mullak99sMod.handler.MCraftingGUIHandler;
+import mullak99.mullak99sMod.handler.localHandler;
+import mullak99.mullak99sMod.items.Battery;
+import mullak99.mullak99sMod.items.Dust;
+import mullak99.mullak99sMod.items.alphaDust;
+import mullak99.mullak99sMod.items.axeMullite;
+import mullak99.mullak99sMod.items.blood;
+import mullak99.mullak99sMod.items.bucketChocMilk;
+import mullak99.mullak99sMod.items.enchantedMelon;
+import mullak99.mullak99sMod.items.grate;
+import mullak99.mullak99sMod.items.hoeMullite;
+import mullak99.mullak99sMod.items.ingotAlpha;
+import mullak99.mullak99sMod.items.ingotAluminium;
+import mullak99.mullak99sMod.items.ingotCopper;
+import mullak99.mullak99sMod.items.ingotSteel;
+import mullak99.mullak99sMod.items.ingotTin;
+import mullak99.mullak99sMod.items.ingotWroughtIron;
+import mullak99.mullak99sMod.items.mortarPestle;
+import mullak99.mullak99sMod.items.mullite;
+import mullak99.mullak99sMod.items.paxelBronze;
+import mullak99.mullak99sMod.items.paxelDiamond;
+import mullak99.mullak99sMod.items.paxelIron;
+import mullak99.mullak99sMod.items.paxelMGem;
+import mullak99.mullak99sMod.items.paxelSteel;
+import mullak99.mullak99sMod.items.pickaxeMullite;
+import mullak99.mullak99sMod.items.roxite;
+import mullak99.mullak99sMod.items.shovelMullite;
+import mullak99.mullak99sMod.items.swordMullite;
+import mullak99.mullak99sMod.items.swordMulliteDE;
 import mullak99.mullak99sMod.mobs.EntitySheepOverride;
+import mullak99.mullak99sMod.mobs.EntityZombieOverride;
 import mullak99.mullak99sMod.mobs.ProNinjaGamerMob;
-import mullak99.mullak99sMod.mobs.RenderMullak99Mob;
-import mullak99.mullak99sMod.mobs.mullak99Mob;
 import mullak99.mullak99sMod.mobs.ThundercoyoteMob;
-import mullak99.mullak99sMod.armor.*;
+import mullak99.mullak99sMod.mobs.mullak99Mob;
+import mullak99.mullakCore.CapeCore;
+import mullak99.mullakCore.HandTool;
 import mullak99.mullakCore.mullakCore;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
-import net.minecraft.block.BlockGlass;
-import net.minecraft.block.BlockGrass;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockPane;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityEggInfo;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemAppleGold;
-import net.minecraft.item.ItemBucketMilk;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.DimensionManager;
+import net.minecraft.potion.Potion;
+import net.minecraft.stats.Achievement;
+import net.minecraft.stats.AchievementList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -59,22 +92,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StringUtils;
-import net.minecraft.world.biome.BiomeGenBase;
-import mullak99.mullakCore.HandTool;
-import mullak99.mullakCore.mullakCore;
-import mullak99.mullakCore.ToolPaxel;
 
-@Mod (modid="mullak99's Mod", name="mullak99's Mod", version="COULDNT FIND VERSION!", dependencies="after:*")
+@Mod (modid="mullak99's Mod", name="mullak99's Mod", version="", dependencies="after:mullakCore")
 @NetworkMod (clientSideRequired=true, serverSideRequired=false)
 
 public class mullak99 {
@@ -82,7 +105,7 @@ public class mullak99 {
 	@Instance ("mullak99's Mod")
 	public static mullak99 instance;
 	
-	/** Dimension ID **/
+	//Dimension ID
 	public static int alphaID = 2;
 	
     //Items
@@ -110,14 +133,19 @@ public class mullak99 {
     public static Item blood;
     public static Item mullak99Spawn;
     public static Item ThundercoyoteSpawn;
+    public static Item ingotAlpha;
+    public static Item foamFinger;
+    public static Item Chain;
     
     public static Item ingotSteelRaw;
+    public static Item ingotWroughtIron;
     public static Item grate;
     
     //Food
     public static Item enchantedMelon;
     public static Item muttonRaw;
     public static Item muttonCooked;
+    public static Item fleshCooked;
     
     //Drink
     public static Item bucketChocMilk;
@@ -158,6 +186,13 @@ public class mullak99 {
     public static Item hoeSteel;
     public static Item paxelSteel;
     
+    public static Item pickaxeAlpha;
+    public static Item shovelAlpha;
+    public static Item swordAlpha;
+    public static Item axeAlpha;
+    public static Item hoeAlpha;
+    public static Item paxelAlpha;
+    
     public static Item paxelIron;
     public static Item paxelDiamond;
     
@@ -185,6 +220,11 @@ public class mullak99 {
     public static Item legsSteel;
     public static Item bootsSteel;
     
+    public static Item helmetAlpha;
+    public static Item chestAlpha;
+    public static Item legsAlpha;
+    public static Item bootsAlpha;
+    
     //Blocks
     public static Block oreMullite;
     public static Block blockMullite;
@@ -207,22 +247,33 @@ public class mullak99 {
     public static Block alphaGrass;
     public static Block alphaSapling;
     public static Block MCraftingTable;
-    public static Block oreAluminium;
+    public static Block oreBauxite;
     public static Block blockAluminium;
     public static Block alphaPortal;
+    
 
 	
 	//Enum Tool Material
-	public static EnumToolMaterial mulliteTools = EnumHelper.addToolMaterial("Mullite", 3, 2500, 10.0F, 4, 20);
+	public static EnumToolMaterial mulliteTools = EnumHelper.addToolMaterial("Mullite", 3, 2500, 10.0F, 10.0F, 20);
+	public static EnumToolMaterial mullitePaxel = EnumHelper.addToolMaterial("MullitePaxel", 3, 5000, 10.0F, 4, 20);
 	public static EnumToolMaterial mulliteToolsDE = EnumHelper.addToolMaterial("MulliteDE", 3, 3000, 12.0F, 6, 22);
 	public static EnumToolMaterial bronzeTools = EnumHelper.addToolMaterial("Bronze", 2, 300, 6.0F, 2.0F, 14);
+	public static EnumToolMaterial bronzePaxel = EnumHelper.addToolMaterial("BronzePaxel", 2, 600, 6.0F, 2.0F, 14);
 	public static EnumToolMaterial steelTools = EnumHelper.addToolMaterial("Steel", 2, 500, 7.5F, 3.0F, 15);
+	public static EnumToolMaterial steelPaxel = EnumHelper.addToolMaterial("SteelPaxel", 2, 1000, 7.5F, 3.0F, 15);
+	public static EnumToolMaterial alphaTools = EnumHelper.addToolMaterial("Alpha", 3, 512, 8.5F, 2.5F, 16);
+	public static EnumToolMaterial alphaPaxel = EnumHelper.addToolMaterial("AlphaPaxel", 3, 1024, 8.5F, 2.5F, 16);
 	public static EnumToolMaterial bedrockTools = EnumHelper.addToolMaterial("Bedrock", 10, -1, 99999999999999999999999999999999999999.9F, 999999999, 999999999);
+	public static EnumToolMaterial foamFingerTool = EnumHelper.addToolMaterial("Foam", 2, 100, 6.0F, 2.0F, 1);
+	
+	public static EnumToolMaterial ironPaxel = EnumHelper.addToolMaterial("IronPaxel",2, 550, 6.0F, 2.0F, 14);
+	public static EnumToolMaterial diamondPaxel = EnumHelper.addToolMaterial("DiamondPaxel", 3, 2561, 8.0F, 3.0F, 10);
 	
 	//Enum Armor Material
-	public static EnumArmorMaterial mulliteArmor = EnumHelper.addArmorMaterial("Mullite", 40, new int[]{4, 8, 6, 4}, 25);
+	public static EnumArmorMaterial mulliteArmor = EnumHelper.addArmorMaterial("Mullite", 40, new int[]{5, 8, 6, 5}, 25);
 	public static EnumArmorMaterial bronzeArmor = EnumHelper.addArmorMaterial("Bronze", 15, new int[]{2, 6, 5, 2}, 9);
 	public static EnumArmorMaterial steelArmor = EnumHelper.addArmorMaterial("Steel", 15, new int[]{3, 7, 6, 3}, 9);
+	public static EnumArmorMaterial alphaArmor = EnumHelper.addArmorMaterial("Alpha", 20, new int[]{4, 7, 6, 4}, 12);
 	
 	//Creative Tabs
 	public static CreativeTabs tabMullak99sModI = new CreativeTabs("mullak99sModI") {
@@ -254,6 +305,7 @@ public class mullak99 {
 		}
 	};
 	
+	public static AchievementPage mullak99sMod = new AchievementPage("mullak99's Mod 2");
 	
 		
 	//Biome's
@@ -267,6 +319,10 @@ public class mullak99 {
 		mullakCore.registerEntity(mullak99Mob.class, "mullak99", 0x000FF00, 0x000000);
 		mullakCore.registerEntity(ThundercoyoteMob.class, "Thundercoyote", 0x7F7F7F, 0x000000);
 		mullakCore.registerEntity(ProNinjaGamerMob.class, "Pro_Ninja_Gamer", 0x6600CC, 0x000000);
+		
+		
+		
+		AchievementPage.registerAchievementPage(mullak99sMod);
 	}
 		
 		
@@ -281,7 +337,7 @@ public class mullak99 {
 
 		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DevCape/DevCape.png";
 		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DevCape/DevCapes.txt";
-		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		String[] devs = CapeCore.getArrayFromUrl(getArrayFromUrl);
 		
 
 		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
@@ -296,7 +352,7 @@ public class mullak99 {
 
 		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/TesterCape/TesterCape.png";
 		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/TesterCape/TesterCapes.txt";
-		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		String[] devs = CapeCore.getArrayFromUrl(getArrayFromUrl);
 		
 
 		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
@@ -311,7 +367,7 @@ public class mullak99 {
 
 		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/YoutuberCape/YoutuberCape.png";
 		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/YoutuberCape/YoutuberCapes.txt";
-		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		String[] devs = CapeCore.getArrayFromUrl(getArrayFromUrl);
 		
 
 		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
@@ -326,7 +382,7 @@ public class mullak99 {
 
 		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape1.png";
 		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape1.txt";
-		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		String[] devs = CapeCore.getArrayFromUrl(getArrayFromUrl);
 		
 
 		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
@@ -341,7 +397,7 @@ public class mullak99 {
 
 		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape2.png";
 		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape2.txt";
-		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		String[] devs = CapeCore.getArrayFromUrl(getArrayFromUrl);
 		
 
 		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
@@ -356,7 +412,7 @@ public class mullak99 {
 
 		String capeURL = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape3.png";
 		String getArrayFromUrl = "https://raw2.github.com/mullak99/mullak99sMod2/master/capes/DonatorCape1/DonatorCape3.txt";
-		String[] devs = mullakUtil.getArrayFromUrl(getArrayFromUrl);
+		String[] devs = CapeCore.getArrayFromUrl(getArrayFromUrl);
 		
 
 		ThreadDownloadImageData image = new ThreadDownloadImageData(capeURL, null, null);
@@ -401,14 +457,19 @@ public class mullak99 {
 		redstoneBattery = new Battery(1032).setMaxStackSize(1).setMaxDamage(10).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:redstoneBattery").setUnlocalizedName("mullak99:redstoneBattery");
 		
 		grate = new grate(1035).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:grate").setUnlocalizedName("mullak99:grate");
+		
+		ingotAlpha = new ingotAlpha(1040).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:ingotAlpha").setUnlocalizedName("mullak99:ingotAlpha");
+		Chain = new ingotWroughtIron(1041).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:Chain").setUnlocalizedName("mullak99:Chain");
+		//foamFinger = new swordMullite(1038, foamFingerTool).setMaxStackSize(64).setCreativeTab(tabMullak99sModI).setTextureName("mullak99:foamFinger").setUnlocalizedName("mullak99:foamFinger");
 			
 			//Food
 			enchantedMelon = new enchantedMelon(1030, 20, 1.2F, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.id, 2400, 16, 1.0F).setPotionEffect(Potion.resistance.id, 2400, 16, 1.0F).setPotionEffect(Potion.fireResistance.id, 2400, 16, 1.0F).setCreativeTab(tabMullak99sModFood).setUnlocalizedName("mullak99:enchantedMelon").setTextureName("melon");
 			muttonRaw = (new ItemFood(1033, 3, 0.3F, true)).setCreativeTab(tabMullak99sModFood).setUnlocalizedName("mullak99:muttonRaw").setTextureName("mullak99:muttonRaw");
 			muttonCooked = (new ItemFood(1034, 8, 0.8F, true)).setCreativeTab(tabMullak99sModFood).setUnlocalizedName("mullak99:muttonCooked").setTextureName("mullak99:muttonCooked");
+			fleshCooked = (new ItemFood(1037, 6, 0.4F, true)).setCreativeTab(tabMullak99sModFood).setUnlocalizedName("mullak99:fleshCooked").setTextureName("mullak99:fleshCooked");
 		
 			//Drink
-			bucketChocMilk = new bucketChocMilk(1031).setUnlocalizedName("bucketChocMilk").setCreativeTab(tabMullak99sModWIP).setContainerItem(Item.bucketEmpty).setTextureName("mullak99:bucketChocMilk");
+			bucketChocMilk = new bucketChocMilk(1031).setUnlocalizedName("bucketChocMilk").setCreativeTab(tabMullak99sModFood).setContainerItem(Item.bucketEmpty).setTextureName("mullak99:bucketChocMilk");
 			blood = new blood(1036).setMaxStackSize(64).setCreativeTab(tabMullak99sModWIP).setTextureName("mullak99:blood").setUnlocalizedName("mullak99:blood");
 			
 			//Tools
@@ -438,24 +499,31 @@ public class mullak99 {
 			axeSteel = new axeMullite(3508, steelTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeSteel").setUnlocalizedName("mullak99:axeSteel");
 			hoeSteel = new hoeMullite(3509, steelTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:hoeSteel").setUnlocalizedName("mullak99:hoeSteel");
 			
+			pickaxeAlpha = new pickaxeMullite(3510, alphaTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeAlpha").setUnlocalizedName("mullak99:pickaxeAlpha");
+			shovelAlpha = new shovelMullite(3511, alphaTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelAlpha").setUnlocalizedName("mullak99:shovelAlpha");
+			swordAlpha = new swordMullite(3512, alphaTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordAlpha").setUnlocalizedName("mullak99:swordAlpha");
+			axeAlpha = new axeMullite(3513, alphaTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeAlpha").setUnlocalizedName("mullak99:axeAlpha");
+			hoeAlpha = new hoeMullite(3514, alphaTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:hoeAlpha").setUnlocalizedName("mullak99:hoeAlpha");
+			
 			pickaxeBedrock = new pickaxeMullite(4000, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:pickaxeBedrock").setUnlocalizedName("mullak99:pickaxeBedrock");
 			shovelBedrock = new shovelMullite(4001, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:shovelBedrock").setUnlocalizedName("mullak99:shovelBedrock");
 			swordBedrock = new swordMullite(4002, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:swordBedrock").setUnlocalizedName("mullak99:swordBedrock");
 			axeBedrock = new axeMullite(4003, bedrockTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:axeBedrock").setUnlocalizedName("mullak99:axeBedrock");
 			
-			paxelIron = new paxelIron(4004, EnumToolMaterial.IRON).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelIron").setUnlocalizedName("mullak99:paxelIron");
-			paxelDiamond = new paxelDiamond(4005, EnumToolMaterial.EMERALD).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelDiamond").setUnlocalizedName("mullak99:paxelDiamond");
-			paxelMullite = new paxelMGem(4006, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelMullite").setUnlocalizedName("mullak99:paxelMullite");
-			paxelRoxite = new paxelMGem(4007, mulliteTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelRoxite").setUnlocalizedName("mullak99:paxelRoxite");
-			paxelBronze = new paxelBronze(4008, bronzeTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelBronze").setUnlocalizedName("mullak99:paxelBronze");
-			paxelSteel = new paxelSteel(4009, steelTools).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelSteel").setUnlocalizedName("mullak99:paxelSteel");
+			paxelIron = new paxelIron(4004, ironPaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelIron").setUnlocalizedName("mullak99:paxelIron");
+			paxelDiamond = new paxelDiamond(4005, diamondPaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelDiamond").setUnlocalizedName("mullak99:paxelDiamond");
+			paxelMullite = new paxelMGem(4006, mullitePaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelMullite").setUnlocalizedName("mullak99:paxelMullite");
+			paxelRoxite = new paxelMGem(4007, mullitePaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelRoxite").setUnlocalizedName("mullak99:paxelRoxite");
+			paxelBronze = new paxelBronze(4008, bronzePaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelBronze").setUnlocalizedName("mullak99:paxelBronze");
+			paxelSteel = new paxelSteel(4009, steelPaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelSteel").setUnlocalizedName("mullak99:paxelSteel");
+			paxelAlpha = new paxelSteel(4009, alphaPaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelAlpha").setUnlocalizedName("mullak99:paxelAlpha");
 			
 			//alphaPortal = new alphaPortal(4500).setUnlocalizedName("mullak99:alphaPortal");
 			
 			mortarPestle = new mortarPestle(1005).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:mortarPestle").setUnlocalizedName("mullak99:mortarPestle");
 			mortarPestleReinf = new mortarPestle(1006).setMaxStackSize(1).setMaxDamage(1024).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:mortarPestleReinf").setUnlocalizedName("mullak99:mortarPestleReinf");
 			steelHammer = new HandTool(1007, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(16).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:steelHammer").setUnlocalizedName("mullak99:steelHammer");
-			essenceExtractor = new HandTool(1008, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(16).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:essenceExtractor").setUnlocalizedName("mullak99:essenceExtractor");
+			essenceExtractor = new HandTool(1008, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:essenceExtractor").setUnlocalizedName("mullak99:essenceExtractor");
 			
 			//Armor
 			
@@ -464,6 +532,7 @@ public class mullak99 {
 			int renderRoxiteArmor = proxy.addArmor("roxiteArmor");
 			int renderBronzeArmor = proxy.addArmor("bronzeArmor");
 			int renderSteelArmor = proxy.addArmor("steelArmor");
+			int renderAlphaArmor = proxy.addArmor("alphaArmor");
 			
 			
 			helmetMullite = new mulliteArmor(1600, mulliteArmor, renderMulliteArmor, 0).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:helmetMullite").setUnlocalizedName("mullak99:helmetMullite");
@@ -486,6 +555,11 @@ public class mullak99 {
 			legsSteel = new steelArmor(1626, steelArmor, renderSteelArmor, 2).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:legsSteel").setUnlocalizedName("mullak99:legsSteel");
 			bootsSteel = new steelArmor(1627, steelArmor, renderSteelArmor, 3).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:bootsSteel").setUnlocalizedName("mullak99:bootsSteel");
 			
+			helmetAlpha = new alphaArmor(1628, alphaArmor, renderAlphaArmor, 0).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:helmetAlpha").setUnlocalizedName("mullak99:helmetAlpha");
+			chestAlpha = new alphaArmor(1629, alphaArmor, renderAlphaArmor, 1).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:chestAlpha").setUnlocalizedName("mullak99:chestAlpha");
+			legsAlpha = new alphaArmor(1630, alphaArmor, renderAlphaArmor, 2).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:legsAlpha").setUnlocalizedName("mullak99:legsAlpha");
+			bootsAlpha = new alphaArmor(1631, alphaArmor, renderAlphaArmor, 3).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:bootsAlpha").setUnlocalizedName("mullak99:bootsAlpha");
+			
 		//Blocks
 		oreMullite = new oreMullite(500, Material.rock).setHardness(4.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreMullite").setUnlocalizedName("mullak99:oreMullite");
 		blockMullite = new genericBlock(501, Material.iron).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockMullite").setUnlocalizedName("mullak99:blockMullite");
@@ -499,7 +573,7 @@ public class mullak99 {
 		oreTin = new oreTin(506, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreTin").setUnlocalizedName("mullak99:oreTin");
 		blockTin = new genericBlock(507, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockTin").setUnlocalizedName("mullak99:blockTin");
 		
-		oreAluminium = new oreAluminium(514, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreBauxite").setUnlocalizedName("mullak99:oreBauxite");
+		oreBauxite = new oreBauxite(514, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreBauxite").setUnlocalizedName("mullak99:oreBauxite");
 		blockAluminium = new genericBlock(515, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockAluminium").setUnlocalizedName("mullak99:blockAluminium");
 		
 		
@@ -508,7 +582,7 @@ public class mullak99 {
 		thinClearGlass = new clearGlassPane(512, "mullak99:clearGlass", "mullak99:clearGlass_pane_top", Material.glass, false).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("mullak99:thinClearGlass");
 		MCraftingTable = new MCraftingTable(513).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:MCrafting").setUnlocalizedName("mullak99:MTable");
 		
-		
+		blockAlpha = new genericBlock(520, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:blockAlpha").setUnlocalizedName("mullak99:blockAlpha");
 		
 		oreAlpha = new oreAlpha(508, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:oreAlpha").setUnlocalizedName("mullak99:oreAlpha");
 		alphaCobble = new genericBlock(910, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setResistance(10.0F).setCreativeTab(tabMullak99sModB).setTextureName("mullak99:alphaCobble").setUnlocalizedName("mullak99:alphaCobble");
@@ -519,12 +593,14 @@ public class mullak99 {
 	    alphaGrass = new alphaGrass(915).setHardness(0.2F).setCreativeTab(tabMullak99sModB).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaGrass");
 	    alphaSapling = new alphaSapling(916).setHardness(0.0F).setCreativeTab(tabMullak99sModB).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaSapling").setTextureName("mullak99:alphaSapling");
 	    
+	    
+	    
 		//Creative Tabs
-		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModI", "en_US", "mullak99's Mod | Items");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModB", "en_US", "mullak99's Mod | Blocks");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWP", "en_US", "mullak99's Mod | Tools");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWIP", "en_US", "mullak99's Mod | WIP");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModFood", "en_US", "mullak99's Mod | Food");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModI", "en_US", mullak99Util.ModID + " | Items");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModB", "en_US", mullak99Util.ModID + " | Blocks");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWP", "en_US", mullak99Util.ModID + " | Tools");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModWIP", "en_US", mullak99Util.ModID + " | WIP");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModFood", "en_US", mullak99Util.ModID + " | Food/Drink");
 		
 		//Mobs
 		LanguageRegistry.instance().addStringLocalization("entity.mullak99.name", "en_US", "mullak99");
@@ -548,6 +624,7 @@ public class mullak99 {
 		LanguageRegistry.addName(dustCopper, "Copper Dust");
 		LanguageRegistry.addName(dustTin, "Tin Dust");
 		LanguageRegistry.addName(ingotBronze, "Bronze Ingot");
+		LanguageRegistry.addName(ingotAlpha, "Nostalgia Ingot");
 		
 		LanguageRegistry.addName(aluminiumRaw, "Aluminium Oxide");
 		LanguageRegistry.addName(ingotAluminium, "Aluminium Ingot");
@@ -563,10 +640,15 @@ public class mullak99 {
 		LanguageRegistry.addName(grate, "Grate");
 		LanguageRegistry.addName(essenceExtractor, "Essence Extractor");
 		
+		//LanguageRegistry.addName(foamFinger, "Foam Finger");
+		
+		LanguageRegistry.addName(Chain, "Chain");
+		
 			//Food
 			LanguageRegistry.addName(enchantedMelon, "Michael Melon");
 			LanguageRegistry.addName(muttonRaw, "Raw Mutton");
 			LanguageRegistry.addName(muttonCooked, "Cooked Mutton");
+			LanguageRegistry.addName(fleshCooked, "Cooked Zombie Flesh");
 			
 			
 			//Drink
@@ -604,6 +686,13 @@ public class mullak99 {
 			LanguageRegistry.addName(hoeSteel, "Steel Hoe");
 			LanguageRegistry.addName(paxelSteel, "Steel Paxel");
 			
+			LanguageRegistry.addName(pickaxeAlpha, "Nostalgia Pickaxe");
+			LanguageRegistry.addName(shovelAlpha, "Nostalgia Shovel");
+			LanguageRegistry.addName(swordAlpha, "Nostalgia Sword");
+			LanguageRegistry.addName(axeAlpha, "Nostalgia Axe");
+			LanguageRegistry.addName(hoeAlpha, "Nostalgia Hoe");
+			LanguageRegistry.addName(paxelAlpha, "Nostalgia Paxel");
+			
 			LanguageRegistry.addName(pickaxeBedrock, "Bedrock Pickaxe");
 			LanguageRegistry.addName(shovelBedrock, "Bedrock Shovel");
 			LanguageRegistry.addName(swordBedrock, "Bedrock Sword");
@@ -634,16 +723,31 @@ public class mullak99 {
 			LanguageRegistry.addName(legsSteel, "Steel Leggings");
 			LanguageRegistry.addName(bootsSteel, "Steel Boots");
 			
+			LanguageRegistry.addName(helmetAlpha, "Nostalgia Helmet");
+			LanguageRegistry.addName(chestAlpha, "Nostalgia Chestplate");
+			LanguageRegistry.addName(legsAlpha, "Nostalgia Leggings");
+			LanguageRegistry.addName(bootsAlpha, "Nostalgia Boots");
+			
 			//Catalyst
 			
 			
-			//Mob
+			//Events
 			
-			
-			//EntityRegistry.registerModEntity(mullak99Mob.class, "mullak99", 5, this, 10, 10, true);
 			MinecraftForge.EVENT_BUS.register(new EntitySheepOverride(null));
-			LanguageRegistry.instance().addStringLocalization("entity.mullak99.name", "mullak99");
-			LanguageRegistry.instance().addStringLocalization("entity.Thundercoyote.name", "Thundercoyote");
+			MinecraftForge.EVENT_BUS.register(new EntityZombieOverride(null));
+			MinecraftForge.EVENT_BUS.register(new mullak99TreeBonemealEvent());
+			MinecraftForge.EVENT_BUS.register(new mullakCore());
+			
+			
+			//World Gen
+			ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 10, 30));
+			ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 5, 25));
+			ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 5, 25));
+			ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 3, 10));
+			ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 3, 10));
+			ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 5, 15));
+			ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 1, 3, 20));
+			ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 1, 1, 10));
 			
 		
 		//Blocks
@@ -722,24 +826,25 @@ public class mullak99 {
 		LanguageRegistry.addName(MCraftingTable, "Advanced Crafting Table");
 		MinecraftForge.setBlockHarvestLevel(MCraftingTable, "pickaxe", 2);
 		
-		GameRegistry.registerBlock(oreAluminium, "oreAluminium");
-		LanguageRegistry.addName(oreAluminium, "Bauxite Ore");
-		MinecraftForge.setBlockHarvestLevel(oreAluminium, "pickaxe", 1);
+		GameRegistry.registerBlock(oreBauxite, "oreBauxite");
+		LanguageRegistry.addName(oreBauxite, "Bauxite Ore");
+		MinecraftForge.setBlockHarvestLevel(oreBauxite, "pickaxe", 1);
 		
 		GameRegistry.registerBlock(blockAluminium, "blockAluminium");
 		LanguageRegistry.addName(blockAluminium, "Aluminium Block");
 		MinecraftForge.setBlockHarvestLevel(blockAluminium, "pickaxe", 1);
 		
-		MinecraftForge.EVENT_BUS.register(new AlphaTreeBonemeal());
+		GameRegistry.registerBlock(blockAlpha, "blockAlpha");
+		LanguageRegistry.addName(blockAlpha, "Nostalgia Block");
+		MinecraftForge.setBlockHarvestLevel(blockAlpha, "pickaxe", 2);
+		
+		
 		
 		
 		//Handlers
 		
 		GameRegistry.registerFuelHandler(new mullak99FuelHandler());
-		GameRegistry.registerCraftingHandler(new extractorHandler());
-		GameRegistry.registerCraftingHandler(new mortarPestleHandler());
-		GameRegistry.registerCraftingHandler(new repairHandler());
-		GameRegistry.registerCraftingHandler(new batteryHandler());
+		GameRegistry.registerCraftingHandler(new localHandler());
 		
 		
 		//Container Item
@@ -773,8 +878,8 @@ public class mullak99 {
 					'C', ingotCopper);
 			GameRegistry.addShapelessRecipe(new ItemStack(ingotCopper, 9), blockCopper);
 		
-			/*GameRegistry.addRecipe(new ItemStack(thinClearGlass, 16), "GGG", "GGG",
-					'G', clearGlass);*/
+			GameRegistry.addRecipe(new ItemStack(thinClearGlass, 16), "GGG", "GGG",
+					'G', clearGlass);
 			GameRegistry.addShapelessRecipe(new ItemStack(ingotTin, 9), blockTin);
 			
 			GameRegistry.addRecipe(new ItemStack(alphaCobble, 8), "CCC", "CDC", "CCC",
@@ -791,15 +896,16 @@ public class mullak99 {
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(Block.grass), Block.dirt, (new ItemStack(Item.dyePowder, 2, 15)));
 			
-			/*GameRegistry.addRecipe(new ItemStack(alphaFurnaceIdle), "CCC", "C C", "CCC",
-					'C', alphaCobble);
-			*/
-			
 			GameRegistry.addRecipe(new ItemStack(blockAluminium), "AAA", "AAA", "AAA",
 					'A', ingotAluminium);
+			GameRegistry.addShapelessRecipe(new ItemStack(ingotAluminium, 9), blockAluminium);
 			
 			GameRegistry.addRecipe(new ItemStack(MCraftingTable), "AGA", "GCG", "AGA",
 					'G', Item.ingotGold, 'C', Block.workbench, 'A', ingotAluminium);
+			
+			GameRegistry.addRecipe(new ItemStack(blockAlpha), "AAA", "AAA", "AAA",
+					'A', ingotAlpha);
+			GameRegistry.addShapelessRecipe(new ItemStack(ingotAlpha, 9), blockAlpha);
 			
 			
 			//Items
@@ -814,8 +920,9 @@ public class mullak99 {
 			GameRegistry.addRecipe(new ItemStack(grate, 4), "CAC", "ASA", "CAC",
 					'C', dustCopper, 'A', dustAluminium, 'S', ingotSteel);
 			
-			GameRegistry.addRecipe(new ItemStack(dustAlpha), "SSS", "SES", "SSS",
-					'S', alphaSapling, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
+			
+			GameRegistry.addRecipe(new ItemStack(Chain, 6, 0), "I", "I",
+					'I', Item.ingotIron);
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(dustBronze, 4), dustTin, dustCopper, dustCopper, dustCopper);
 			
@@ -823,6 +930,35 @@ public class mullak99 {
 			GameRegistry.addShapelessRecipe(new ItemStack(ingotSteelRaw), dustCharcoal, dustCharcoal, Item.ingotIron);
 			GameRegistry.addShapelessRecipe(new ItemStack(ingotSteelRaw), dustCoal, dustCharcoal, Item.ingotIron);
 			
+			
+			//Essence Extractor
+			
+			GameRegistry.addRecipe(new ItemStack(dustAlpha), "SSS", "SES", "SSS",
+					'S', alphaSapling, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
+			
+			GameRegistry.addRecipe(new ItemStack(dustAlpha), "SSS", "SES", "SSS",
+					'S', alphaStone, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
+			
+			GameRegistry.addRecipe(new ItemStack(dustAlpha), "CCC", "CEC", "CCC",
+					'C', alphaCobble, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
+			
+			GameRegistry.addRecipe(new ItemStack(dustAlpha), "GGG", "GEG", "GGG",
+					'G', alphaGrass, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
+			
+			GameRegistry.addRecipe(new ItemStack(dustAlpha), "SSS", "SES", "SSS",
+					'S', alphaSapling, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
+			
+			GameRegistry.addRecipe(new ItemStack(dustAlpha), "IE",
+					'I', ingotAlpha, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
+			
+			GameRegistry.addRecipe(new ItemStack(dustAlpha), "EI",
+					'I', ingotAlpha, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
+			
+			GameRegistry.addRecipe(new ItemStack(dustAlpha, 9), "BE",
+					'B', blockAlpha, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
+			
+			GameRegistry.addRecipe(new ItemStack(dustAlpha, 9), "EB",
+					'B', blockAlpha, 'E', (new ItemStack(essenceExtractor, 1, 32767)));
 			
 			
 			
@@ -844,7 +980,7 @@ public class mullak99 {
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(Block.cobblestone), alphaCobble, (new ItemStack(mortarPestle, 1, 32767)));
 			
-			GameRegistry.addShapelessRecipe(new ItemStack(bauxite, 2), oreAluminium, (new ItemStack(mortarPestle, 1, 32767)));
+			GameRegistry.addShapelessRecipe(new ItemStack(bauxite, 2), oreBauxite, (new ItemStack(mortarPestle, 1, 32767)));
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(dustAluminium), ingotAluminium, (new ItemStack(mortarPestle, 1, 32767)));
 			
@@ -870,9 +1006,7 @@ public class mullak99 {
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(dustBronze), ingotBronze, (new ItemStack(mortarPestleReinf, 1, 32767)));
 			
-			GameRegistry.addShapelessRecipe(new ItemStack(Block.cobblestone), alphaCobble, (new ItemStack(mortarPestleReinf, 1, 32767)));
-			
-			GameRegistry.addShapelessRecipe(new ItemStack(bauxite, 2), oreAluminium, (new ItemStack(mortarPestleReinf, 1, 32767)));
+			GameRegistry.addShapelessRecipe(new ItemStack(bauxite, 2), oreBauxite, (new ItemStack(mortarPestleReinf, 1, 32767)));
 			
 			GameRegistry.addShapelessRecipe(new ItemStack(dustAluminium), ingotAluminium, (new ItemStack(mortarPestleReinf, 1, 32767)));
 			
@@ -881,7 +1015,7 @@ public class mullak99 {
 					'M', Item.melon, 'A', (new ItemStack(Item.appleGold, 1, 1)), 'D', Block.blockDiamond, 'G', Block.blockGold);
 			
 			//Drink
-			/*GameRegistry.addShapelessRecipe(new ItemStack(bucketChocMilk), Item.bucketMilk, (new ItemStack(Item.dyePowder, 1, 3)));*/
+			GameRegistry.addShapelessRecipe(new ItemStack(bucketChocMilk), Item.bucketMilk, (new ItemStack(Item.dyePowder, 1, 3)));
 			
 			//Tools
 			GameRegistry.addRecipe(new ItemStack(pickaxeMullite), "MMM", " S ", " S ",
@@ -937,41 +1071,37 @@ public class mullak99 {
 					'-', ingotSteel, 'S', Item.stick);
 			GameRegistry.addRecipe(new ItemStack(shovelSteel), "-", "S", "S",
 					'-', ingotSteel, 'S', Item.stick);
-			GameRegistry.addRecipe(new ItemStack(swordSteel), "-", "B", "S",
+			GameRegistry.addRecipe(new ItemStack(swordSteel), "-", "-", "S",
 					'-', ingotSteel, 'S', Item.stick);
-			GameRegistry.addRecipe(new ItemStack(axeSteel), "-- ", "BS ", " S ",
+			GameRegistry.addRecipe(new ItemStack(axeSteel), "-- ", "-S ", " S ",
 					'-', ingotSteel, 'S', Item.stick);
-			GameRegistry.addRecipe(new ItemStack(axeSteel), " --", " SB", " S ",
+			GameRegistry.addRecipe(new ItemStack(axeSteel), " --", " S-", " S ",
 					'-', ingotSteel, 'S', Item.stick);
 			GameRegistry.addRecipe(new ItemStack(hoeSteel), "-- ", " S ", " S ",
 					'-', ingotSteel, 'S', Item.stick);
 			GameRegistry.addRecipe(new ItemStack(hoeSteel), " --", " S ", " S ",
 					'-', ingotSteel, 'S', Item.stick);
 			
+			GameRegistry.addRecipe(new ItemStack(pickaxeAlpha), "AAA", " S ", " S ",
+					'A', ingotAlpha, 'S', Item.stick);
+			GameRegistry.addRecipe(new ItemStack(shovelAlpha), "A", "S", "S",
+					'A', ingotAlpha, 'S', Item.stick);
+			GameRegistry.addRecipe(new ItemStack(swordAlpha), "A", "A", "S",
+					'A', ingotAlpha, 'S', Item.stick);
+			GameRegistry.addRecipe(new ItemStack(axeAlpha), "AA ", "AS ", " S ",
+					'A', ingotAlpha, 'S', Item.stick);
+			GameRegistry.addRecipe(new ItemStack(axeAlpha), " AA", " SA", " S ",
+					'A', ingotAlpha, 'S', Item.stick);
+			GameRegistry.addRecipe(new ItemStack(hoeAlpha), "AA ", " S ", " S ",
+					'A', ingotAlpha, 'S', Item.stick);
+			GameRegistry.addRecipe(new ItemStack(hoeAlpha), " AA", " S ", " S ",
+					'A', ingotAlpha, 'S', Item.stick);
+			
 			GameRegistry.addRecipe(new ItemStack(steelHammer), "-", "S",
 					'-', ingotSteel, 'S', Item.stick);
 			
 			GameRegistry.addRecipe(new ItemStack(essenceExtractor), "-", "S",
 					'-', grate, 'S', Item.stick);
-			
-			
-			GameRegistry.addRecipe(new ItemStack(paxelIron), "APS", " - ", " - ",
-					'A', Item.axeIron, 'P', Item.pickaxeIron, 'S', Item.shovelIron, '-', Item.stick);
-			
-			GameRegistry.addRecipe(new ItemStack(paxelDiamond), "APS", " - ", " - ",
-					'A', Item.axeDiamond, 'P', Item.pickaxeDiamond, 'S', Item.shovelDiamond, '-', Item.stick);
-			
-			GameRegistry.addRecipe(new ItemStack(paxelMullite), "APS", " - ", " - ",
-					'A', axeMullite, 'P', pickaxeMullite, 'S', shovelMullite, '-', Item.stick);
-			
-			GameRegistry.addRecipe(new ItemStack(paxelRoxite), "APS", " - ", " - ",
-					'A', axeRoxite, 'P', pickaxeRoxite, 'S', shovelRoxite, '-', Item.stick);
-			
-			GameRegistry.addRecipe(new ItemStack(paxelBronze), "APS", " - ", " - ",
-					'A', axeBronze, 'P', pickaxeBronze, 'S', shovelBronze, '-', Item.stick);
-			
-			GameRegistry.addRecipe(new ItemStack(paxelSteel), "APS", " - ", " - ",
-					'A', axeSteel, 'P', pickaxeSteel, 'S', shovelSteel, '-', Item.stick);
 			
 			
 			//Armor
@@ -994,13 +1124,13 @@ public class mullak99 {
 			GameRegistry.addRecipe(new ItemStack(bootsRoxite), "R R", "R R",
 					'R', roxite);
 			
-			GameRegistry.addRecipe(new ItemStack(helmetSteel), "BBB", "B B",
+			GameRegistry.addRecipe(new ItemStack(helmetBronze), "BBB", "B B",
 					'B', ingotBronze);
-			GameRegistry.addRecipe(new ItemStack(chestSteel), "B B", "BBB", "BBB",
+			GameRegistry.addRecipe(new ItemStack(chestBronze), "B B", "BBB", "BBB",
 					'B', ingotBronze);
-			GameRegistry.addRecipe(new ItemStack(legsSteel), "BBB", "B B", "B B",
+			GameRegistry.addRecipe(new ItemStack(legsBronze), "BBB", "B B", "B B",
 					'B', ingotBronze);
-			GameRegistry.addRecipe(new ItemStack(bootsSteel), "B B", "B B",
+			GameRegistry.addRecipe(new ItemStack(bootsBronze), "B B", "B B",
 					'B', ingotBronze);
 			
 			GameRegistry.addRecipe(new ItemStack(helmetSteel), "SSS", "S S",
@@ -1012,10 +1142,45 @@ public class mullak99 {
 			GameRegistry.addRecipe(new ItemStack(bootsSteel), "S S", "S S",
 					'S', ingotSteel);
 			
+			GameRegistry.addRecipe(new ItemStack(helmetAlpha), "AAA", "A A",
+					'A', ingotAlpha);
+			GameRegistry.addRecipe(new ItemStack(chestAlpha), "A A", "AAA", "AAA",
+					'A', ingotAlpha);
+			GameRegistry.addRecipe(new ItemStack(legsAlpha), "AAA", "A A", "A A",
+					'A', ingotAlpha);
+			GameRegistry.addRecipe(new ItemStack(bootsAlpha), "A A", "A A",
+					'A', ingotAlpha);
+			
+			GameRegistry.addRecipe(new ItemStack(Item.helmetChain), "CCC", "C C",
+					'C', Chain);
+			GameRegistry.addRecipe(new ItemStack(Item.plateChain), "C C", "CCC", "CCC",
+					'C', Chain);
+			GameRegistry.addRecipe(new ItemStack(Item.legsChain), "CCC", "C C", "C C",
+					'C', Chain);
+			GameRegistry.addRecipe(new ItemStack(Item.bootsChain), "C C", "C C",
+					'C', Chain);
+			
 
 			
 			
 			//Crafting | MCrafting
+			
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(redstoneBattery), new Object[] {" C ", "ARA", "ARA", "ARA", "ACA", 'C', ingotCopper, 'A', ingotAluminium, 'R', Item.redstone});
+
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 3), new Object[] {"BBB", "B-B", "BMB", "B-B", "BBB", 'M', mullite, 'B', blood, '-', Item.bone});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 4), new Object[] {"BBB", "B-B", "BSB", "B-B", "BBB", 'S', Item.sign, 'B', blood, '-', Item.bone});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 5), new Object[] {"BBB", "B-B", "BCB", "B-B", "BBB", 'C', Item.cookie, 'B', blood, '-', Item.bone});
+			
+			
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(paxelIron), new Object[] {" - ", "---", "---", " S ", " S ", '-', Item.ingotIron, 'S', Item.stick});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(paxelSteel), new Object[] {" - ", "---", "---", " S ", " S ", '-', ingotSteel, 'S', Item.stick});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(paxelDiamond), new Object[] {" - ", "---", "---", " S ", " S ", '-', Item.diamond, 'S', Item.stick});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(paxelMullite), new Object[] {" - ", "---", "---", " S ", " S ", '-', mullite, 'S', Item.stick});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(paxelRoxite), new Object[] {" - ", "---", "---", " S ", " S ", '-', roxite, 'S', Item.stick});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(paxelAlpha), new Object[] {" - ", "---", "---", " S ", " S ", '-', ingotAlpha, 'S', Item.stick});
+			
+			
+			//Repair | MCrafting
 			
 			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(pickaxeMullite), new Object[] {"MIM", " S ", 'M', mullite, 'I', (new ItemStack(pickaxeMullite, 1, 32767)), 'S', (new ItemStack(steelHammer, 1, 32767))});
 			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(shovelMullite), new Object[] {"MIM", " S ", 'M', mullite, 'I', (new ItemStack(shovelMullite, 1, 32767)), 'S', (new ItemStack(steelHammer, 1, 32767))});
@@ -1042,11 +1207,7 @@ public class mullak99 {
 			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(paxelDiamond), new Object[] {"-I-", " S ", '-', Item.diamond, 'I', (new ItemStack(paxelDiamond, 1, 32767)), 'S', (new ItemStack(steelHammer, 1, 32767))});
 			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(paxelSteel), new Object[] {"-I-", " S ", '-', ingotSteel, 'I', (new ItemStack(paxelSteel, 1, 32767)), 'S', (new ItemStack(steelHammer, 1, 32767))});
 			
-			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(redstoneBattery), new Object[] {" C ", "ARA", "ARA", "ARA", "ACA", 'C', ingotCopper, 'A', ingotAluminium, 'R', Item.redstone});
-
-			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 3), new Object[] {"BBB", "B-B", "BMB", "B-B", "BBB", 'M', mullite, 'B', blood, '-', Item.bone});
-			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 4), new Object[] {"BBB", "B-B", "BSB", "B-B", "BBB", 'S', Item.sign, 'B', blood, '-', Item.bone});
-			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 5), new Object[] {"BBB", "B-B", "BCB", "B-B", "BBB", 'C', Item.cookie, 'B', blood, '-', Item.bone});
+			
 			
 			
 		//Smelting
@@ -1055,8 +1216,9 @@ public class mullak99 {
 		GameRegistry.addSmelting(oreCopper.blockID, new ItemStack(ingotCopper), 0.1F);
 		GameRegistry.addSmelting(oreTin.blockID, new ItemStack(ingotTin), 0.1F);
 		GameRegistry.addSmelting(muttonRaw.itemID, new ItemStack(muttonCooked), 0.1F);
+		GameRegistry.addSmelting(Item.rottenFlesh.itemID, new ItemStack(fleshCooked), 0.1F);
 		
-		//GameRegistry.addSmelting(alphaCobble.blockID, new ItemStack(Block.stone), 0F);
+		GameRegistry.addSmelting(alphaCobble.blockID, new ItemStack(mullak99.alphaStone), 0F);
 		
 		GameRegistry.addSmelting(dustMullite.itemID, new ItemStack(mullite), 0F);
 		GameRegistry.addSmelting(dustRoxite.itemID, new ItemStack(roxite), 0F);
@@ -1066,11 +1228,13 @@ public class mullak99 {
 		GameRegistry.addSmelting(dustCoal.itemID, new ItemStack(Item.coal), 0F);
 		GameRegistry.addSmelting(dustCharcoal.itemID, new ItemStack(Item.coal, 1, 1), 0F);
 		GameRegistry.addSmelting(Block.glass.blockID, new ItemStack(clearGlass), 0.1F);
-		GameRegistry.addSmelting(oreAluminium.blockID, new ItemStack(aluminiumRaw), 0.1F);
+		GameRegistry.addSmelting(Block.thinGlass.blockID, new ItemStack(thinClearGlass), 0F);
+		GameRegistry.addSmelting(oreBauxite.blockID, new ItemStack(aluminiumRaw), 0.1F);
 		GameRegistry.addSmelting(aluminiumRaw.itemID, new ItemStack(ingotAluminium), 0.1F);
-		GameRegistry.addSmelting(dustAluminium.itemID, new ItemStack(ingotAluminium), 0F);
-		GameRegistry.addSmelting(bauxite.itemID, new ItemStack(aluminiumRaw), 0F);
+		GameRegistry.addSmelting(dustAluminium.itemID, new ItemStack(ingotAluminium), 0.1F);
+		GameRegistry.addSmelting(bauxite.itemID, new ItemStack(aluminiumRaw), 0.1F);
 		GameRegistry.addSmelting(ingotSteelRaw.itemID, new ItemStack(ingotSteel), 0.1F);
+		GameRegistry.addSmelting(dustAlpha.itemID,new ItemStack(ingotAlpha), 0F);
 		
 		
 		//World Gen
@@ -1088,7 +1252,8 @@ public class mullak99 {
 		OreDictionary.registerOre("dustBronze", new ItemStack(dustBronze));
 		OreDictionary.registerOre("ingotAluminium", new ItemStack(ingotAluminium));
 		OreDictionary.registerOre("ingotAluminum", new ItemStack(ingotAluminium));
-		OreDictionary.registerOre("oreBauxite", new ItemStack(oreAluminium));
+		OreDictionary.registerOre("oreBauxite", new ItemStack(oreBauxite));
+		OreDictionary.registerOre("oreAluminium", new ItemStack(oreBauxite));
 		OreDictionary.registerOre("dustAluminium", new ItemStack(dustAluminium));
 		OreDictionary.registerOre("dustAluminum", new ItemStack(dustAluminium));
 		
@@ -1109,10 +1274,11 @@ public class mullak99 {
 		
 		
 		//Are essential mods loaded?
+		
 		/* *
 		 * Checks if mullakCore is installed, Gives Log message for easier debugging
 		 */
-		if(Loader.isModLoaded("mullak99Core")) {
+		if(Loader.isModLoaded("mullakCore")) {
 			FMLLog.fine("[mullak99's Mod] Sucess: mullakCore Found!");
 		}
 		
@@ -1123,8 +1289,9 @@ public class mullak99 {
 		
 		//Are extra mods loaded?
 		
+		/* *
+		 * Checks if extra mods are installed
+		 */
 	}
-	
 
-	
 }

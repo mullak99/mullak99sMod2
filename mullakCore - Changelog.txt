@@ -25,3 +25,13 @@
 | - Alpha 0.0.3_01 - |
 
 - Minor bugfixes
+
+-------------------
+| - Alpha 0.0.4 - |
+
+= UPDATE WAS PRIVATE ==
+
+-------------------
+| - Alpha 0.0.5 - |
+
+- Added CapeCore for ease of access when adding capes to your mod

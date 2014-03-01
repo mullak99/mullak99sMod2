@@ -61,3 +61,34 @@
 - Added Pro_Ninja_Gamer mob
 
 - Minor bugfixes
+
+-------------------
+| - Alpha 0.0.4 - |
+
+= UPDATE WAS PRIVATE ==
+
+
+-------------------
+| - Alpha 0.0.5 - |
+
+- Added Nostalgia Ingots
+- Added Nostalgia Armor
+- Added Nostalgia Tools
+- Added Nostalgia Block
+- Added many recipes to get back your Nostalgia Dust from Nostalgia Items/Blocks
+- Added Cooked Zombie Flesh
+- Added Chain
+- Added crafting for Chain Armor (With Chains)
+- Added Achivements page (Still unused)
+- Blood is drinkable, doing so will heal you directly
+- Blood spawns naturaly in Dungeons, Mineshafts, Strongholds, Blacksmiths, Pyramids, Jungle Temples and Bonus Chest
+- Reworked durability of Paxels
+- Changed crafting recipe of Paxels
+- Crafting recipe for Chocolate Milk added
+- Done some organising of class files
+- Fixed some Multiplayer Bugs
+- Fixed some crafting bugs
+
+- Minor bugfixes
+- Minor source code changes
+

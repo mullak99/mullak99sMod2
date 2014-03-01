@@ -1,7 +1,10 @@
 package mullak99.mullakCore;
 
 import mullak99.mullak99sMod.mullak99;
+import mullak99.mullak99sMod.blocks.alphaSapling;
 import mullak99.mullak99sMod.mobs.EntitySheepOverride;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
@@ -11,6 +14,8 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.Event.Result;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -21,7 +26,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
-@Mod (modid="mullak99Core", name="mullakCore", version="Alpha 0.0.3", dependencies="before:*")
+@Mod (modid="mullakCore", name="mullakCore", version="Alpha 0.0.5", dependencies="before:*")
 @NetworkMod (clientSideRequired=true, serverSideRequired=false)
 
 
@@ -45,6 +50,7 @@ public class mullakCore {
 		}
 	}
 	
+
 	public static void registerEntity(Class<? extends Entity> entityClass, String entityName, int bkEggColor, int fgEggColor) {
 		int id = EntityRegistry.findGlobalUniqueEntityId();
 
@@ -58,11 +64,18 @@ public class mullakCore {
 		}
 	}
 	
+
+	
 	public static EnumToolMaterial nullTool = EnumHelper.addToolMaterial("Null", 1, 1, 1.0F, 1, 1);
 	
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event) {
 	
+		event.getModMetadata().version = "Alpha 0.0.5";
+		event.getModMetadata().name = "mullakCore";
+		event.getModMetadata().description = "mullakCore is the base that runs many of the functions required for mullak99's Mod 2";
+		event.getModMetadata().authorList.add("mullak99");
+		event.getModMetadata().logoFile = "";
 	}
 	
 	@EventHandler
@@ -75,5 +88,5 @@ public class mullakCore {
 	public void postInit (FMLPostInitializationEvent event) {
 		
 	}
-	
+		
 }
