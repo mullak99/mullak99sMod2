@@ -516,7 +516,7 @@ public class mullak99 {
 			paxelRoxite = new paxelMGem(4007, mullitePaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelRoxite").setUnlocalizedName("mullak99:paxelRoxite");
 			paxelBronze = new paxelBronze(4008, bronzePaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelBronze").setUnlocalizedName("mullak99:paxelBronze");
 			paxelSteel = new paxelSteel(4009, steelPaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelSteel").setUnlocalizedName("mullak99:paxelSteel");
-			paxelAlpha = new paxelSteel(4009, alphaPaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelAlpha").setUnlocalizedName("mullak99:paxelAlpha");
+			paxelAlpha = new paxelSteel(4010, alphaPaxel).setCreativeTab(tabMullak99sModWP).setTextureName("mullak99:paxelAlpha").setUnlocalizedName("mullak99:paxelAlpha");
 			
 			//alphaPortal = new alphaPortal(4500).setUnlocalizedName("mullak99:alphaPortal");
 			

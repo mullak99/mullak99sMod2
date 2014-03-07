@@ -92,3 +92,8 @@
 - Minor bugfixes
 - Minor source code changes
 
+-------------------
+| - Alpha 0.0.5_01 - |
+
+- Fixed Nostalgia Paxel Item ID conflict with Steel Paxel
+
