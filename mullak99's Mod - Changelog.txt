@@ -97,3 +97,29 @@
 
 - Fixed Nostalgia Paxel Item ID conflict with Steel Paxel
 
+-------------------
+| - Alpha 0.0.6 - |
+
+- Added Essence of Nostalgia
+- Fixed bug with crafting
+- Added Marble
+- Added Marble Cobblestone
+- Added Marble Bricks
+- Added Marble Stairs
+- Added Marble Cobblestone Stairs
+- Added Marble Bricks Stairs
+- Added Marble Slab
+- Added Marble Cobblestone Slab
+- Added Marble Bricks Slab
+- Marble world gen
+- Organized many major class files
+- Recoded paxels
+- Made Nostalgia Ore rarer
+- Changed the Nostalgia Ingot to Nostalgia Dust and Nostalgia Block to Nostalgia Dust from requiring the Essence Extractor to the Mortar and Pestle
+- mullak99Util now stores cape links and ModID and CoreLoaded
+- Updated cape links to update faster 
+- Right clicking with a paxel now places a torch (Consumes torches in inventory) - mullakCore Side
+- Buffed Bloods health modifier
+
+- Fixed many major bugs
+- Fixed many minor bugs

@@ -1,27 +1,24 @@
 package mullak99.mullak99sMod.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import mullak99.mullak99sMod.mullak99;
+import mullak99.mullak99sMod.mullak99CT;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
 import net.minecraft.util.Icon;
-import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeavesBase;
-import mullak99.mullak99sMod.mullak99;
-
 import net.minecraftforge.common.IShearable;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class alphaLeaves extends BlockLeavesBase implements IShearable
 {
@@ -39,7 +36,7 @@ public class alphaLeaves extends BlockLeavesBase implements IShearable
     {
         super(par1, Material.leaves, false);
         this.setTickRandomly(true);
-        this.setCreativeTab(mullak99.tabMullak99sModB);
+        this.setCreativeTab(mullak99CT.tabMullak99sModB);
     }
     
 

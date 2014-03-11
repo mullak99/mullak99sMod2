@@ -1,19 +1,19 @@
 package mullak99.mullak99sMod.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
-import mullak99.mullak99sMod.mullak99;
+
+import mullak99.mullak99sMod.mullak99CT;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class clearGlass extends BlockBreakable
 {
     public clearGlass(int par1, Material par2Material, boolean par3)
     {
         super(par1, "mullak99:clearGlass", par2Material, par3);
-        this.setCreativeTab(mullak99.tabMullak99sModB);
+        this.setCreativeTab(mullak99CT.tabMullak99sModB);
     }
 
     /**

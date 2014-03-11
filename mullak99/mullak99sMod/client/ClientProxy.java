@@ -51,6 +51,7 @@ public class ClientProxy extends CommonProxy
             mullak99.addDonatorCapes1();
             mullak99.addDonatorCapes2();
             mullak99.addDonatorCapes3();
+            mullak99.addMelonCape();
             
             FMLLog.fine("[mullak99's Mod] Done: Loaded Capes Sucsessfully");
         }

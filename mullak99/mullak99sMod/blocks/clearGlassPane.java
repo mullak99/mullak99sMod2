@@ -1,15 +1,12 @@
 package mullak99.mullak99sMod.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
-import mullak99.mullak99sMod.mullak99;
-import net.minecraft.block.Block;
+
+import mullak99.mullak99sMod.mullak99CT;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -17,6 +14,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class clearGlassPane extends BlockPane
 {
@@ -41,9 +40,9 @@ public class clearGlassPane extends BlockPane
         this.sideTextureIndex = par3Str;
         this.canDropItself = par5;
         this.field_94402_c = par2Str;
-        this.setCreativeTab(mullak99.tabMullak99sModB);
+        this.setCreativeTab(mullak99CT.tabMullak99sModB);
     }
-
+    
     /**
      * Returns the ID of the items to drop on destruction.
      */

@@ -155,8 +155,8 @@ public class ThundercoyoteMob extends EntityMob
 
         for (k = 0; k < j; ++k)
         {
-            this.dropItem(Item.bone.itemID, mullakCore.randomWithRange(1, 2));
-            this.dropItem(mullak99.blood.itemID, mullakCore.randomWithRange(1, 2));
+            this.dropItem(Item.bone.itemID, mullakCore.randomWithRange(2, 3));
+            this.dropItem(mullak99.blood.itemID, mullakCore.randomWithRange(3, 6));
         }
     }
     
@@ -222,7 +222,4 @@ public class ThundercoyoteMob extends EntityMob
 	    {
 	        return 0.4F;
 	    }
-
-
-
 }

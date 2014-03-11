@@ -1,6 +1,8 @@
 package mullak99.mullak99sMod;
 
 import java.util.Random;
+
+import mullak99.mullakCore.mullakCore;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -53,12 +55,12 @@ public class mullak99WorldGenerator implements IWorldGenerator {
 			
 		}	
 		
-		for(int i =0; i<8; i++) {
+		for(int i =0; i<7; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
 			int Ycoord = random.nextInt(45);
 				
-			(new WorldGenMinable (mullak99.oreAlpha.blockID, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			(new WorldGenMinable (mullak99.oreAlpha.blockID, 3)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			
 		}
 		
@@ -68,6 +70,15 @@ public class mullak99WorldGenerator implements IWorldGenerator {
 			int Ycoord = random.nextInt(45);
 				
 			(new WorldGenMinable (mullak99.oreBauxite.blockID, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			
+		}
+		
+		for(int i =0; i<8; i++) {
+			int Xcoord = BlockX + random.nextInt(16);
+			int Zcoord = BlockZ + random.nextInt(16);
+			int Ycoord = random.nextInt(256);
+				
+			(new WorldGenMinable (mullak99.marble.blockID, 32)).generate(world, random, Xcoord, Ycoord, Zcoord);
 			
 		}
 		

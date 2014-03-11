@@ -26,7 +26,7 @@ public class blood extends Item {
 
         if (!par2World.isRemote)
         {
-            par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.heal.id, 1, 2));
+            par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.heal.id, 1, 3));
         }
 
         return par1ItemStack.stackSize <= 0 ? new ItemStack(Item.glassBottle) : par1ItemStack;

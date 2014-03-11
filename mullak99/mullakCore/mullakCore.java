@@ -1,21 +1,16 @@
 package mullak99.mullakCore;
 
-import mullak99.mullak99sMod.mullak99;
-import mullak99.mullak99sMod.blocks.alphaSapling;
-import mullak99.mullak99sMod.mobs.EntitySheepOverride;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSapling;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -25,8 +20,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod (modid="mullakCore", name="mullakCore", version="Alpha 0.0.5", dependencies="before:*")
+@Mod (modid="mullakCore", name="mullakCore", version="Alpha 0.0.6", dependencies="before:*")
 @NetworkMod (clientSideRequired=true, serverSideRequired=false)
 
 
@@ -62,6 +59,19 @@ public class mullakCore {
 		if (spawnProb > 0) {
 		EntityRegistry.addSpawn(entityClass, spawnProb, min, max, EnumCreatureType.creature, biomes);
 		}
+	}
+		
+	
+	public static void InitialiseBlock(Block block, String registerBlockName, String BlockNameIG, String Tool, int harvestLevel) {
+		
+		GameRegistry.registerBlock(block, registerBlockName);
+		LanguageRegistry.addName(block, BlockNameIG);
+		MinecraftForge.setBlockHarvestLevel(block, Tool, harvestLevel);
+	}
+	
+public static void InitialiseItem(Item item, String ItemNameIG) {
+		
+		LanguageRegistry.addName(item, ItemNameIG);
 	}
 	
 

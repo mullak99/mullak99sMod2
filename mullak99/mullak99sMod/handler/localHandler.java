@@ -70,26 +70,30 @@ public class localHandler implements ICraftingHandler {
 					}
 				}
 				
-				if(craftMatrix.getStackInSlot(i) != null) {
+				/*if(craftMatrix.getStackInSlot(i) != null) {
 					ItemStack j = craftMatrix.getStackInSlotOnClosing(i);
 					
-					if(j.getItem() != null && j.getItem() == mullak99.bucketChocMilk) {
-						ItemStack k = new ItemStack(mullak99.bucketChocMilk, 2, (j.getMaxStackSize()));
+					if(j.getItem() != null && j.getItem() == Item.bucketEmpty) {
+						ItemStack k = new ItemStack(Item.bucketEmpty, 2, (j.getItemDamage() + 1));
 						
-						if(k.equals(Item.bucketEmpty)) {
-							k.stackSize--;
+						if(j.getItem() == Item.bucketEmpty && !(j.getItem() != Item.bucketEmpty)) {
+							j.stackSize--;
+						}
+						else {
+							j.equals(i);
 						}
 						
-						craftMatrix.setInventorySlotContents(i, k);
+						//craftMatrix.setInventorySlotContents(i, k);
 					}
-				}
+
+				}*/
+				
 			}
 	}
 
 	@Override
 	public void onSmelting(EntityPlayer player, ItemStack item) {
-		
-		
+			
 		
 	}
 
