@@ -43,4 +43,5 @@
 - Added Initialise Blocks
 - Made paxels easier to implement in your own mods
 - Removed ToolPaxel's dedication to mullak99's Mod 2
-- Right clicking with a paxel now places a torch (Consumes torches in inventory) 
+- Right clicking with a paxel now places a torch (Consumes torches in inventory)
+- Alpha/Nostalgia/Pre-Beta1.8 Food (UNFINISHED)

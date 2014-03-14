@@ -25,7 +25,6 @@ import mullak99.mullak99sMod.blocks.oreCopper;
 import mullak99.mullak99sMod.blocks.oreMullite;
 import mullak99.mullak99sMod.blocks.oreRoxite;
 import mullak99.mullak99sMod.blocks.oreTin;
-import mullak99.mullak99sMod.container.MCraftingManager;
 import mullak99.mullak99sMod.event.mullak99TreeBonemealEvent;
 import mullak99.mullak99sMod.handler.MCraftingGUIHandler;
 import mullak99.mullak99sMod.handler.localHandler;
@@ -37,6 +36,8 @@ import mullak99.mullak99sMod.items.bucketChocMilk;
 import mullak99.mullak99sMod.items.chain;
 import mullak99.mullak99sMod.items.enchantedMelon;
 import mullak99.mullak99sMod.items.essenceAlpha;
+import mullak99.mullak99sMod.items.essenceExtractor;
+import mullak99.mullak99sMod.items.genericItem;
 import mullak99.mullak99sMod.items.grate;
 import mullak99.mullak99sMod.items.hoeMullite;
 import mullak99.mullak99sMod.items.ingotAlpha;
@@ -46,6 +47,7 @@ import mullak99.mullak99sMod.items.ingotSteel;
 import mullak99.mullak99sMod.items.ingotTin;
 import mullak99.mullak99sMod.items.mortarPestle;
 import mullak99.mullak99sMod.items.mullite;
+import mullak99.mullak99sMod.items.mulliteBow;
 import mullak99.mullak99sMod.items.paxelBronze;
 import mullak99.mullak99sMod.items.paxelDiamond;
 import mullak99.mullak99sMod.items.paxelIron;
@@ -64,6 +66,7 @@ import mullak99.mullak99sMod.mobs.ThundercoyoteMob;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
 import mullak99.mullakCore.CapeCore;
 import mullak99.mullakCore.HandTool;
+import mullak99.mullakCore.ItemAlphaFood;
 import mullak99.mullakCore.mullakCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHalfSlab;
@@ -86,8 +89,6 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -142,6 +143,7 @@ public class mullak99 {
     public static Item ingotAlpha;
     public static Item foamFinger;
     public static Item Chain;
+    public static Item IronTippedArrow;
     
     public static Item ingotSteelRaw;
     public static Item ingotWroughtIron;
@@ -153,6 +155,8 @@ public class mullak99 {
     public static Item muttonRaw;
     public static Item muttonCooked;
     public static Item fleshCooked;
+    public static Item alphaPorkchopRaw;
+    public static Item alphaPorkchopCooked;
     
     //Drink
     public static Item bucketChocMilk;
@@ -206,6 +210,7 @@ public class mullak99 {
     
     public static Item steelHammer;
     public static Item essenceExtractor;
+    public static Item mulliteBow;
     
     //Armor
     public static Item helmetMullite;
@@ -468,6 +473,8 @@ public class mullak99 {
 			muttonRaw = (new ItemFood(1033, 3, 0.3F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:muttonRaw").setTextureName("mullak99:muttonRaw");
 			muttonCooked = (new ItemFood(1034, 8, 0.8F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:muttonCooked").setTextureName("mullak99:muttonCooked");
 			fleshCooked = (new ItemFood(1037, 6, 0.4F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:fleshCooked").setTextureName("mullak99:fleshCooked");
+			alphaPorkchopRaw = (new ItemAlphaFood(1038, 3, 0.3F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:alphaPorkchopRaw").setTextureName("mullak99:alphaPorkchopRaw");
+			alphaPorkchopCooked = (new ItemAlphaFood(1039, 8, 0.8F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:alphaPorkchopCooked").setTextureName("mullak99:alphaPorkchopCooked");
 		
 			//Drink
 			bucketChocMilk = new bucketChocMilk(1031).setUnlocalizedName("bucketChocMilk").setCreativeTab(mullak99CT.tabMullak99sModFood).setTextureName("mullak99:bucketChocMilk");
@@ -522,12 +529,13 @@ public class mullak99 {
 			
 			portableCrafting = new portableCrafting(1009).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:portableCrafting").setUnlocalizedName("mullak99:portableCrafting");
 			
+			
 			//alphaPortal = new alphaPortal(4500).setUnlocalizedName("mullak99:alphaPortal");
 			
 			mortarPestle = new mortarPestle(1005).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:mortarPestle").setUnlocalizedName("mullak99:mortarPestle");
 			mortarPestleReinf = new mortarPestle(1006).setMaxStackSize(1).setMaxDamage(1024).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:mortarPestleReinf").setUnlocalizedName("mullak99:mortarPestleReinf");
 			steelHammer = new HandTool(1007, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(16).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:steelHammer").setUnlocalizedName("mullak99:steelHammer");
-			essenceExtractor = new HandTool(1008, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:essenceExtractor").setUnlocalizedName("mullak99:essenceExtractor");
+			essenceExtractor = new essenceExtractor(1008, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:essenceExtractor").setUnlocalizedName("mullak99:essenceExtractor");
 			
 			//Armor
 			
@@ -660,6 +668,7 @@ public class mullak99 {
 		mullakCore.InitialiseItem(essenceExtractor, "Essence Extractor");
 		mullakCore.InitialiseItem(portableCrafting, "Portable Crafting Table");
 		
+		
 		//mullakCore.InitializedItem(foamFinger, "Foam Finger");
 		
 		mullakCore.InitialiseItem(Chain, "Chain");
@@ -669,6 +678,9 @@ public class mullak99 {
 			mullakCore.InitialiseItem(muttonRaw, "Raw Mutton");
 			mullakCore.InitialiseItem(muttonCooked, "Cooked Mutton");
 			mullakCore.InitialiseItem(fleshCooked, "Cooked Zombie Flesh");
+			
+			mullakCore.InitialiseItem(alphaPorkchopRaw, "Raw Nostalgia Porkchop");
+			mullakCore.InitialiseItem(alphaPorkchopCooked, "Cooked Nostalgia Porkchop");
 			
 			
 			//Drink
@@ -721,6 +733,7 @@ public class mullak99 {
 			
 			mullakCore.InitialiseItem(paxelIron, "Iron Paxel");
 			mullakCore.InitialiseItem(paxelDiamond, "Diamond Paxel");
+			
 			
 			MinecraftForge.setToolClass(paxelIron, "pickaxe", 2);
 			MinecraftForge.setToolClass(paxelBronze, "pickaxe", 2);

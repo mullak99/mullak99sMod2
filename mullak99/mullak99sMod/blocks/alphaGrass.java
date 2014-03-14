@@ -21,6 +21,8 @@ private Icon iconGrassTop;
 private Icon iconGrassBottom;
 @SideOnly(Side.CLIENT)
 private static Icon iconGrassSideOverlay;
+@SideOnly(Side.CLIENT)
+private Icon iconSnowSide;
 
 public alphaGrass(int par1)
 {
@@ -93,8 +95,8 @@ return this.iconGrassBottom;
 }
 else
 {
-
-return this.blockIcon;
+    Material material = par1IBlockAccess.getBlockMaterial(par2, par3 + 1, par4);
+    return material != Material.snow && material != Material.craftedSnow ? this.blockIcon : this.iconSnowSide;
 }
 }
 
@@ -110,6 +112,7 @@ this.blockIcon = par1IconRegister.registerIcon("mullak99:alphaGrassSide");
 this.iconGrassTop = par1IconRegister.registerIcon("mullak99:alphaGrassTop");
 this.iconGrassBottom = par1IconRegister.registerIcon("dirt");
 this.iconGrassSideOverlay = par1IconRegister.registerIcon("mullak99:alphaGrassSide");
+this.iconSnowSide = par1IconRegister.registerIcon("grass_side_snowed");
 }
 
 @SideOnly(Side.CLIENT)

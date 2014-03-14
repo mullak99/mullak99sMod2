@@ -120,6 +120,7 @@
 - Updated cape links to update faster 
 - Right clicking with a paxel now places a torch (Consumes torches in inventory) - mullakCore Side
 - Buffed Bloods health modifier
+- Nostalgia Grass Snow sided texture
 
 - Fixed many major bugs
 - Fixed many minor bugs
