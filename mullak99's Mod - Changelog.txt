@@ -124,3 +124,23 @@
 
 - Fixed many major bugs
 - Fixed many minor bugs
+
+-------------------
+| - Alpha 0.1.0 - |
+
+* THIS UPDATE WILL BREAK OLD WORLDS DUE TO ALL BLOCK/ITEM ID'S HAVE BEEN CHANGED, YOU CAN TRY CHANGING ALL ID'S TO THE OLD ONES *
+
+- Added Config file
+- Added Liquid Blood (The Block varient)
+- Added Blood Bucket
+- Added Ender Battery (Infinitly lasting Battery)
+- Added Mullite TNT
+- Rearranged source code so its neater
+- Displays mod info when loading into a SP or MP game
+
+- Disable spawning of the ores (In Config but enabled by default)
+- Saddle Recipe (In Config but enabled by default)
+- Disable Mullite TNT (In Config but enabled by default)
+- Change Mullite TNT explosion size (In Config)
+- All Block/Item ID's can be changed (In Config)
+- Many more config options

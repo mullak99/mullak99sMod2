@@ -8,7 +8,7 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import mullak99.mullak99sMod.*;
-
+import mullak99.mullakCore.IWeight;;
 
 public class alphaArmor extends ItemArmor {
 	

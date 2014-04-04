@@ -7,7 +7,7 @@ public class shovelMullite extends ItemSpade {
 
 	public shovelMullite(int par1, EnumToolMaterial par2EnumToolMaterial) {
 		super(par1, par2EnumToolMaterial);
-		
+		this.canRepair = true;
 	}
 
 }

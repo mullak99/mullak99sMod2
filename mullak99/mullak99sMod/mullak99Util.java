@@ -1,11 +1,35 @@
 package mullak99.mullak99sMod;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Scanner;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class mullak99Util {
 	
+	public static boolean isDevVersionBoolean = true;
+
 	public static String ModID = "mullak99's Mod 2";
+	public static String VersionTitle = "Alpha";
+	public static String VersionTitleS = "A";
+	public static String VersionNo = "0.1.0";
+	public static String Version = VersionTitle + " " + VersionNo;
+	
+	public static String DevState = "Pre-Release ";
+	public static String DevStateNo = "1";
+	
+	public static String LongVersion = VersionTitle + " " + VersionNo;
+	public static String ShortVersion = VersionTitleS + VersionNo;
 	
 	public static String DevCapePicURL = "https://raw.github.com/mullak99/mullak99sMod2/master/capes/DevCape/DevCape.png";
 	public static String DevCapeTXTURL = "https://raw.github.com/mullak99/mullak99sMod2/master/capes/DevCape/DevCapes.txt";
@@ -28,6 +52,40 @@ public class mullak99Util {
 	public static String MelonCapePicURL = "https://raw.github.com/mullak99/mullak99sMod2/master/capes/MelonCape/MelonCape.png";
 	public static String MelonCapeTXTURL = "https://raw.github.com/mullak99/mullak99sMod2/master/capes/MelonCape/MelonCape.txt";
 	
+	public static final String NBT_ITEM_CRAFTING_GUI_OPEN = "itemCraftingGuiOpen";
+	
+	public static URL currentVersionSRC;
+	public static BufferedReader currentVersion;
+	public static String currentVersionText;
+	
+	
+	public static String mullak99sMod2String = "[mullak99's Mod 2] ";
+	public static String MTNTDisabledMSG = mullak99sMod2String + "Mullite TNT explosion is currently disabled on this client/server, but you can still place it";
+	public static String MTNTWARNING = mullak99sMod2String + "Mullite TNT could cause lag, crashes, corruption and massive destruction, use with caution!";
+	
+	public static final int AdvancedCraftingTable = 0;
+	public static final int PortableCrafting = 1;
+	
+	public void VersionChecker() {
+		
+		try {
+			currentVersionSRC = new URL("https://raw.githubusercontent.com/mullak99/mullak99sMod2/master/version/currentVersion.txt");
+			currentVersion = new BufferedReader(new InputStreamReader(currentVersionSRC.openStream()));
+			
+			
+			while ((currentVersionText = currentVersion.readLine()) != null) {
+                System.out.println(currentVersionText);
+            }
+            
+		} catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	
+	
 	
 	public static void CoreLoaded() {
 		
@@ -38,13 +96,36 @@ public class mullak99Util {
 			 * Checks if mullakCore is installed, Gives Log message for easier debugging
 			 */
 			if(Loader.isModLoaded("mullakCore")) {
-				FMLLog.fine("[mullak99's Mod] Sucess: mullakCore Found!");
+				System.out.println("[mullak99's Mod 2] Sucess: mullakCore Found!");
 			}
 			
 			else {
-				FMLLog.severe("[mullak99's Mod] Error: mullakCore not found!");
+				System.out.println("[mullak99's Mod 2] Error: mullakCore not found!");
 				System.exit(1);
 			}
 	}
+	
+	private static void initNBTTagCompound(ItemStack itemStack)
+    {
 
+        if (itemStack.stackTagCompound == null)
+        {
+            itemStack.setTagCompound(new NBTTagCompound());
+        }
+    }
+	
+	public static void setBoolean(ItemStack itemStack, String keyName, boolean keyValue)
+    {
+
+        initNBTTagCompound(itemStack);
+
+        itemStack.stackTagCompound.setBoolean(keyName, keyValue);
+    }
+	
+	public static String OldModVersionWarning;
+	
+	public static void VersionChecker(FMLPreInitializationEvent event) {
+		//OldModVersionWarning = mullak99sMod2String + "You are using version" + event.getModMetadata().version + "and the latest version is " + currentVersionText + ", consider updating.";
+		
+	}
 }

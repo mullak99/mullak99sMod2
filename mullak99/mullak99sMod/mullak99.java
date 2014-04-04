@@ -6,12 +6,13 @@ import mullak99.mullak99sMod.armor.mulliteArmor;
 import mullak99.mullak99sMod.armor.roxiteArmor;
 import mullak99.mullak99sMod.armor.steelArmor;
 import mullak99.mullak99sMod.blocks.MCraftingTable;
+import mullak99.mullak99sMod.blocks.MTNT;
 import mullak99.mullak99sMod.blocks.Stairs;
-import mullak99.mullak99sMod.blocks.alphaFurnace;
 import mullak99.mullak99sMod.blocks.alphaGrass;
 import mullak99.mullak99sMod.blocks.alphaLeaves;
 import mullak99.mullak99sMod.blocks.alphaSapling;
 import mullak99.mullak99sMod.blocks.alphaStone;
+import mullak99.mullak99sMod.blocks.bloodLiquid;
 import mullak99.mullak99sMod.blocks.clearGlass;
 import mullak99.mullak99sMod.blocks.clearGlassPane;
 import mullak99.mullak99sMod.blocks.genericBlock;
@@ -26,43 +27,34 @@ import mullak99.mullak99sMod.blocks.oreMullite;
 import mullak99.mullak99sMod.blocks.oreRoxite;
 import mullak99.mullak99sMod.blocks.oreTin;
 import mullak99.mullak99sMod.event.mullak99TreeBonemealEvent;
+import mullak99.mullak99sMod.fluid.bloodFluid;
+import mullak99.mullak99sMod.handler.BucketHandler;
 import mullak99.mullak99sMod.handler.MCraftingGUIHandler;
+import mullak99.mullak99sMod.handler.PlayerHandler;
 import mullak99.mullak99sMod.handler.localHandler;
 import mullak99.mullak99sMod.items.Battery;
-import mullak99.mullak99sMod.items.Dust;
+import mullak99.mullak99sMod.items.BatteryEmpty;
+import mullak99.mullak99sMod.items.BatteryEnder;
+import mullak99.mullak99sMod.items.Paxel;
 import mullak99.mullak99sMod.items.axeMullite;
 import mullak99.mullak99sMod.items.blood;
+import mullak99.mullak99sMod.items.bloodBucket;
 import mullak99.mullak99sMod.items.bucketChocMilk;
-import mullak99.mullak99sMod.items.chain;
 import mullak99.mullak99sMod.items.enchantedMelon;
 import mullak99.mullak99sMod.items.essenceAlpha;
 import mullak99.mullak99sMod.items.essenceExtractor;
 import mullak99.mullak99sMod.items.genericItem;
-import mullak99.mullak99sMod.items.grate;
 import mullak99.mullak99sMod.items.hoeMullite;
-import mullak99.mullak99sMod.items.ingotAlpha;
-import mullak99.mullak99sMod.items.ingotAluminium;
-import mullak99.mullak99sMod.items.ingotCopper;
-import mullak99.mullak99sMod.items.ingotSteel;
-import mullak99.mullak99sMod.items.ingotTin;
 import mullak99.mullak99sMod.items.mortarPestle;
-import mullak99.mullak99sMod.items.mullite;
-import mullak99.mullak99sMod.items.mulliteBow;
-import mullak99.mullak99sMod.items.paxelBronze;
-import mullak99.mullak99sMod.items.paxelDiamond;
-import mullak99.mullak99sMod.items.paxelIron;
-import mullak99.mullak99sMod.items.paxelMGem;
-import mullak99.mullak99sMod.items.paxelSteel;
 import mullak99.mullak99sMod.items.pickaxeMullite;
 import mullak99.mullak99sMod.items.portableCrafting;
-import mullak99.mullak99sMod.items.roxite;
 import mullak99.mullak99sMod.items.shovelMullite;
 import mullak99.mullak99sMod.items.swordMullite;
 import mullak99.mullak99sMod.items.swordMulliteDE;
-import mullak99.mullak99sMod.mobs.EntitySheepOverride;
-import mullak99.mullak99sMod.mobs.EntityZombieOverride;
+import mullak99.mullak99sMod.mobs.EntityTweaks;
 import mullak99.mullak99sMod.mobs.ProNinjaGamerMob;
 import mullak99.mullak99sMod.mobs.ThundercoyoteMob;
+import mullak99.mullak99sMod.mobs.lucozade_wallerMob;
 import mullak99.mullak99sMod.mobs.mullak99Mob;
 import mullak99.mullakCore.CapeCore;
 import mullak99.mullakCore.HandTool;
@@ -74,7 +66,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.texture.TextureObject;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -86,8 +77,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -104,16 +99,16 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod (modid="mullak99's Mod", name="mullak99's Mod", version="", dependencies="after:mullakCore")
+@Mod (modid="mullak99's Mod 2", name="mullak99's Mod 2", version="", dependencies="after:mullakCore")
 @NetworkMod (clientSideRequired=true, serverSideRequired=false)
 
 public class mullak99 {
 	
-	@Instance ("mullak99's Mod")
+	@Instance ("mullak99's Mod 2")
 	public static mullak99 instance;
 	
 	//Dimension ID
-	public static int alphaID = 2;
+	public static int alphaID = 14;
 	
     //Items
     public static Item mullite;
@@ -144,6 +139,9 @@ public class mullak99 {
     public static Item foamFinger;
     public static Item Chain;
     public static Item IronTippedArrow;
+    public static Item BatteryEmpty;
+    public static Item BatteryEnder;
+    public static Item bloodBucket;
     
     public static Item ingotSteelRaw;
     public static Item ingotWroughtIron;
@@ -275,6 +273,176 @@ public class mullak99 {
     public static Block marbleSlabDouble;
     public static Block marbleCobbleSlabDouble;
     public static Block marbleBrickSlabDouble;
+    public static Block bloodLiquid;
+    public static Block MTNT;
+    
+    //Fluid
+    public static Fluid bloodFluid;
+    
+    //Config
+	    public static boolean TorchPlacement;
+	    public static boolean EnderBatteryCrafting;
+	    public static boolean ModSpawnEggs;
+	    public static boolean WillMTNTExplode;
+	    public static boolean SaddleRecipe;
+	    
+	    public static boolean ShortHand;
+	    
+	    public static boolean CopperGen;
+	    public static boolean TinGen;
+	    public static boolean MulliteGen;
+	    public static boolean RoxiteGen;
+	    public static boolean AlphaGen;
+	    public static boolean BauxiteGen;
+	    public static boolean MarbleGen;
+	    
+	    
+	    public static int MTNTExplode;
+	    
+	    public static int mulliteID;
+	    public static int roxiteID;
+	    public static int ingotCopperID;
+	    public static int ingotSteelID;
+	    public static int ingotTinID;
+	    public static int dustAlphaID;
+	    public static int mortarPestleID;
+	    public static int mortarPestleReinfID;
+	    public static int dustMulliteID;
+	    public static int dustRoxiteID;
+	    public static int dustCoalID;
+	    public static int dustCharcoalID;
+	    public static int dustBronzeID;
+	    public static int dustCopperID;
+	    public static int dustTinID;
+	    public static int ingotBronzeID;
+	    public static int redstoneBatteryID;
+	    public static int aluminiumRawID;
+	    public static int ingotAluminiumID;
+	    public static int dustAluminiumID;
+	    public static int bauxiteID;
+	    public static int bloodID;
+	    public static int mullak99SpawnID;
+	    public static int ThundercoyoteSpawnID;
+	    public static int ingotAlphaID;
+	    public static int foamFingerID;
+	    public static int ChainID;
+	    public static int IronTippedArrowID;
+	    public static int ingotSteelRawID;
+	    public static int ingotWroughtIronID;
+	    public static int grateID;
+	    public static int portableCraftingID;
+	    public static int enchantedMelonID;
+	    public static int muttonRawID;
+	    public static int muttonCookedID;
+	    public static int fleshCookedID;
+	    public static int alphaPorkchopRawID;
+	    public static int alphaPorkchopCookedID;
+	    public static int bucketChocMilkID;
+	    public static int essenceAlphaID;
+	    public static int pickaxeMulliteID;
+	    public static int shovelMulliteID;
+	    public static int swordMulliteID;
+	    public static int axeMulliteID;
+	    public static int hoeMulliteID;
+	    public static int swordMulliteDEID;
+	    public static int paxelMulliteID;
+	    public static int pickaxeRoxiteID;
+	    public static int shovelRoxiteID;
+	    public static int swordRoxiteID;
+	    public static int axeRoxiteID;
+	    public static int hoeRoxiteID;
+	    public static int swordRoxiteDEID;
+	    public static int paxelRoxiteID;
+	    public static int pickaxeBedrockID;
+	    public static int shovelBedrockID;
+	    public static int swordBedrockID;
+	    public static int axeBedrockID;
+	    public static int pickaxeBronzeID;
+	    public static int shovelBronzeID;
+	    public static int swordBronzeID;
+	    public static int axeBronzeID;
+	    public static int hoeBronzeID;
+	    public static int paxelBronzeID;
+	    public static int pickaxeSteelID;
+	    public static int shovelSteelID;
+	    public static int swordSteelID;
+	    public static int axeSteelID;
+	    public static int hoeSteelID;
+	    public static int paxelSteelID;
+	    public static int pickaxeAlphaID;
+	    public static int shovelAlphaID;
+	    public static int swordAlphaID;
+	    public static int axeAlphaID;
+	    public static int hoeAlphaID;
+	    public static int paxelAlphaID;
+	    public static int paxelIronID;
+	    public static int paxelDiamondID;
+	    public static int steelHammerID;
+	    public static int essenceExtractorID;
+	    public static int mulliteBowID;
+	    public static int helmetMulliteID;
+	    public static int chestMulliteID;
+	    public static int legsMulliteID;
+	    public static int bootsMulliteID;
+	    public static int helmetRoxiteID;
+	    public static int chestRoxiteID;
+	    public static int legsRoxiteID;
+	    public static int bootsRoxiteID;
+	    public static int helmetBronzeID;
+	    public static int chestBronzeID;
+	    public static int legsBronzeID;
+	    public static int bootsBronzeID;
+	    public static int helmetSteelID;
+	    public static int chestSteelID;
+	    public static int legsSteelID;
+	    public static int bootsSteelID;
+	    public static int helmetAlphaID;
+	    public static int chestAlphaID;
+	    public static int legsAlphaID;
+	    public static int bootsAlphaID;
+	    public static int oreMulliteID;
+	    public static int blockMulliteID;
+	    public static int oreRoxiteID;
+	    public static int blockRoxiteID;
+	    public static int oreCopperID;
+	    public static int blockCopperID;
+	    public static int oreTinID;
+	    public static int blockTinID;
+	    public static int clearGlassID;
+	    public static int thinClearGlassID;
+	    public static int oreAlphaID;
+	    public static int alphaCobbleID;
+	    public static int alphaStoneID;
+	    public static int blockAlphaID;
+	    public static int blockBronzeID;
+	    public static int alphaFurnaceIdleID;
+	    public static int alphaFurnaceBurningID;
+	    public static int alphaLeavesID;
+	    public static int alphaGrassID;
+	    public static int alphaSaplingID;
+	    public static int MCraftingTableID;
+	    public static int oreBauxiteID;
+	    public static int blockAluminiumID;
+	    public static int alphaPortalID;
+	    public static int marbleID;
+	    public static int marbleCobbleID;
+	    public static int marbleBrickID;
+	    public static int marbleStairID;
+	    public static int marbleCobbleStairID;
+	    public static int marbleBrickStairID;
+	    public static int marbleSlabID;
+	    public static int marbleCobbleSlabID;
+	    public static int marbleBrickSlabID;
+	    public static int marbleSlabDoubleID;
+	    public static int marbleCobbleSlabDoubleID;
+	    public static int marbleBrickSlabDoubleID;
+	    public static int BatteryEmptyID;
+	    public static int BatteryEnderID;
+	    public static int bloodLiquidID;
+	    public static int bloodBucketID;
+	    public static int MTNTID;
+	    public static int portalAlphaID;
+	    
     
 
 	
@@ -305,14 +473,198 @@ public class mullak99 {
 	public void PreInit (FMLPreInitializationEvent event) {
 
 		
+		System.out.println(mullak99Util.mullak99sMod2String + "Loaded!");
+		
+		
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+
+		try {
+	        config.load();
+	
+	        TorchPlacement = config.get(Configuration.CATEGORY_GENERAL, "Right clicking with Paxel places torch", true).getBoolean(false);
+	        EnderBatteryCrafting = config.get(Configuration.CATEGORY_GENERAL, "Ender Battery recipe", true).getBoolean(false);
+	        ModSpawnEggs = config.get(Configuration.CATEGORY_GENERAL, "mullak99, Thundercoyote and Pro_Ninja_Gamer spawn eggs recipe", true).getBoolean(false);
+	        MTNTExplode = config.get(Configuration.CATEGORY_GENERAL, "Mullite TNT Explosion Size", 100).getInt();
+	        WillMTNTExplode = config.get(Configuration.CATEGORY_GENERAL, "Will Mullite TNT Explode", true).getBoolean(false);
+	        SaddleRecipe = config.get(Configuration.CATEGORY_GENERAL, "Is the Saddle recipe enabled", true).getBoolean(false);
+	        
+	        ShortHand = config.get(Configuration.CATEGORY_GENERAL, "Shorter Version Number on game join", false).getBoolean(false);
+	        
+	        CopperGen = config.get(Configuration.CATEGORY_GENERAL, "Copper Ore Generation", true).getBoolean(false);
+	        TinGen = config.get(Configuration.CATEGORY_GENERAL, "Tin Ore Generation", true).getBoolean(false);
+	        MulliteGen = config.get(Configuration.CATEGORY_GENERAL, "Mullite Ore Generation", true).getBoolean(false);
+	        RoxiteGen = config.get(Configuration.CATEGORY_GENERAL, "Roxite Ore Generation", true).getBoolean(false);
+	        AlphaGen = config.get(Configuration.CATEGORY_GENERAL, "Nostalgia Ore Generation", true).getBoolean(false);
+	        BauxiteGen = config.get(Configuration.CATEGORY_GENERAL, "Bauxite Ore Generation", true).getBoolean(false);
+	        MarbleGen = config.get(Configuration.CATEGORY_GENERAL, "Marble Generation", true).getBoolean(false);
+	        
+	        mulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite", 4097).getInt();
+		    roxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite", 4098).getInt();
+		    ingotCopperID = config.get(Configuration.CATEGORY_ITEM, "Copper Ingot", 4099).getInt();
+		    ingotSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Ingot", 4100).getInt();
+		    ingotTinID = config.get(Configuration.CATEGORY_ITEM, "Tin Ingot", 4101).getInt();
+		    dustAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Dust", 4102).getInt();
+		    mortarPestleID = config.get(Configuration.CATEGORY_ITEM, "Mortar and Pestle", 4103).getInt();
+		    mortarPestleReinfID = config.get(Configuration.CATEGORY_ITEM, "Reinforced Mortar and Pestle", 4104).getInt();
+		    dustMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Dust", 4105).getInt();
+		    dustRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Dust", 4106).getInt();
+		    dustCoalID = config.get(Configuration.CATEGORY_ITEM, "Coal Dust", 4107).getInt();
+		    dustCharcoalID = config.get(Configuration.CATEGORY_ITEM, "Charcoal Dust", 4108).getInt();
+		    dustBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Dust", 4109).getInt();
+		    dustCopperID = config.get(Configuration.CATEGORY_ITEM, "Copper Dust", 4110).getInt();
+		    dustTinID = config.get(Configuration.CATEGORY_ITEM, "Tin Dust", 4111).getInt();
+		    ingotBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Ingot", 4112).getInt();
+		    redstoneBatteryID = config.get(Configuration.CATEGORY_ITEM, "Redstone Battery", 4113).getInt();
+		    aluminiumRawID = config.get(Configuration.CATEGORY_ITEM, "Aluminium Oxide", 4114).getInt();
+		    ingotAluminiumID = config.get(Configuration.CATEGORY_ITEM, "Aluminium Ingot", 4115).getInt();
+		    dustAluminiumID = config.get(Configuration.CATEGORY_ITEM, "Aluminium Dust", 4116).getInt();
+		    bauxiteID = config.get(Configuration.CATEGORY_ITEM, "Bauxite", 4117).getInt();
+		    bloodID = config.get(Configuration.CATEGORY_ITEM, "Blood", 4118).getInt();
+		    mullak99SpawnID = config.get(Configuration.CATEGORY_ITEM, "Summon mullak99 (Not Implemented)", 4119).getInt();
+		    ThundercoyoteSpawnID = config.get(Configuration.CATEGORY_ITEM, "Summon Thundercoyote (Not Implemented)", 4120).getInt();
+		    ingotAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Ingot", 4121).getInt();
+		    foamFingerID = config.get(Configuration.CATEGORY_ITEM, "Foam Finger (Not Implemented)", 4122).getInt();
+		    ChainID = config.get(Configuration.CATEGORY_ITEM, "Chain", 4123).getInt();
+		    IronTippedArrowID = config.get(Configuration.CATEGORY_ITEM, "Steel Arrow (Not Implemented)", 4124).getInt();
+		    ingotSteelRawID = config.get(Configuration.CATEGORY_ITEM, "Raw Steel Ingot", 4125).getInt();
+		    ingotWroughtIronID = config.get(Configuration.CATEGORY_ITEM, "Wrought Iron Ingot (Not Implemented)", 4126).getInt();
+		    grateID = config.get(Configuration.CATEGORY_ITEM, "Grate", 4127).getInt();
+		    portableCraftingID = config.get(Configuration.CATEGORY_ITEM, "Portable Crafting Table", 4128).getInt();
+		    enchantedMelonID = config.get(Configuration.CATEGORY_ITEM, "Michael Melon", 4129).getInt();
+		    muttonRawID = config.get(Configuration.CATEGORY_ITEM, "Raw Mutton", 4130).getInt();
+		    muttonCookedID = config.get(Configuration.CATEGORY_ITEM, "Cooked Mutton", 4131).getInt();
+		    fleshCookedID = config.get(Configuration.CATEGORY_ITEM, "Cooked Zombie Flesh", 4132).getInt();
+		    alphaPorkchopRawID = config.get(Configuration.CATEGORY_ITEM, "Raw Nostalgia Porkchop", 4133).getInt();
+		    alphaPorkchopCookedID = config.get(Configuration.CATEGORY_ITEM, "Cooked Nostalgia Porkchop", 4134).getInt();
+		    bucketChocMilkID = config.get(Configuration.CATEGORY_ITEM, "Chocolate Milk", 4135).getInt();
+		    essenceAlphaID = config.get(Configuration.CATEGORY_ITEM, "Essence of Nostalgia", 4136).getInt();
+		    pickaxeMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Pickaxe", 4137).getInt();
+		    shovelMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Shovel", 4138).getInt();
+		    swordMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Sword", 4139).getInt();
+		    axeMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Axe", 4140).getInt();
+		    hoeMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Hoe", 4141).getInt();
+		    swordMulliteDEID = config.get(Configuration.CATEGORY_ITEM, "Mullite Sword (Diamond-Edged)", 4142).getInt();
+		    paxelMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Paxel", 4143).getInt();
+		    pickaxeRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Pickaxe", 4144).getInt();
+		    shovelRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Shovel", 4145).getInt();
+		    swordRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Sword", 4146).getInt();
+		    axeRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Axe", 4147).getInt();
+		    hoeRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Hoe", 4148).getInt();
+		    swordRoxiteDEID = config.get(Configuration.CATEGORY_ITEM, "Roxite Sword (Diamond-Edged)", 4149).getInt();
+		    paxelRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Paxel", 4150).getInt();
+		    pickaxeBedrockID = config.get(Configuration.CATEGORY_ITEM, "Bedrock Pickaxe", 4151).getInt();
+		    shovelBedrockID = config.get(Configuration.CATEGORY_ITEM, "Bedrock Shovel", 4152).getInt();
+		    swordBedrockID = config.get(Configuration.CATEGORY_ITEM, "Bedrock Sword", 4153).getInt();
+		    axeBedrockID = config.get(Configuration.CATEGORY_ITEM, "Bedrock Axe", 4154).getInt();
+		    pickaxeBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Pickaxe", 4155).getInt();
+		    shovelBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Shovel", 4166).getInt();
+		    swordBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Sword", 4167).getInt();
+		    axeBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Axe", 4168).getInt();
+		    hoeBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Hoe", 4169).getInt();
+		    paxelBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Paxel", 4170).getInt();
+		    pickaxeSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Pickaxe", 4171).getInt();
+		    shovelSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Shovel", 4172).getInt();
+		    swordSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Sword", 4173).getInt();
+		    axeSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Axe", 4174).getInt();
+		    hoeSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Hoe", 4175).getInt();
+		    paxelSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Paxel", 4176).getInt();
+		    pickaxeAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Pickaxe", 4177).getInt();
+		    shovelAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Shovel", 4178).getInt();
+		    swordAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Sword", 4179).getInt();
+		    axeAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Axe", 4180).getInt();
+		    hoeAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Hoe", 4181).getInt();
+		    paxelAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Paxel", 4182).getInt();
+		    paxelIronID = config.get(Configuration.CATEGORY_ITEM, "Iron Paxel", 4183).getInt();
+		    paxelDiamondID = config.get(Configuration.CATEGORY_ITEM, "Diamond Paxel", 4184).getInt();
+		    steelHammerID = config.get(Configuration.CATEGORY_ITEM, "Steel Hammer", 4185).getInt();
+		    essenceExtractorID = config.get(Configuration.CATEGORY_ITEM, "Essence Extractor", 4186).getInt();
+		    mulliteBowID = config.get(Configuration.CATEGORY_ITEM, "Mullite Bow (Not Implemented)", 4187).getInt();
+		    helmetMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Helmet", 4188).getInt();
+		    chestMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Chestplate", 4189).getInt();
+		    legsMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Leggings", 4190).getInt();
+		    bootsMulliteID = config.get(Configuration.CATEGORY_ITEM, "Mullite Boots", 4191).getInt();
+		    helmetRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Helmet", 4192).getInt();
+		    chestRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Chestplate", 4193).getInt();
+		    legsRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Leggings", 4194).getInt();
+		    bootsRoxiteID = config.get(Configuration.CATEGORY_ITEM, "Roxite Boots", 4195).getInt();
+		    helmetBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Helmet", 4196).getInt();
+		    chestBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Chestplate", 4197).getInt();
+		    legsBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Leggings", 4198).getInt();
+		    bootsBronzeID = config.get(Configuration.CATEGORY_ITEM, "Bronze Boots", 4199).getInt();
+		    helmetSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Helmet", 4200).getInt();
+		    chestSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Chestplate", 4201).getInt();
+		    legsSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Leggings", 4202).getInt();
+		    bootsSteelID = config.get(Configuration.CATEGORY_ITEM, "Steel Boots", 4203).getInt();
+		    helmetAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Helmet", 4204).getInt();
+		    chestAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Chestplate", 4205).getInt();
+		    legsAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Leggings", 4206).getInt();
+		    bootsAlphaID = config.get(Configuration.CATEGORY_ITEM, "Nostalgia Boots", 4207).getInt();
+	        oreMulliteID = config.get(Configuration.CATEGORY_BLOCK, "Mullite Ore", 500).getInt();
+	        blockMulliteID = config.get(Configuration.CATEGORY_BLOCK, "Mullite Block", 501).getInt();
+	        oreRoxiteID = config.get(Configuration.CATEGORY_BLOCK, "Roxite Ore", 502).getInt();
+	        blockRoxiteID = config.get(Configuration.CATEGORY_BLOCK, "Roxite Block", 503).getInt();
+	        oreCopperID = config.get(Configuration.CATEGORY_BLOCK, "Copper Ore", 504).getInt();
+		    blockCopperID = config.get(Configuration.CATEGORY_BLOCK, "Bopper Block", 505).getInt();
+		    oreTinID = config.get(Configuration.CATEGORY_BLOCK, "Tin Ore", 506).getInt();
+		    blockTinID = config.get(Configuration.CATEGORY_BLOCK, "Tin Block", 507).getInt();
+		    clearGlassID = config.get(Configuration.CATEGORY_BLOCK, "Clear Glass", 508).getInt();
+		    thinClearGlassID = config.get(Configuration.CATEGORY_BLOCK, "Clear Glass Pane", 509).getInt();
+		    oreAlphaID = config.get(Configuration.CATEGORY_BLOCK, "Nostalgia Ore", 510).getInt();
+		    alphaCobbleID = config.get(Configuration.CATEGORY_BLOCK, "Nostalgia Cobblestone", 511).getInt();
+		    alphaStoneID = config.get(Configuration.CATEGORY_BLOCK, "Nostalgia Stone", 512).getInt();
+		    blockAlphaID = config.get(Configuration.CATEGORY_BLOCK, "Nostalgia Block", 513).getInt();
+		    alphaLeavesID = config.get(Configuration.CATEGORY_BLOCK, "Nostalgia Leaves", 514).getInt();
+		    alphaGrassID = config.get(Configuration.CATEGORY_BLOCK, "Nostalgia Grass", 515).getInt();
+		    alphaSaplingID = config.get(Configuration.CATEGORY_BLOCK, "Nostalgia Sapling", 516).getInt();
+		    blockBronzeID = config.get(Configuration.CATEGORY_BLOCK, "Bronze Block", 517).getInt();
+		    MCraftingTableID = config.get(Configuration.CATEGORY_BLOCK, "Advanced Crafting Table", 518).getInt();
+		    oreBauxiteID = config.get(Configuration.CATEGORY_BLOCK, "Bauxite Ore", 519).getInt();
+		    blockAluminiumID = config.get(Configuration.CATEGORY_BLOCK, "Aluminium Block", 520).getInt();
+		    marbleID = config.get(Configuration.CATEGORY_BLOCK, "Marble", 521).getInt();
+		    marbleCobbleID = config.get(Configuration.CATEGORY_BLOCK, "Marble Cobblestone", 522).getInt();
+		    marbleBrickID = config.get(Configuration.CATEGORY_BLOCK, "Marble Bricks", 523).getInt();
+		    marbleStairID = config.get(Configuration.CATEGORY_BLOCK, "Marble Stairs", 524).getInt();
+		    marbleCobbleStairID = config.get(Configuration.CATEGORY_BLOCK, "Marble Cobblestone Stairs", 525).getInt();
+		    marbleBrickStairID = config.get(Configuration.CATEGORY_BLOCK, "Marble Bricks Stairs", 526).getInt();
+		    marbleSlabID = config.get(Configuration.CATEGORY_BLOCK, "Marble Slab", 527).getInt();
+		    marbleCobbleSlabID = config.get(Configuration.CATEGORY_BLOCK, "Marble Cobblestone Slab", 528).getInt();
+		    marbleBrickSlabID = config.get(Configuration.CATEGORY_BLOCK, "Marble Bricks Slab", 529).getInt();
+		    marbleSlabDoubleID = config.get(Configuration.CATEGORY_BLOCK, "Marble Double Slab", 530).getInt();
+		    marbleCobbleSlabDoubleID = config.get(Configuration.CATEGORY_BLOCK, "Marble Cobblestone Double Slab", 531).getInt();
+		    marbleBrickSlabDoubleID = config.get(Configuration.CATEGORY_BLOCK, "Marble Brick Double Slab", 532).getInt();
+		    BatteryEmptyID = config.get(Configuration.CATEGORY_ITEM, "Battery Empty", 533).getInt();
+		    BatteryEnderID = config.get(Configuration.CATEGORY_ITEM, "Ender Battery", 534).getInt();
+		    bloodBucketID = config.get(Configuration.CATEGORY_ITEM, "Bucket of Blood", 535).getInt();
+		    bloodLiquidID = config.get(Configuration.CATEGORY_BLOCK, "Blood", 536).getInt();
+		    MTNTID = config.get(Configuration.CATEGORY_BLOCK, "Mullite TNT", 537).getInt();
+		    portalAlphaID = config.get(Configuration.CATEGORY_BLOCK, "Nostalgia Portal", 538).getInt();
+		    
+		}
+		    
+		catch(Exception e) {
+			System.out.println(mullak99Util.mullak99sMod2String + "Failed to load config!");
+		}
+			
+		finally {
+			if (config.hasChanged()) {
+				config.save();
+			}
+			else {
+				
+			}
+		}
+	        
 		NetworkRegistry.instance().registerGuiHandler(mullak99.instance, (IGuiHandler) new MCraftingGUIHandler());
 		mullakCore.registerEntity(mullak99Mob.class, "mullak99", 0x000FF00, 0x000000);
 		mullakCore.registerEntity(ThundercoyoteMob.class, "Thundercoyote", 0x7F7F7F, 0x000000);
 		mullakCore.registerEntity(ProNinjaGamerMob.class, "Pro_Ninja_Gamer", 0x6600CC, 0x000000);
+		mullakCore.registerEntity(lucozade_wallerMob.class, "lucozade_waller", 0xFFAE00, 0x0011FF);
 		
 		
 		
 		AchievementPage.registerAchievementPage(mullak99sMod);
+		
+		
 	}
 		
 		
@@ -437,105 +789,110 @@ public class mullak99 {
 		proxy.setupCapes();
 		
 		//Items
-		mullite = new mullite(1000).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:Mullite").setUnlocalizedName("mullak99:mullite");
-		roxite = new roxite(1001).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:Roxite").setUnlocalizedName("mullak99:roxite");
-		ingotCopper = new ingotCopper(1002).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotCopper").setUnlocalizedName("mullak99:ingotCopper");
-		ingotSteel = new ingotSteel(1003).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotSteel").setUnlocalizedName("mullak99:ingotSteel");
-		ingotTin = new ingotTin(1004).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotTin").setUnlocalizedName("mullak99:ingotTin");
-		dustAlpha = new Dust(900).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustAlpha").setUnlocalizedName("mullak99:dustAlpha");
-		dustMullite = new Dust(1010).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustMullite").setUnlocalizedName("mullak99:mulliteDust");
-		dustRoxite = new Dust(1011).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustRoxite").setUnlocalizedName("rmullak99:oxiteDust");
-		dustCoal = new Dust(1012).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustCoal").setUnlocalizedName("mullak99:coalDust");
-		dustCharcoal = new Dust(1013).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustCoal").setUnlocalizedName("mullak99:charcoalDust");
-		dustBronze = new Dust(1014).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustBronze").setUnlocalizedName("mullak99:bronzeDust");
-		dustCopper = new Dust(1015).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustCopper").setUnlocalizedName("mullak99:copperDust");
-		dustTin = new Dust(1016).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustTin").setUnlocalizedName("mullak99:tinDust");
-		ingotBronze = new ingotSteel(1017).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotBronze").setUnlocalizedName("mullak99:ingotBronze");
+		mullite = new genericItem(mulliteID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:Mullite").setUnlocalizedName("mullak99:mullite");
+		roxite = new genericItem(roxiteID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:Roxite").setUnlocalizedName("mullak99:roxite");
+		ingotCopper = new genericItem(ingotCopperID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotCopper").setUnlocalizedName("mullak99:ingotCopper");
+		ingotSteel = new genericItem(ingotSteelID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotSteel").setUnlocalizedName("mullak99:ingotSteel");
+		ingotTin = new genericItem(ingotTinID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotTin").setUnlocalizedName("mullak99:ingotTin");
+		dustAlpha = new genericItem(dustAlphaID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustAlpha").setUnlocalizedName("mullak99:dustAlpha");
+		dustMullite = new genericItem(dustMulliteID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustMullite").setUnlocalizedName("mullak99:mulliteDust");
+		dustRoxite = new genericItem(dustRoxiteID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustRoxite").setUnlocalizedName("rmullak99:oxiteDust");
+		dustCoal = new genericItem(dustCoalID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustCoal").setUnlocalizedName("mullak99:coalDust");
+		dustCharcoal = new genericItem(dustCharcoalID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustCoal").setUnlocalizedName("mullak99:charcoalDust");
+		dustBronze = new genericItem(dustBronzeID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustBronze").setUnlocalizedName("mullak99:bronzeDust");
+		dustCopper = new genericItem(dustCopperID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustCopper").setUnlocalizedName("mullak99:copperDust");
+		dustTin = new genericItem(dustTinID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustTin").setUnlocalizedName("mullak99:tinDust");
+		ingotBronze = new genericItem(ingotBronzeID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotBronze").setUnlocalizedName("mullak99:ingotBronze");
 		
-		aluminiumRaw = new ingotAluminium(1018).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:aluminiumOxide").setUnlocalizedName("mullak99:aluminiumOxide");
-		ingotAluminium = new ingotAluminium(1019).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotAluminium").setUnlocalizedName("mullak99:ingotAluminium");
+		aluminiumRaw = new genericItem(aluminiumRawID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:aluminiumOxide").setUnlocalizedName("mullak99:aluminiumOxide");
+		ingotAluminium = new genericItem(ingotAluminiumID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotAluminium").setUnlocalizedName("mullak99:ingotAluminium");
 		
-		bauxite = new Dust(1020).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:bauxite").setUnlocalizedName("mullak99:bauxite");
-		dustAluminium = new Dust(1021).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustAluminium").setUnlocalizedName("mullak99:dustAluminium");
+		bauxite = new genericItem(bauxiteID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:bauxite").setUnlocalizedName("mullak99:bauxite");
+		dustAluminium = new genericItem(dustAluminiumID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:dustAluminium").setUnlocalizedName("mullak99:dustAluminium");
 		
-		ingotSteelRaw = new ingotSteel(1022).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotSteelRaw").setUnlocalizedName("mullak99:ingotSteelRaw");
+		ingotSteelRaw = new genericItem(ingotSteelRawID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotSteelRaw").setUnlocalizedName("mullak99:ingotSteelRaw");
 		
-		redstoneBattery = new Battery(1032).setMaxStackSize(1).setMaxDamage(10).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:redstoneBattery").setUnlocalizedName("mullak99:redstoneBattery");
+		redstoneBattery = new Battery(redstoneBatteryID).setMaxStackSize(1).setContainerItem(BatteryEmpty).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:redstoneBattery").setUnlocalizedName("mullak99:redstoneBattery");
 		
-		grate = new grate(1035).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:grate").setUnlocalizedName("mullak99:grate");
+		grate = new genericItem(grateID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:grate").setUnlocalizedName("mullak99:grate");
 		
-		ingotAlpha = new ingotAlpha(1040).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotAlpha").setUnlocalizedName("mullak99:ingotAlpha");
-		Chain = new chain(1041).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:Chain").setUnlocalizedName("mullak99:Chain");
+		ingotAlpha = new genericItem(ingotAlphaID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:ingotAlpha").setUnlocalizedName("mullak99:ingotAlpha");
+		Chain = new genericItem(ChainID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:Chain").setUnlocalizedName("mullak99:Chain");
+		
+		BatteryEmpty = new BatteryEmpty(BatteryEmptyID).setMaxStackSize(16).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:emptyBattery").setUnlocalizedName("mullak99:emptyBattery");
+		BatteryEnder = new BatteryEnder(BatteryEnderID).setMaxStackSize(1).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:enderBattery").setUnlocalizedName("mullak99:enderBattery");
+		bloodBucket = new bloodBucket(bloodBucketID, bloodLiquidID).setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(mullak99CT.tabMullak99sModWIP).setTextureName("mullak99:bloodBucket").setUnlocalizedName("mullak99:bloodBucket");
+		
 		//foamFinger = new swordMullite(1038, foamFingerTool).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModI).setTextureName("mullak99:foamFinger").setUnlocalizedName("mullak99:foamFinger");
 			
 			//Food
-			enchantedMelon = new enchantedMelon(1030, 20, 1.2F, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.id, 2400, 16, 1.0F).setPotionEffect(Potion.resistance.id, 2400, 16, 1.0F).setPotionEffect(Potion.fireResistance.id, 2400, 16, 1.0F).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:enchantedMelon").setTextureName("melon");
-			muttonRaw = (new ItemFood(1033, 3, 0.3F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:muttonRaw").setTextureName("mullak99:muttonRaw");
-			muttonCooked = (new ItemFood(1034, 8, 0.8F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:muttonCooked").setTextureName("mullak99:muttonCooked");
-			fleshCooked = (new ItemFood(1037, 6, 0.4F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:fleshCooked").setTextureName("mullak99:fleshCooked");
-			alphaPorkchopRaw = (new ItemAlphaFood(1038, 3, 0.3F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:alphaPorkchopRaw").setTextureName("mullak99:alphaPorkchopRaw");
-			alphaPorkchopCooked = (new ItemAlphaFood(1039, 8, 0.8F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:alphaPorkchopCooked").setTextureName("mullak99:alphaPorkchopCooked");
+			enchantedMelon = new enchantedMelon(enchantedMelonID, 20, 1.2F, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.id, 2400, 16, 1.0F).setPotionEffect(Potion.resistance.id, 2400, 16, 1.0F).setPotionEffect(Potion.fireResistance.id, 2400, 16, 1.0F).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:enchantedMelon").setTextureName("melon");
+			muttonRaw = (new ItemFood(muttonRawID, 3, 0.3F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:muttonRaw").setTextureName("mullak99:muttonRaw");
+			muttonCooked = (new ItemFood(muttonCookedID, 8, 0.8F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:muttonCooked").setTextureName("mullak99:muttonCooked");
+			fleshCooked = (new ItemFood(fleshCookedID, 6, 0.4F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:fleshCooked").setTextureName("mullak99:fleshCooked");
+			alphaPorkchopRaw = (new ItemAlphaFood(alphaPorkchopRawID, 3, 0.3F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:alphaPorkchopRaw").setTextureName("mullak99:alphaPorkchopRaw");
+			alphaPorkchopCooked = (new ItemAlphaFood(alphaPorkchopCookedID, 8, 0.8F, true)).setCreativeTab(mullak99CT.tabMullak99sModFood).setUnlocalizedName("mullak99:alphaPorkchopCooked").setTextureName("mullak99:alphaPorkchopCooked");
 		
 			//Drink
-			bucketChocMilk = new bucketChocMilk(1031).setUnlocalizedName("bucketChocMilk").setCreativeTab(mullak99CT.tabMullak99sModFood).setTextureName("mullak99:bucketChocMilk");
-			blood = new blood(1036).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModFood).setTextureName("mullak99:blood").setUnlocalizedName("mullak99:blood");
-			essenceAlpha = new essenceAlpha(1042).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModFood).setTextureName("mullak99:essenceAlpha").setUnlocalizedName("mullak99:essenceAlpha");
+			bucketChocMilk = new bucketChocMilk(bucketChocMilkID).setUnlocalizedName("bucketChocMilk").setCreativeTab(mullak99CT.tabMullak99sModFood).setTextureName("mullak99:bucketChocMilk");
+			blood = new blood(bloodID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModFood).setTextureName("mullak99:blood").setUnlocalizedName("mullak99:blood");
+			essenceAlpha = new essenceAlpha(essenceAlphaID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModFood).setTextureName("mullak99:essenceAlpha").setUnlocalizedName("mullak99:essenceAlpha");
 			
 			//Tools
-			pickaxeMullite = new pickaxeMullite(1500, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeMullite").setUnlocalizedName("mullak99:pickaxeMullite");
-			shovelMullite = new shovelMullite(1501, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelMullite").setUnlocalizedName("mullak99:shovelMullite");
-			swordMullite = new swordMullite(1502, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordMullite").setUnlocalizedName("mullak99:swordMullite");
-			axeMullite = new axeMullite(1503, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeMullite").setUnlocalizedName("mullak99:axeMullite");
-			hoeMullite = new hoeMullite(1504, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeMullite").setUnlocalizedName("mullak99:hoeMullite");
-			swordMulliteDE = new swordMulliteDE(1505, mulliteToolsDE).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordMulliteDE").setUnlocalizedName("mullak99:swordMulliteDE");
+			pickaxeMullite = new pickaxeMullite(pickaxeMulliteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeMullite").setUnlocalizedName("mullak99:pickaxeMullite");
+			shovelMullite = new shovelMullite(shovelMulliteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelMullite").setUnlocalizedName("mullak99:shovelMullite");
+			swordMullite = new swordMullite(swordMulliteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordMullite").setUnlocalizedName("mullak99:swordMullite");
+			axeMullite = new axeMullite(axeMulliteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeMullite").setUnlocalizedName("mullak99:axeMullite");
+			hoeMullite = new hoeMullite(hoeMulliteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeMullite").setUnlocalizedName("mullak99:hoeMullite");
+			swordMulliteDE = new swordMulliteDE(swordMulliteDEID, mulliteToolsDE).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordMulliteDE").setUnlocalizedName("mullak99:swordMulliteDE");
 			
-			pickaxeRoxite = new pickaxeMullite(2500, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeRoxite").setUnlocalizedName("mullak99:pickaxeRoxite");
-			shovelRoxite = new shovelMullite(2501, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelRoxite").setUnlocalizedName("mullak99:shovelRoxite");
-			swordRoxite = new swordMullite(2502, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordRoxite").setUnlocalizedName("mullak99:swordRoxite");
-			axeRoxite = new axeMullite(2503, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeRoxite").setUnlocalizedName("mullak99:axeRoxite");
-			hoeRoxite = new hoeMullite(2504, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeRoxite").setUnlocalizedName("mullak99:hoeRoxite");
-			swordRoxiteDE = new swordMulliteDE(2505, mulliteToolsDE).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordRoxiteDE").setUnlocalizedName("mullak99:swordRoxiteDE");
+			pickaxeRoxite = new pickaxeMullite(pickaxeRoxiteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeRoxite").setUnlocalizedName("mullak99:pickaxeRoxite");
+			shovelRoxite = new shovelMullite(shovelRoxiteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelRoxite").setUnlocalizedName("mullak99:shovelRoxite");
+			swordRoxite = new swordMullite(swordRoxiteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordRoxite").setUnlocalizedName("mullak99:swordRoxite");
+			axeRoxite = new axeMullite(axeRoxiteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeRoxite").setUnlocalizedName("mullak99:axeRoxite");
+			hoeRoxite = new hoeMullite(hoeRoxiteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeRoxite").setUnlocalizedName("mullak99:hoeRoxite");
+			swordRoxiteDE = new swordMulliteDE(swordRoxiteDEID, mulliteToolsDE).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordRoxiteDE").setUnlocalizedName("mullak99:swordRoxiteDE");
 			
-			pickaxeBronze = new pickaxeMullite(3500, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeBronze").setUnlocalizedName("mullak99:pickaxeBronze");
-			shovelBronze = new shovelMullite(3501, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelBronze").setUnlocalizedName("mullak99:shovelBronze");
-			swordBronze = new swordMullite(3502, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordBronze").setUnlocalizedName("mullak99:swordBronze");
-			axeBronze = new axeMullite(3503, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeBronze").setUnlocalizedName("mullak99:axeBronze");
-			hoeBronze = new hoeMullite(3504, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeBronze").setUnlocalizedName("mullak99:hoeBronze");
+			pickaxeBronze = new pickaxeMullite(pickaxeBronzeID, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeBronze").setUnlocalizedName("mullak99:pickaxeBronze");
+			shovelBronze = new shovelMullite(shovelBronzeID, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelBronze").setUnlocalizedName("mullak99:shovelBronze");
+			swordBronze = new swordMullite(swordBronzeID, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordBronze").setUnlocalizedName("mullak99:swordBronze");
+			axeBronze = new axeMullite(axeBronzeID, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeBronze").setUnlocalizedName("mullak99:axeBronze");
+			hoeBronze = new hoeMullite(hoeBronzeID, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeBronze").setUnlocalizedName("mullak99:hoeBronze");
 			
-			pickaxeSteel = new pickaxeMullite(3505, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeSteel").setUnlocalizedName("mullak99:pickaxeSteel");
-			shovelSteel = new shovelMullite(3506, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelSteel").setUnlocalizedName("mullak99:shovelSteel");
-			swordSteel = new swordMullite(3507, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordSteel").setUnlocalizedName("mullak99:swordSteel");
-			axeSteel = new axeMullite(3508, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeSteel").setUnlocalizedName("mullak99:axeSteel");
-			hoeSteel = new hoeMullite(3509, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeSteel").setUnlocalizedName("mullak99:hoeSteel");
+			pickaxeSteel = new pickaxeMullite(pickaxeSteelID, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeSteel").setUnlocalizedName("mullak99:pickaxeSteel");
+			shovelSteel = new shovelMullite(shovelSteelID, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelSteel").setUnlocalizedName("mullak99:shovelSteel");
+			swordSteel = new swordMullite(swordSteelID, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordSteel").setUnlocalizedName("mullak99:swordSteel");
+			axeSteel = new axeMullite(axeSteelID, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeSteel").setUnlocalizedName("mullak99:axeSteel");
+			hoeSteel = new hoeMullite(hoeSteelID, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeSteel").setUnlocalizedName("mullak99:hoeSteel");
 			
-			pickaxeAlpha = new pickaxeMullite(3510, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeAlpha").setUnlocalizedName("mullak99:pickaxeAlpha");
-			shovelAlpha = new shovelMullite(3511, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelAlpha").setUnlocalizedName("mullak99:shovelAlpha");
-			swordAlpha = new swordMullite(3512, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordAlpha").setUnlocalizedName("mullak99:swordAlpha");
-			axeAlpha = new axeMullite(3513, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeAlpha").setUnlocalizedName("mullak99:axeAlpha");
-			hoeAlpha = new hoeMullite(3514, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeAlpha").setUnlocalizedName("mullak99:hoeAlpha");
+			pickaxeAlpha = new pickaxeMullite(pickaxeAlphaID, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeAlpha").setUnlocalizedName("mullak99:pickaxeAlpha");
+			shovelAlpha = new shovelMullite(shovelAlphaID, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelAlpha").setUnlocalizedName("mullak99:shovelAlpha");
+			swordAlpha = new swordMullite(swordAlphaID, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordAlpha").setUnlocalizedName("mullak99:swordAlpha");
+			axeAlpha = new axeMullite(axeAlphaID, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeAlpha").setUnlocalizedName("mullak99:axeAlpha");
+			hoeAlpha = new hoeMullite(hoeAlphaID, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:hoeAlpha").setUnlocalizedName("mullak99:hoeAlpha");
 			
-			pickaxeBedrock = new pickaxeMullite(4000, bedrockTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeBedrock").setUnlocalizedName("mullak99:pickaxeBedrock");
-			shovelBedrock = new shovelMullite(4001, bedrockTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelBedrock").setUnlocalizedName("mullak99:shovelBedrock");
-			swordBedrock = new swordMullite(4002, bedrockTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordBedrock").setUnlocalizedName("mullak99:swordBedrock");
-			axeBedrock = new axeMullite(4003, bedrockTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeBedrock").setUnlocalizedName("mullak99:axeBedrock");
+			pickaxeBedrock = new pickaxeMullite(pickaxeBedrockID, bedrockTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:pickaxeBedrock").setUnlocalizedName("mullak99:pickaxeBedrock");
+			shovelBedrock = new shovelMullite(shovelBedrockID, bedrockTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:shovelBedrock").setUnlocalizedName("mullak99:shovelBedrock");
+			swordBedrock = new swordMullite(swordBedrockID, bedrockTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:swordBedrock").setUnlocalizedName("mullak99:swordBedrock");
+			axeBedrock = new axeMullite(axeBedrockID, bedrockTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:axeBedrock").setUnlocalizedName("mullak99:axeBedrock");
 			
-			paxelIron = new paxelIron(4004, EnumToolMaterial.IRON).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelIron").setUnlocalizedName("mullak99:paxelIron");
-			paxelDiamond = new paxelDiamond(4005, EnumToolMaterial.EMERALD).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelDiamond").setUnlocalizedName("mullak99:paxelDiamond");
-			paxelMullite = new paxelMGem(4006, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelMullite").setUnlocalizedName("mullak99:paxelMullite");
-			paxelRoxite = new paxelMGem(4007, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelRoxite").setUnlocalizedName("mullak99:paxelRoxite");
-			paxelBronze = new paxelBronze(4008, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelBronze").setUnlocalizedName("mullak99:paxelBronze");
-			paxelSteel = new paxelSteel(4009, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelSteel").setUnlocalizedName("mullak99:paxelSteel");
-			paxelAlpha = new paxelSteel(4010, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelAlpha").setUnlocalizedName("mullak99:paxelAlpha");
+			paxelIron = new Paxel(paxelIronID, EnumToolMaterial.IRON).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelIron").setUnlocalizedName("mullak99:paxelIron");
+			paxelDiamond = new Paxel(paxelDiamondID, EnumToolMaterial.EMERALD).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelDiamond").setUnlocalizedName("mullak99:paxelDiamond");
+			paxelMullite = new Paxel(paxelMulliteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelMullite").setUnlocalizedName("mullak99:paxelMullite");
+			paxelRoxite = new Paxel(paxelRoxiteID, mulliteTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelRoxite").setUnlocalizedName("mullak99:paxelRoxite");
+			paxelBronze = new Paxel(paxelBronzeID, bronzeTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelBronze").setUnlocalizedName("mullak99:paxelBronze");
+			paxelSteel = new Paxel(paxelSteelID, steelTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelSteel").setUnlocalizedName("mullak99:paxelSteel");
+			paxelAlpha = new Paxel(paxelAlphaID, alphaTools).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:paxelAlpha").setUnlocalizedName("mullak99:paxelAlpha");
 			
-			portableCrafting = new portableCrafting(1009).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:portableCrafting").setUnlocalizedName("mullak99:portableCrafting");
+			portableCrafting = new portableCrafting(portableCraftingID).setMaxStackSize(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:portableCrafting").setUnlocalizedName("mullak99:portableCrafting");
 			
 			
 			//alphaPortal = new alphaPortal(4500).setUnlocalizedName("mullak99:alphaPortal");
 			
-			mortarPestle = new mortarPestle(1005).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:mortarPestle").setUnlocalizedName("mullak99:mortarPestle");
-			mortarPestleReinf = new mortarPestle(1006).setMaxStackSize(1).setMaxDamage(1024).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:mortarPestleReinf").setUnlocalizedName("mullak99:mortarPestleReinf");
-			steelHammer = new HandTool(1007, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(16).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:steelHammer").setUnlocalizedName("mullak99:steelHammer");
-			essenceExtractor = new essenceExtractor(1008, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:essenceExtractor").setUnlocalizedName("mullak99:essenceExtractor");
+			mortarPestle = new mortarPestle(mortarPestleID).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:mortarPestle").setUnlocalizedName("mullak99:mortarPestle");
+			mortarPestleReinf = new mortarPestle(mortarPestleReinfID).setMaxStackSize(1).setMaxDamage(1024).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:mortarPestleReinf").setUnlocalizedName("mullak99:mortarPestleReinf");
+			steelHammer = new HandTool(steelHammerID, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(16).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:steelHammer").setUnlocalizedName("mullak99:steelHammer");
+			essenceExtractor = new essenceExtractor(essenceExtractorID, mullakCore.nullTool).setMaxStackSize(1).setMaxDamage(64).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:essenceExtractor").setUnlocalizedName("mullak99:essenceExtractor");
 			
 			//Armor
 			
@@ -547,80 +904,85 @@ public class mullak99 {
 			int renderAlphaArmor = proxy.addArmor("alphaArmor");
 			
 			
-			helmetMullite = new mulliteArmor(1600, mulliteArmor, renderMulliteArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetMullite").setUnlocalizedName("mullak99:helmetMullite");
-			chestMullite = new mulliteArmor(1601, mulliteArmor, renderMulliteArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestMullite").setUnlocalizedName("mullak99:chestMullite");
-			legsMullite = new mulliteArmor(1602, mulliteArmor, renderMulliteArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsMullite").setUnlocalizedName("mullak99:legsMullite");
-			bootsMullite = new mulliteArmor(1603, mulliteArmor, renderMulliteArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsMullite").setUnlocalizedName("mullak99:bootsMullite");
+			helmetMullite = new mulliteArmor(helmetMulliteID, mulliteArmor, renderMulliteArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetMullite").setUnlocalizedName("mullak99:helmetMullite");
+			chestMullite = new mulliteArmor(chestMulliteID, mulliteArmor, renderMulliteArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestMullite").setUnlocalizedName("mullak99:chestMullite");
+			legsMullite = new mulliteArmor(legsMulliteID, mulliteArmor, renderMulliteArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsMullite").setUnlocalizedName("mullak99:legsMullite");
+			bootsMullite = new mulliteArmor(bootsMulliteID, mulliteArmor, renderMulliteArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsMullite").setUnlocalizedName("mullak99:bootsMullite");
 			
-			helmetRoxite = new roxiteArmor(1610, mulliteArmor, renderRoxiteArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetRoxite").setUnlocalizedName("mullak99:helmetRoxite");
-			chestRoxite = new roxiteArmor(1611, mulliteArmor, renderRoxiteArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestRoxite").setUnlocalizedName("mullak99:chestRoxite");
-			legsRoxite = new roxiteArmor(1612, mulliteArmor, renderRoxiteArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsRoxite").setUnlocalizedName("mullak99:legsRoxite");
-			bootsRoxite = new roxiteArmor(1613, mulliteArmor, renderRoxiteArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsRoxite").setUnlocalizedName("mullak99:bootsRoxite");
+			helmetRoxite = new roxiteArmor(helmetRoxiteID, mulliteArmor, renderRoxiteArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetRoxite").setUnlocalizedName("mullak99:helmetRoxite");
+			chestRoxite = new roxiteArmor(chestRoxiteID, mulliteArmor, renderRoxiteArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestRoxite").setUnlocalizedName("mullak99:chestRoxite");
+			legsRoxite = new roxiteArmor(legsRoxiteID, mulliteArmor, renderRoxiteArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsRoxite").setUnlocalizedName("mullak99:legsRoxite");
+			bootsRoxite = new roxiteArmor(bootsRoxiteID, mulliteArmor, renderRoxiteArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsRoxite").setUnlocalizedName("mullak99:bootsRoxite");
 			
-			helmetBronze = new bronzeArmor(1620, bronzeArmor, renderBronzeArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetBronze").setUnlocalizedName("mullak99:helmetBronze");
-			chestBronze = new bronzeArmor(1621, bronzeArmor, renderBronzeArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestBronze").setUnlocalizedName("mullak99:chestBronze");
-			legsBronze = new bronzeArmor(1622, bronzeArmor, renderBronzeArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsBronze").setUnlocalizedName("mullak99:legsBronze");
-			bootsBronze = new bronzeArmor(1623, bronzeArmor, renderBronzeArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsBronze").setUnlocalizedName("mullak99:bootsBronze");
+			helmetBronze = new bronzeArmor(helmetBronzeID, bronzeArmor, renderBronzeArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetBronze").setUnlocalizedName("mullak99:helmetBronze");
+			chestBronze = new bronzeArmor(chestBronzeID, bronzeArmor, renderBronzeArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestBronze").setUnlocalizedName("mullak99:chestBronze");
+			legsBronze = new bronzeArmor(legsBronzeID, bronzeArmor, renderBronzeArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsBronze").setUnlocalizedName("mullak99:legsBronze");
+			bootsBronze = new bronzeArmor(bootsBronzeID, bronzeArmor, renderBronzeArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsBronze").setUnlocalizedName("mullak99:bootsBronze");
 			
-			helmetSteel = new steelArmor(1624, steelArmor, renderSteelArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetSteel").setUnlocalizedName("mullak99:helmetSteel");
-			chestSteel = new steelArmor(1625, steelArmor, renderSteelArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestSteel").setUnlocalizedName("mullak99:chestSteel");
-			legsSteel = new steelArmor(1626, steelArmor, renderSteelArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsSteel").setUnlocalizedName("mullak99:legsSteel");
-			bootsSteel = new steelArmor(1627, steelArmor, renderSteelArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsSteel").setUnlocalizedName("mullak99:bootsSteel");
+			helmetSteel = new steelArmor(helmetSteelID, steelArmor, renderSteelArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetSteel").setUnlocalizedName("mullak99:helmetSteel");
+			chestSteel = new steelArmor(chestSteelID, steelArmor, renderSteelArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestSteel").setUnlocalizedName("mullak99:chestSteel");
+			legsSteel = new steelArmor(legsSteelID, steelArmor, renderSteelArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsSteel").setUnlocalizedName("mullak99:legsSteel");
+			bootsSteel = new steelArmor(bootsSteelID, steelArmor, renderSteelArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsSteel").setUnlocalizedName("mullak99:bootsSteel");
 			
-			helmetAlpha = new alphaArmor(1628, alphaArmor, renderAlphaArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetAlpha").setUnlocalizedName("mullak99:helmetAlpha");
-			chestAlpha = new alphaArmor(1629, alphaArmor, renderAlphaArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestAlpha").setUnlocalizedName("mullak99:chestAlpha");
-			legsAlpha = new alphaArmor(1630, alphaArmor, renderAlphaArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsAlpha").setUnlocalizedName("mullak99:legsAlpha");
-			bootsAlpha = new alphaArmor(1631, alphaArmor, renderAlphaArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsAlpha").setUnlocalizedName("mullak99:bootsAlpha");
+			helmetAlpha = new alphaArmor(helmetAlphaID, alphaArmor, renderAlphaArmor, 0).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:helmetAlpha").setUnlocalizedName("mullak99:helmetAlpha");
+			chestAlpha = new alphaArmor(chestAlphaID, alphaArmor, renderAlphaArmor, 1).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:chestAlpha").setUnlocalizedName("mullak99:chestAlpha");
+			legsAlpha = new alphaArmor(legsAlphaID, alphaArmor, renderAlphaArmor, 2).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:legsAlpha").setUnlocalizedName("mullak99:legsAlpha");
+			bootsAlpha = new alphaArmor(bootsAlphaID, alphaArmor, renderAlphaArmor, 3).setCreativeTab(mullak99CT.tabMullak99sModWP).setTextureName("mullak99:bootsAlpha").setUnlocalizedName("mullak99:bootsAlpha");
 			
 		//Blocks
-		oreMullite = new oreMullite(500, Material.rock).setHardness(4.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreMullite").setUnlocalizedName("mullak99:oreMullite");
-		blockMullite = new genericBlock(501, Material.iron).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockMullite").setUnlocalizedName("mullak99:blockMullite");
+		oreMullite = new oreMullite(oreMulliteID, Material.rock).setHardness(4.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreMullite").setUnlocalizedName("mullak99:oreMullite");
+		blockMullite = new genericBlock(blockMulliteID, Material.iron).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockMullite").setUnlocalizedName("mullak99:blockMullite");
 		
-		oreRoxite = new oreRoxite(502, Material.rock).setHardness(4.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreRoxite").setUnlocalizedName("mullak99:oreRoxite");
-		blockRoxite = new genericBlock(503, Material.iron).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockRoxite").setUnlocalizedName("mullak99:blockRoxite");
+		oreRoxite = new oreRoxite(oreRoxiteID, Material.rock).setHardness(4.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreRoxite").setUnlocalizedName("mullak99:oreRoxite");
+		blockRoxite = new genericBlock(blockRoxiteID, Material.iron).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockRoxite").setUnlocalizedName("mullak99:blockRoxite");
 		
-		oreCopper = new oreCopper(504, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreCopper").setUnlocalizedName("mullak99:oreCopper");
-		blockCopper = new genericBlock(505, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockCopper").setUnlocalizedName("mullak99:blockCopper");
+		oreCopper = new oreCopper(oreCopperID, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreCopper").setUnlocalizedName("mullak99:oreCopper");
+		blockCopper = new genericBlock(blockCopperID, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockCopper").setUnlocalizedName("mullak99:blockCopper");
 		
-		oreTin = new oreTin(506, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreTin").setUnlocalizedName("mullak99:oreTin");
-		blockTin = new genericBlock(507, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockTin").setUnlocalizedName("mullak99:blockTin");
+		oreTin = new oreTin(oreTinID, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreTin").setUnlocalizedName("mullak99:oreTin");
+		blockTin = new genericBlock(blockTinID, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockTin").setUnlocalizedName("mullak99:blockTin");
 		
-		oreBauxite = new oreBauxite(514, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreBauxite").setUnlocalizedName("mullak99:oreBauxite");
-		blockAluminium = new genericBlock(515, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockAluminium").setUnlocalizedName("mullak99:blockAluminium");
+		oreBauxite = new oreBauxite(oreBauxiteID, Material.rock).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreBauxite").setUnlocalizedName("mullak99:oreBauxite");
+		blockAluminium = new genericBlock(blockAluminiumID, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockAluminium").setUnlocalizedName("mullak99:blockAluminium");
 		
 		
-		blockBronze = new genericBlock(510, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockBronze").setUnlocalizedName("blockBronze");
-		clearGlass = new clearGlass(511, Material.glass, false).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:clearGlass").setTextureName("mullak99:clearGlass");
-		thinClearGlass = new clearGlassPane(512, "mullak99:clearGlass", "mullak99:clearGlass_pane_top", Material.glass, false).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("mullak99:thinClearGlass");
-		MCraftingTable = new MCraftingTable(513).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:MCrafting").setUnlocalizedName("mullak99:MTable");
+		blockBronze = new genericBlock(blockBronzeID, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockBronze").setUnlocalizedName("blockBronze");
+		clearGlass = new clearGlass(clearGlassID, Material.glass, false).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:clearGlass").setTextureName("mullak99:clearGlass");
+		thinClearGlass = new clearGlassPane(thinClearGlassID, "mullak99:clearGlass", "mullak99:clearGlass_pane_top", Material.glass, false).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("mullak99:thinClearGlass");
+		MCraftingTable = new MCraftingTable(MCraftingTableID).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:MCrafting").setUnlocalizedName("mullak99:MTable");
 		
-		blockAlpha = new genericBlock(520, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockAlpha").setUnlocalizedName("mullak99:blockAlpha");
+		blockAlpha = new genericBlock(blockAlphaID, Material.iron).setHardness(4.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:blockAlpha").setUnlocalizedName("mullak99:blockAlpha");
 		
-		oreAlpha = new oreAlpha(508, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreAlpha").setUnlocalizedName("mullak99:oreAlpha");
-		alphaCobble = new genericBlock(910, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setResistance(10.0F).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:alphaCobble").setUnlocalizedName("mullak99:alphaCobble");
-		alphaStone = new alphaStone(911, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setResistance(10.0F).setCreativeTab(mullak99CT.tabMullak99sModWIP).setTextureName("stone").setUnlocalizedName("mullak99:alphaStone");
-		alphaFurnaceIdle = new alphaFurnace(912, false).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModWIP).setUnlocalizedName("mullak99:alphaFurnace").setCreativeTab(CreativeTabs.tabDecorations);
-	    alphaFurnaceBurning = new alphaFurnace(913, true).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setLightValue(0.875F).setUnlocalizedName("mullak99:alphaFurnace");
-	    alphaLeaves = (alphaLeaves)(new alphaLeaves(914)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaLeaves").setTextureName("mullak99:leaves");
-	    alphaGrass = new alphaGrass(915).setHardness(0.2F).setCreativeTab(mullak99CT.tabMullak99sModB).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaGrass");
-	    alphaSapling = new alphaSapling(916).setHardness(0.0F).setCreativeTab(mullak99CT.tabMullak99sModB).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaSapling").setTextureName("mullak99:alphaSapling");
+		oreAlpha = new oreAlpha(oreAlphaID, Material.rock).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:oreAlpha").setUnlocalizedName("mullak99:oreAlpha");
+		alphaCobble = new genericBlock(alphaCobbleID, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setResistance(10.0F).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:alphaCobble").setUnlocalizedName("mullak99:alphaCobble");
+		alphaStone = new alphaStone(alphaStoneID, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setResistance(10.0F).setCreativeTab(mullak99CT.tabMullak99sModWIP).setTextureName("stone").setUnlocalizedName("mullak99:alphaStone");
+	    alphaLeaves = (alphaLeaves)(new alphaLeaves(alphaLeavesID)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaLeaves").setTextureName("mullak99:leaves");
+	    alphaGrass = new alphaGrass(alphaGrassID).setHardness(0.2F).setCreativeTab(mullak99CT.tabMullak99sModB).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaGrass");
+	    alphaSapling = new alphaSapling(alphaSaplingID).setHardness(0.0F).setCreativeTab(mullak99CT.tabMullak99sModB).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mullak99:alphaSapling").setTextureName("mullak99:alphaSapling");
 	    
-	   marble = new marble(516, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:marble").setUnlocalizedName("mullak99:marble");
-	   marbleCobble = new genericBlock(517, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:marbleCobble").setUnlocalizedName("mullak99:marbleCobble");
-	   marbleBrick = new genericBlock(518, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:marbleBrick").setUnlocalizedName("mullak99:marbleBrick");
+	   marble = new marble(marbleID, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:marble").setUnlocalizedName("mullak99:marble");
+	   marbleCobble = new genericBlock(marbleCobbleID, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:marbleCobble").setUnlocalizedName("mullak99:marbleCobble");
+	   marbleBrick = new genericBlock(marbleBrickID, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setTextureName("mullak99:marbleBrick").setUnlocalizedName("mullak99:marbleBrick");
 	   
-	   marbleStair = new Stairs(521, marble, 0).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleStair");
-	   marbleCobbleStair = new Stairs(522, marbleCobble, 0).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleCobbleStair");
-	   marbleBrickStair = new Stairs(523, marbleBrick, 0).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleBrickStair");
+	   marbleStair = new Stairs(marbleStairID, marble, 0).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleStair");
+	   marbleCobbleStair = new Stairs(marbleCobbleStairID, marbleCobble, 0).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleCobbleStair");
+	   marbleBrickStair = new Stairs(marbleBrickStairID, marbleBrick, 0).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleBrickStair");
 	   
-	   marbleSlab = new marbleSlab(524, false, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleSlab");
-	   marbleCobbleSlab = new marbleCobbleSlab(525, false, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleCobbleSlab");
-	   marbleBrickSlab = new marbleBrickSlab(526, false, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleBrickSlab");
+	   marbleSlab = new marbleSlab(marbleSlabID, false, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleSlab");
+	   marbleCobbleSlab = new marbleCobbleSlab(marbleCobbleSlabID, false, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleCobbleSlab");
+	   marbleBrickSlab = new marbleBrickSlab(marbleBrickSlabID, false, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:marbleBrickSlab");
 	   
-	   marbleSlabDouble = new marbleSlab(527, true, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(null).setUnlocalizedName("mullak99:marbleSlabDouble");
-	   marbleCobbleSlabDouble = new marbleCobbleSlab(528, true, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(null).setUnlocalizedName("mullak99:marbleCobbleSlabDouble");
-	   marbleBrickSlabDouble = new marbleBrickSlab(529, true, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(null).setUnlocalizedName("mullak99:marbleBrickSlabDouble");
+	   marbleSlabDouble = new marbleSlab(marbleSlabDoubleID, true, Material.rock).setHardness(1.5F).setStepSound(Block.soundStoneFootstep).setCreativeTab(null).setUnlocalizedName("mullak99:marbleSlabDouble");
+	   marbleCobbleSlabDouble = new marbleCobbleSlab(marbleCobbleSlabDoubleID, true, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(null).setUnlocalizedName("mullak99:marbleCobbleSlabDouble");
+	   marbleBrickSlabDouble = new marbleBrickSlab(marbleBrickSlabDoubleID, true, Material.rock).setHardness(2.0F).setStepSound(Block.soundStoneFootstep).setCreativeTab(null).setUnlocalizedName("mullak99:marbleBrickSlabDouble");
 	   
+	   //alphaPortal = (portalAlpha)new portalAlpha(alphaPortalID).setCreativeTab(mullak99CT.tabMullak99sModWIP).setUnlocalizedName("mullak99:alphaPortal").setTextureName("portal");
+	   
+	   Fluid bloodFluid = new bloodFluid();
+	   
+	   bloodLiquid = new bloodLiquid(bloodLiquidID, bloodFluid, Material.water).setDensity(2000).setCreativeTab(mullak99CT.tabMullak99sModWIP).setUnlocalizedName("mullak99:bloodLiquid");
+	   
+	   MTNT = new MTNT(MTNTID).setHardness(5.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(mullak99CT.tabMullak99sModB).setUnlocalizedName("mullak99:MTNT");
 	   
 		//Creative Tabs
 		LanguageRegistry.instance().addStringLocalization("itemGroup.mullak99sModI", "en_US", mullak99Util.ModID + " | Items");
@@ -633,6 +995,7 @@ public class mullak99 {
 		LanguageRegistry.instance().addStringLocalization("entity.mullak99.name", "en_US", "mullak99");
 		LanguageRegistry.instance().addStringLocalization("entity.Thundercoyote.name", "en_US", "Thundercoyote");
 		LanguageRegistry.instance().addStringLocalization("entity.Pro_Ninja_Gamer.name", "en_US", "Pro_Ninja_Gamer");
+		LanguageRegistry.instance().addStringLocalization("entity.lucozade_waller.name", "en_US", "lucozade_waller");
 		
 		//Items
 		mullakCore.InitialiseItem(mullite, "Mullite");
@@ -657,6 +1020,8 @@ public class mullak99 {
 		mullakCore.InitialiseItem(ingotAluminium, "Aluminium Ingot");
 		
 		mullakCore.InitialiseItem(redstoneBattery, "Redstone Battery");
+		mullakCore.InitialiseItem(BatteryEmpty, "Empty Battery");
+		mullakCore.InitialiseItem(BatteryEnder, "Ender Battery");
 		
 		mullakCore.InitialiseItem(steelHammer, "Steel Hammer");
 		
@@ -735,13 +1100,13 @@ public class mullak99 {
 			mullakCore.InitialiseItem(paxelDiamond, "Diamond Paxel");
 			
 			
-			MinecraftForge.setToolClass(paxelIron, "pickaxe", 2);
-			MinecraftForge.setToolClass(paxelBronze, "pickaxe", 2);
-			MinecraftForge.setToolClass(paxelSteel, "pickaxe", 2);
-			MinecraftForge.setToolClass(paxelDiamond, "pickaxe", 3);
-			MinecraftForge.setToolClass(paxelMullite, "pickaxe", 4);
-			MinecraftForge.setToolClass(paxelRoxite, "pickaxe", 4);
-			MinecraftForge.setToolClass(paxelAlpha, "pickaxe", 3);
+			mullakCore.RegisterPaxel(paxelIron, 2);
+			mullakCore.RegisterPaxel(paxelBronze, 2);
+			mullakCore.RegisterPaxel(paxelSteel, 2);
+			mullakCore.RegisterPaxel(paxelDiamond, 3);
+			mullakCore.RegisterPaxel(paxelMullite, 4);
+			mullakCore.RegisterPaxel(paxelRoxite, 4);
+			mullakCore.RegisterPaxel(paxelAlpha, 3);
 			
 			
 			//Armor
@@ -770,25 +1135,33 @@ public class mullak99 {
 			mullakCore.InitialiseItem(legsAlpha, "Nostalgia Leggings");
 			mullakCore.InitialiseItem(bootsAlpha, "Nostalgia Boots");
 			
-			//Catalyst
+			mullakCore.InitialiseItem(bloodBucket, "Bucket of Blood");
+			
+			//Container Items and Catalysts
+			
+			BatteryEmpty.setContainerItem(BatteryEmpty);
+			BatteryEnder.setContainerItem(BatteryEnder);
 			
 			
 			//Events
 			
-			MinecraftForge.EVENT_BUS.register(new EntitySheepOverride(null));
-			MinecraftForge.EVENT_BUS.register(new EntityZombieOverride(null));
+			MinecraftForge.EVENT_BUS.register(new EntityTweaks(null));
 			MinecraftForge.EVENT_BUS.register(new mullak99TreeBonemealEvent());
 			MinecraftForge.EVENT_BUS.register(new mullakCore());
+			MinecraftForge.EVENT_BUS.register(new BucketHandler());
+			NetworkRegistry.instance().registerConnectionHandler(new PlayerHandler());
+			
+
 			
 			
 			//World Gen
-			ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 10, 30));
-			ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 5, 25));
-			ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 5, 25));
-			ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 3, 10));
-			ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 3, 10));
-			ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 2, 5, 15));
-			ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 1, 3, 20));
+			ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 1, 2, 7));
+			ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 1, 2, 4));
+			ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 1, 2, 4));
+			ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 1, 2, 4));
+			ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 1, 2, 4));
+			ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 1, 2, 1));
+			ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(new WeightedRandomChestContent(mullak99.blood.itemID, 0, 0, 1, 2));
 			
 		
 		//Blocks
@@ -859,6 +1232,10 @@ public class mullak99 {
 
 		mullakCore.InitialiseBlock(marbleBrickSlabDouble, "marbleBrickSlabDouble", "Marble Bricks Double Slab", "pickaxe", 0);
 		
+		mullakCore.InitialiseBlock(bloodLiquid, "bloodLiquid", "Blood", null, 0);
+		
+		mullakCore.InitialiseBlock(MTNT, "MTNT", "Mullite TNT", "pickaxe", 3);
+		
 		
 		
 		//Recipes
@@ -871,11 +1248,8 @@ public class mullak99 {
 		GameRegistry.registerFuelHandler(new mullak99FuelHandler());
 		GameRegistry.registerCraftingHandler(new localHandler());
 		
-		
-		//Container Item
-		
-		
-		
+		//Fluid
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("blood", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bloodBucket), new ItemStack(Item.bucketEmpty));
 		
 		
 		//World Gen
@@ -903,10 +1277,12 @@ public class mullak99 {
 		
 		
 		
-		/*//DIM
-		DimensionManager.registerProviderType(DimID, WorldProviderMullak99.class, true);
-		DimensionManager.registerDimension(DimID, DimID);*/
+		//DIM
+		//DimensionManager.registerProviderType(alphaID, WorldProviderMullak99.class, true);
+		//DimensionManager.registerDimension(alphaID, alphaID);
 		
+		//mullakCore.addChatMSG(mullak99Util.OldModVersionWarning);
+		//System.out.println(mullak99Util.OldModVersionWarning);
 
 	}
 	
@@ -925,6 +1301,7 @@ public class mullak99 {
 		
 		//Is mullakCore loaded
 		mullak99Util.CoreLoaded();
+
 	}
 
 }

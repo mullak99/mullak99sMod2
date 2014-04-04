@@ -6,18 +6,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class Battery extends Item {
+public class BatteryEnder extends Item {
 
-	public Battery(int id) {
+	public BatteryEnder(int id) {
 		super(id);
-		this.setContainerItem(mullak99.BatteryEmpty);
 		
 	}
 	
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
-	par3List.add("NOT WORKING YET (CRAFTING RECIPE DISABLED)");
-    par3List.add("Using the electrical powers of redstone");
+    par3List.add("Using the power of the End");
     }
 
 }

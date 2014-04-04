@@ -148,16 +148,9 @@ public class ThundercoyoteMob extends EntityMob
 
     protected void dropFewItems(boolean par1, int par2)
     {
-        int j;
-        int k;
-
-        j = this.rand.nextInt(3 + par2);
-
-        for (k = 0; k < j; ++k)
-        {
-            this.dropItem(Item.bone.itemID, mullakCore.randomWithRange(2, 3));
-            this.dropItem(mullak99.blood.itemID, mullakCore.randomWithRange(3, 6));
-        }
+        this.dropItem(Item.bone.itemID, mullakCore.randomWithRange(2, 3));
+        this.dropItem(mullak99.blood.itemID, mullakCore.randomWithRange(3, 6));
+        this.dropItem(Item.sign.itemID, 1);
     }
     
     @Override
@@ -166,22 +159,22 @@ public class ThundercoyoteMob extends EntityMob
     return false;
     }
 
-	    protected String getLivingSound()
-	    {
-	        return "mullak99:mob/Thundercoyote_Living";
-	    }
+    protected String getLivingSound()
+    {
+        return null;
+    }
 
 
-	    protected String getHurtSound()
-	    {
-	        return "mullak99:mob/Thundercoyote_Hurt";
-	    }
+    protected String getHurtSound()
+    {
+        return "mullak99:mobs/ThundercoyoteHurt";
+    }
 
 
-	    protected String getDeathSound()
-	    {
-	        return "mullak99:mob/Thundercoyote_Death";
-	    }
+    protected String getDeathSound()
+    {
+        return null;
+    }
 
 	    @Override
 	    protected void applyEntityAttributes()

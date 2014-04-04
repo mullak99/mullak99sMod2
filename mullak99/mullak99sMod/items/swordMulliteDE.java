@@ -11,6 +11,7 @@ public class swordMulliteDE extends ItemSword {
 
 	public swordMulliteDE(int par1, EnumToolMaterial par2EnumToolMaterial) {
 		super(par1, par2EnumToolMaterial);
+		this.canRepair = true;
 		
 	}
 	

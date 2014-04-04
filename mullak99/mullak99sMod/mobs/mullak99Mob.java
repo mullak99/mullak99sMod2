@@ -147,16 +147,9 @@ public class mullak99Mob extends EntityMob
 
     protected void dropFewItems(boolean par1, int par2)
     {
-        int j;
-        int k;
-
-        j = this.rand.nextInt(3 + par2);
-
-        for (k = 0; k < j; ++k)
-        {
-            this.dropItem(Item.bone.itemID, mullakCore.randomWithRange(2, 3));
-            this.dropItem(mullak99.blood.itemID, mullakCore.randomWithRange(3, 6));
-        }
+        this.dropItem(Item.bone.itemID, mullakCore.randomWithRange(2, 3));
+        this.dropItem(mullak99.blood.itemID, mullakCore.randomWithRange(3, 6));
+        this.dropItem(mullak99.mullite.itemID, 1);
     }
     
 	    @Override
@@ -168,19 +161,19 @@ public class mullak99Mob extends EntityMob
     
 	    protected String getLivingSound()
 	    {
-	        return "mullak99:mob/mullak99_Living";
+	        return null;
 	    }
 
 
 	    protected String getHurtSound()
 	    {
-	        return "mullak99:mob/mullak99_Hurt";
+	        return "mullak99:mobs/mullak99Hurt";
 	    }
 
 
 	    protected String getDeathSound()
 	    {
-	        return "mullak99:mob/mullak99_Death";
+	        return null;
 	    }
 
 	    @Override

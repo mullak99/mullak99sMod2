@@ -11,77 +11,88 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class mullak99WorldGenerator implements IWorldGenerator {
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world,
-			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 		switch(world.provider.dimensionId) {
 		case 0 : generateSurface(world, random, chunkX*16, chunkZ*16);
-		
+		case 1 : generateNether(world, random, chunkX*16, chunkZ*16);
 		}
 
 	}
 
 	private void generateSurface(World world, Random random, int BlockX, int BlockZ) {
-		for(int i =0; i<1; i++) {
-			int Xcoord = BlockX + random.nextInt(16);
-			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(11);
-			
-			(new WorldGenMinable (mullak99.oreMullite.blockID, 2)).generate(world, random, Xcoord, Ycoord, Zcoord);
+		if(mullak99.MulliteGen) {
+			for(int i =0; i<1; i++) {
+				int Xcoord = BlockX + random.nextInt(16);
+				int Zcoord = BlockZ + random.nextInt(16);
+				int Ycoord = random.nextInt(11);
+				
+				(new WorldGenMinable (mullak99.oreMullite.blockID, 2)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			}
 		}
 		
-		for(int i =0; i<1; i++) {
-			int Xcoord = BlockX + random.nextInt(16);
-			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(11);
-			
-			(new WorldGenMinable (mullak99.oreRoxite.blockID, 2)).generate(world, random, Xcoord, Ycoord, Zcoord);
+		if(mullak99.RoxiteGen) {
+			for(int i =0; i<1; i++) {
+				int Xcoord = BlockX + random.nextInt(16);
+				int Zcoord = BlockZ + random.nextInt(16);
+				int Ycoord = random.nextInt(11);
+				
+				(new WorldGenMinable (mullak99.oreRoxite.blockID, 2)).generate(world, random, Xcoord, Ycoord, Zcoord);
+			}
 		}
-		
-		for(int i =0; i<10; i++) {
-			int Xcoord = BlockX + random.nextInt(16);
-			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(64);
+		if(mullak99.CopperGen){
+			for(int i =0; i<10; i++) {
+				int Xcoord = BlockX + random.nextInt(16);
+				int Zcoord = BlockZ + random.nextInt(16);
+				int Ycoord = random.nextInt(64);
+					
+				(new WorldGenMinable (mullak99.oreCopper.blockID, 8)).generate(world, random, Xcoord, Ycoord, Zcoord);
 				
-			(new WorldGenMinable (mullak99.oreCopper.blockID, 8)).generate(world, random, Xcoord, Ycoord, Zcoord);
-			
+			}
 		}
-		
-		for(int i =0; i<9; i++) {
-			int Xcoord = BlockX + random.nextInt(16);
-			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(64);
+		if(mullak99.TinGen) {
+			for(int i =0; i<9; i++) {
+				int Xcoord = BlockX + random.nextInt(16);
+				int Zcoord = BlockZ + random.nextInt(16);
+				int Ycoord = random.nextInt(64);
+					
+				(new WorldGenMinable (mullak99.oreTin.blockID, 8)).generate(world, random, Xcoord, Ycoord, Zcoord);
 				
-			(new WorldGenMinable (mullak99.oreTin.blockID, 8)).generate(world, random, Xcoord, Ycoord, Zcoord);
-			
-		}	
-		
-		for(int i =0; i<7; i++) {
-			int Xcoord = BlockX + random.nextInt(16);
-			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(45);
-				
-			(new WorldGenMinable (mullak99.oreAlpha.blockID, 3)).generate(world, random, Xcoord, Ycoord, Zcoord);
-			
+			}	
 		}
-		
-		for(int i =0; i<7; i++) {
-			int Xcoord = BlockX + random.nextInt(16);
-			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(45);
+		if(mullak99.AlphaGen) {
+			for(int i =0; i<7; i++) {
+				int Xcoord = BlockX + random.nextInt(16);
+				int Zcoord = BlockZ + random.nextInt(16);
+				int Ycoord = random.nextInt(45);
+					
+				(new WorldGenMinable (mullak99.oreAlpha.blockID, 3)).generate(world, random, Xcoord, Ycoord, Zcoord);
 				
-			(new WorldGenMinable (mullak99.oreBauxite.blockID, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
-			
+			}
 		}
-		
-		for(int i =0; i<8; i++) {
-			int Xcoord = BlockX + random.nextInt(16);
-			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(256);
+		if(mullak99.BauxiteGen) {
+			for(int i =0; i<7; i++) {
+				int Xcoord = BlockX + random.nextInt(16);
+				int Zcoord = BlockZ + random.nextInt(16);
+				int Ycoord = random.nextInt(45);
+					
+				(new WorldGenMinable (mullak99.oreBauxite.blockID, 5)).generate(world, random, Xcoord, Ycoord, Zcoord);
 				
-			(new WorldGenMinable (mullak99.marble.blockID, 32)).generate(world, random, Xcoord, Ycoord, Zcoord);
-			
+			}
+		}
+		if(mullak99.MarbleGen) {
+			for(int i =0; i<8; i++) {
+				int Xcoord = BlockX + random.nextInt(16);
+				int Zcoord = BlockZ + random.nextInt(16);
+				int Ycoord = random.nextInt(256);
+					
+				(new WorldGenMinable (mullak99.marble.blockID, 32)).generate(world, random, Xcoord, Ycoord, Zcoord);
+				
+			}
 		}
 		
 	}
-
+	
+	private void generateNether(World world, Random random, int BlockX, int BlockZ) {
+		
+	}
 }

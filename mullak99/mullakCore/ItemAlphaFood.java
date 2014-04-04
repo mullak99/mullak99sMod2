@@ -48,6 +48,8 @@ public class ItemAlphaFood extends ItemFood
 	        this.isWolfsFavoriteMeat = par4;
 	        this.saturationModifier = par3;
 	        this.setCreativeTab(CreativeTabs.tabFood);
+	        this.alwaysEdible = true;
+	        this.setMaxStackSize(1);
 	    }
 
 	    public ItemAlphaFood(int par1, int par2, boolean par3)
@@ -55,10 +57,12 @@ public class ItemAlphaFood extends ItemFood
 	        this(par1, par2, 0.6F, par3);
 	    }
 
+	    @Override
 	    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	    {
 	        --par1ItemStack.stackSize;
-	        par3EntityPlayer.getFoodStats().addStats(this);
+	        //par3EntityPlayer.getFoodStats().addStats(this);
+	        par3EntityPlayer.getFoodStats().addStats(healAmount, 0);
 	        this.onFoodEaten(par1ItemStack, par2World, par3EntityPlayer);
 	        return par1ItemStack;
 	    }
@@ -137,6 +141,7 @@ public class ItemAlphaFood extends ItemFood
 	    /**
 	     * Set the field 'alwaysEdible' to true, and make the food edible even if the player don't need to eat.
 	     */
+	    @Override
 	    public ItemAlphaFood setAlwaysEdible()
 	    {
 	        this.alwaysEdible = true;

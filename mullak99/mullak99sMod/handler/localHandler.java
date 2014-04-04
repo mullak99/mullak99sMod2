@@ -93,8 +93,7 @@ public class localHandler implements ICraftingHandler {
 
 	@Override
 	public void onSmelting(EntityPlayer player, ItemStack item) {
-			
-		
+
 	}
 
 }
