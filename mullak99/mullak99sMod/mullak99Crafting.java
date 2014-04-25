@@ -35,13 +35,9 @@ public class mullak99Crafting {
 				'B', mullak99.ingotBronze);
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.ingotBronze, 9), mullak99.blockBronze);
 		
-		GameRegistry.addRecipe(new ItemStack(mullak99.blockMullite), "MMM", "MMM", "MMM",
-				'M', mullak99.mullite);
-		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.mullite, 9), mullak99.blockMullite);
-	
-		GameRegistry.addRecipe(new ItemStack(mullak99.blockCopper), "CCC", "CCC", "CCC",
-				'C', mullak99.ingotCopper);
-		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.ingotCopper, 9), mullak99.blockCopper);
+		GameRegistry.addRecipe(new ItemStack(mullak99.blockSilver), "SSS", "SSS", "SSS",
+				'S', mullak99.ingotSilver);
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.ingotSilver, 9), mullak99.blockSilver);
 	
 		GameRegistry.addRecipe(new ItemStack(mullak99.thinClearGlass, 16), "GGG", "GGG",
 				'G', mullak99.clearGlass);
@@ -93,6 +89,12 @@ public class mullak99Crafting {
 		GameRegistry.addRecipe(new ItemStack(mullak99.marbleBrickStair, 4), "M  ", "MM ", "MMM",
 				'M', mullak99.marbleBrick);
 		
+		GameRegistry.addRecipe(new ItemStack(mullak99.blockEndite), "EEE", "EEE", "EEE",
+				'E', mullak99.endite);
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.endite, 9), mullak99.blockEndite);
+		
+		
+		
 		
 		//Items
 		
@@ -110,6 +112,10 @@ public class mullak99Crafting {
 		GameRegistry.addRecipe(new ItemStack(mullak99.Chain, 6, 0), "I", "I",
 				'I', Item.ingotIron);
 		
+		GameRegistry.addRecipe(new ItemStack(mullak99.bloodBucket), "BBB", "BIB", "BBB",
+				'B', mullak99.blood, 'I', Item.bucketEmpty);
+		
+		
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.dustBronze, 4), mullak99.dustTin, mullak99.dustCopper, mullak99.dustCopper, mullak99.dustCopper);
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.ingotSteelRaw), mullak99.dustCoal, mullak99.dustCoal, Item.ingotIron);
@@ -117,6 +123,10 @@ public class mullak99Crafting {
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.ingotSteelRaw), mullak99.dustCoal, mullak99.dustCharcoal, Item.ingotIron);
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.redstoneBattery), mullak99.BatteryEmpty, Item.redstone, Item.redstone, Item.redstone);
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.gunpowder, 2), mullak99.dustCoal, mullak99.dustCoal, mullak99.sulfur, mullak99.sulfur);
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.gunpowder, 2), mullak99.dustCharcoal, mullak99.dustCharcoal, mullak99.sulfur, mullak99.sulfur);
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.gunpowder, 2), mullak99.dustCoal, mullak99.dustCharcoal, mullak99.sulfur, mullak99.sulfur);
 		
 		
 		
@@ -164,6 +174,12 @@ public class mullak99Crafting {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.dustAlpha), mullak99.alphaCobble, (new ItemStack(mullak99.mortarPestle, 1, 32767)));
 		
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.dustSilver), mullak99.ingotSilver, (new ItemStack(mullak99.mortarPestle, 1, 32767)));
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.dustSilver, 2), mullak99.oreSilver, (new ItemStack(mullak99.mortarPestle, 1, 32767)));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.sulfur, 8), mullak99.oreSulfur, (new ItemStack(mullak99.mortarPestle, 1, 32767)));
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.sulfur, 16), mullak99.oreNetherSulfur, (new ItemStack(mullak99.mortarPestle, 1, 32767)));
+		
 		//Reinforced Mortar and Pestle
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.dustMullite), mullak99.mullite, (new ItemStack(mullak99.mortarPestleReinf, 1, 32767)));
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.dustMullite, 2), mullak99.oreMullite, (new ItemStack(mullak99.mortarPestleReinf, 1, 32767)));
@@ -200,6 +216,12 @@ public class mullak99Crafting {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.dustAlpha), mullak99.alphaCobble, (new ItemStack(mullak99.mortarPestleReinf, 1, 32767)));
 		
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.dustSilver), mullak99.ingotSilver, (new ItemStack(mullak99.mortarPestleReinf, 1, 32767)));
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.dustSilver, 2), mullak99.oreSilver, (new ItemStack(mullak99.mortarPestleReinf, 1, 32767)));
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.sulfur, 8), mullak99.oreSulfur, (new ItemStack(mullak99.mortarPestleReinf, 1, 32767)));
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.sulfur, 16), mullak99.oreNetherSulfur, (new ItemStack(mullak99.mortarPestleReinf, 1, 32767)));
+		
 		//Food
 		GameRegistry.addRecipe(new ItemStack(mullak99.enchantedMelon), "DAG", "AMA", "GAD",
 				'M', Item.melon, 'A', (new ItemStack(Item.appleGold, 1, 1)), 'D', Block.blockDiamond, 'G', Block.blockGold);
@@ -224,6 +246,9 @@ public class mullak99Crafting {
 		GameRegistry.addRecipe(new ItemStack(mullak99.hoeMullite), " MM", " S ", " S ",
 				'M', mullak99.mullite, 'S', Item.stick);
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.swordMulliteDE), mullak99.swordMullite, Item.diamond);
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.swordMulliteEE), mullak99.swordMullite, mullak99.endite, mullak99.endite, mullak99.endite);
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.paxelMulliteEE), mullak99.paxelMullite, mullak99.endite, mullak99.endite, mullak99.endite, mullak99.endite);
 		
 		
 		GameRegistry.addRecipe(new ItemStack(mullak99.pickaxeRoxite), "RRR", " S ", " S ",
@@ -241,6 +266,9 @@ public class mullak99Crafting {
 		GameRegistry.addRecipe(new ItemStack(mullak99.hoeRoxite), " RR", " S ", " S ",
 				'R', mullak99.roxite, 'S', Item.stick);
 		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.swordRoxiteDE), mullak99.swordRoxite, Item.diamond);
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.swordRoxiteEE), mullak99.swordRoxite, mullak99.endite, mullak99.endite, mullak99.endite);
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(mullak99.paxelRoxiteEE), mullak99.paxelRoxite, mullak99.endite, mullak99.endite, mullak99.endite, mullak99.endite);
 		
 		
 		GameRegistry.addRecipe(new ItemStack(mullak99.pickaxeBronze), "BBB", " S ", " S ",
@@ -293,7 +321,10 @@ public class mullak99Crafting {
 		
 		GameRegistry.addRecipe(new ItemStack(mullak99.essenceExtractor), "-", "S",
 				'-', mullak99.grate, 'S', Item.stick);
+
 		
+		GameRegistry.addRecipe(new ItemStack(mullak99.enditeHammer), new Object[] {"ESE", " S ", 
+			'E', mullak99.endite, 'S', Item.blazeRod});
 		
 		//Armor
 		
@@ -366,6 +397,16 @@ public class mullak99Crafting {
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelRoxite), new Object[] {" - ", "---", "---", " S ", " S ", '-', mullak99.roxite, 'S', Item.stick});
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelAlpha), new Object[] {" - ", "---", "---", " S ", " S ", '-', mullak99.ingotAlpha, 'S', Item.stick});
 		
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.blockUru), new Object[] {"MRM", "DED", "DED", "DED", "MRM", 'M', mullak99.blockMullite, 'R', mullak99.blockRoxite, 'D', Block.blockDiamond, 'E', mullak99.blockEndite});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.ingotUru, 4), new Object[] {"H", "U", 'H', (new ItemStack(mullak99.enditeHammer, 1, 32767)), 'U', mullak99.blockUru});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.blockUru), new Object[] {"H ", "UU", "UU", 'H', (new ItemStack(mullak99.enditeHammer, 1, 32767)), 'U', mullak99.ingotUru});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.blockUru), new Object[] {" H", "UU", "UU", 'H', (new ItemStack(mullak99.enditeHammer, 1, 32767)), 'U', mullak99.ingotUru});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.blockUru), new Object[] {"UU", "UU", "H ", 'H', (new ItemStack(mullak99.enditeHammer, 1, 32767)), 'U', mullak99.ingotUru});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.blockUru), new Object[] {"UU", "UU", " H", 'H', (new ItemStack(mullak99.enditeHammer, 1, 32767)), 'U', mullak99.ingotUru});
+		
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.thorsHammer), new Object[] {"EME", "USU", "USU", " D ", " S ", 'E', mullak99.endite, 'M', mullak99.mullite, 'S', Item.stick, 'U', mullak99.ingotUru, 'D', Item.diamond});
+		
+		
 		if(mullak99.SaddleRecipe) {
 			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.saddle), new Object[] {"LLL", "SLS", "I I", " H ", 'L', Item.leather, 'S', Item.silk, 'I', mullak99.ingotSteel, 'H', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		}
@@ -381,22 +422,33 @@ public class mullak99Crafting {
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordMulliteDE), new Object[] {"DIM", " S ", 'M', mullak99.mullite, 'D', Item.diamond, 'I', (new ItemStack(mullak99.swordMulliteDE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelMullite), new Object[] {"MIM", " S ", 'M', mullak99.mullite, 'I', (new ItemStack(mullak99.paxelMullite, 1, 32767)), 'S', mullak99.steelHammer});
 		
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordMulliteEE), new Object[] {"MIE", " S ", 'R', mullak99.mullite, 'E', mullak99.endite, 'I', (new ItemStack(mullak99.swordMulliteEE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordMulliteEE), new Object[] {"EIM", " S ", 'R', mullak99.mullite, 'E', mullak99.endite, 'I', (new ItemStack(mullak99.swordMulliteEE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelMulliteEE), new Object[] {"EIR", " S ", 'R', mullak99.roxite, 'E', mullak99.endite, 'I', (new ItemStack(mullak99.paxelMulliteEE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelMulliteEE), new Object[] {"RIE", " S ", 'R', mullak99.roxite, 'E', mullak99.endite, 'I', (new ItemStack(mullak99.paxelMulliteEE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.pickaxeRoxite), new Object[] {"RIR", " S ", 'R', mullak99.roxite, 'I', (new ItemStack(mullak99.pickaxeRoxite, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.shovelRoxite), new Object[] {"RIR", " S ", 'R', mullak99.roxite, 'I', (new ItemStack(mullak99.shovelMullite, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordRoxite), new Object[] {"RIR", " S ", 'R', mullak99.roxite, 'I', (new ItemStack(mullak99.swordMullite, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
-		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.axeRoxite), new Object[] {"RIR", " S ", 'R', mullak99.roxite, 'I', (new ItemStack(mullak99.axeMullite, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
-		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.hoeRoxite), new Object[] {"RIR", " S ", 'R', mullak99.roxite, 'I', (new ItemStack(mullak99.hoeMullite, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
-		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordRoxiteDE), new Object[] {"RID", " S ", 'R', mullak99.roxite, 'D', Item.diamond, 'I', (new ItemStack(mullak99.swordMulliteDE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
-		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordRoxiteDE), new Object[] {"DIR", " S ", 'R', mullak99.roxite, 'D', Item.diamond, 'I', (new ItemStack(mullak99.swordMulliteDE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.axeRoxite), new Object[] {"RIR", " S ", 'R', mullak99.roxite, 'I', (new ItemStack(mullak99.axeRoxite, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.hoeRoxite), new Object[] {"RIR", " S ", 'R', mullak99.roxite, 'I', (new ItemStack(mullak99.hoeRoxite, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordRoxiteDE), new Object[] {"RID", " S ", 'R', mullak99.roxite, 'D', Item.diamond, 'I', (new ItemStack(mullak99.swordRoxiteDE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordRoxiteDE), new Object[] {"DIR", " S ", 'R', mullak99.roxite, 'D', Item.diamond, 'I', (new ItemStack(mullak99.swordRoxiteDE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelRoxite), new Object[] {"RIR", " S ", 'R', mullak99.roxite, 'I', (new ItemStack(mullak99.paxelRoxite, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordRoxiteEE), new Object[] {"EIR", " S ", 'R', mullak99.roxite, 'E', mullak99.endite, 'I', (new ItemStack(mullak99.swordRoxiteEE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.swordRoxiteEE), new Object[] {"RIE", " S ", 'R', mullak99.roxite, 'E', mullak99.endite, 'I', (new ItemStack(mullak99.swordRoxiteEE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelRoxiteEE), new Object[] {"EIR", " S ", 'R', mullak99.roxite, 'E', mullak99.endite, 'I', (new ItemStack(mullak99.paxelRoxiteEE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelRoxiteEE), new Object[] {"RIE", " S ", 'R', mullak99.roxite, 'E', mullak99.endite, 'I', (new ItemStack(mullak99.paxelRoxiteEE, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelIron), new Object[] {"-I-", " S ", '-', Item.ingotIron, 'I', (new ItemStack(mullak99.paxelIron, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelBronze), new Object[] {"-I-", " S ", '-', mullak99.ingotBronze, 'I', (new ItemStack(mullak99.paxelBronze, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelDiamond), new Object[] {"-I-", " S ", '-', Item.diamond, 'I', (new ItemStack(mullak99.paxelDiamond, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.paxelSteel), new Object[] {"-I-", " S ", '-', mullak99.ingotSteel, 'I', (new ItemStack(mullak99.paxelSteel, 1, 32767)), 'S', (new ItemStack(mullak99.steelHammer, 1, 32767))});
 		
+		MCraftingManager.getInstance().addShapedRecipe(new ItemStack(mullak99.thorsHammer), new Object[] {"-I-", " S ", '-', mullak99.ingotUru, 'I', (new ItemStack(mullak99.thorsHammer, 1, 32767)), 'S', (new ItemStack(mullak99.enditeHammer, 1, 32767))});
 		
 		//Ender Battery
 		
@@ -412,6 +464,18 @@ public class mullak99Crafting {
 			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 4), new Object[] {"BBB", "B-B", "BSB", "B-B", "BBB", 'S', Item.sign, 'B', mullak99.blood, '-', Item.bone});
 			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 5), new Object[] {"BBB", "B-B", "BCB", "B-B", "BBB", 'C', Item.cookie, 'B', mullak99.blood, '-', Item.bone});
 			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 6), new Object[] {"BBB", "B-B", "BMB", "B-B", "BBB", 'M', Item.melon, 'B', mullak99.blood, '-', Item.bone});
+		}
+		else {
+			return;
+		}
+		
+		//Vanilla Spawn Eggs
+		if(mullak99.VanillaSpawnEggs) {
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 90), new Object[] {"BBB", "WWW", "WEW", "WWW", "BBB", 'W', (new ItemStack(Block.cloth, 6, 6)), 'B', mullak99.blood, 'E', Item.egg});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 93), new Object[] {"BBB", "FFF", "FFF", "FFF", "BBB", 'F', Item.feather, 'B', mullak99.blood});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 92), new Object[] {"BBB", "LLL", "LEL", "LLL", "BBB", 'L', Item.leather, 'B', mullak99.blood, 'E', Item.egg});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 91), new Object[] {"BBB", "WWW", "WEW", "WWW", "BBB", 'W', (new ItemStack(Block.cloth, 0, 0)), 'B', mullak99.blood, 'E', Item.egg});
+			MCraftingManager.getInstance().addShapedRecipe(new ItemStack(Item.monsterPlacer, 1, 120), new Object[] {"BBB", "GGG", "GEG", "GGG", "BBB", 'G', Item.emerald, 'B', mullak99.blood, 'E', Item.egg});
 		}
 		else {
 			return;
@@ -443,6 +507,9 @@ public class mullak99Crafting {
 		GameRegistry.addSmelting(mullak99.bauxite.itemID, new ItemStack(mullak99.aluminiumRaw), 0.1F);
 		GameRegistry.addSmelting(mullak99.ingotSteelRaw.itemID, new ItemStack(mullak99.ingotSteel), 0.1F);
 		GameRegistry.addSmelting(mullak99.dustAlpha.itemID,new ItemStack(mullak99.ingotAlpha), 0F);
+	
+		GameRegistry.addSmelting(mullak99.oreSulfur.blockID, new ItemStack(mullak99.sulfur, 4), 0.1F);
+		GameRegistry.addSmelting(mullak99.oreNetherSulfur.blockID, new ItemStack(mullak99.sulfur, 8), 0.1F);
 	}
 
 }

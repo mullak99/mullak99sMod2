@@ -5,22 +5,23 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
-public class ToolPaxel extends ItemTool {
+public class ToolPaxel extends ItemPickaxe {
 	
 	public int torchID = Block.torchWood.blockID;
 	
 	
 	/** an array of the blocks this pickaxe is effective against */
-	public static final Block[] blocksEffectiveAgainst = new Block[] {Block.planks, Block.bookShelf, Block.wood, Block.chest, Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin, Block.pumpkinLantern, Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium, Block.cobblestone, Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.blockIron, Block.oreCoal, Block.blockGold, Block.oreGold, Block.oreDiamond, Block.blockDiamond, Block.ice, Block.netherrack, Block.oreLapis, Block.blockLapis, Block.oreRedstone, Block.oreRedstoneGlowing, Block.rail, Block.railDetector, Block.railPowered, Block.railActivator};
+	public static final Block[] blocksEffectiveAgainst = new Block[] {Block.grass, Block.dirt, Block.planks, Block.bookShelf, Block.wood, Block.chest, Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin, Block.pumpkinLantern, Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium, Block.cobblestone, Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.blockIron, Block.oreCoal, Block.blockGold, Block.oreGold, Block.oreDiamond, Block.blockDiamond, Block.ice, Block.netherrack, Block.oreLapis, Block.blockLapis, Block.oreRedstone, Block.oreRedstoneGlowing, Block.rail, Block.railDetector, Block.railPowered, Block.railActivator};
 	
 	
 	public ToolPaxel (int par1, EnumToolMaterial par2EnumToolMaterial, int DurabilityModifier)
 	{
-		super(par1, 2.0F, par2EnumToolMaterial, blocksEffectiveAgainst);
+		super(par1, par2EnumToolMaterial);
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses() * DurabilityModifier);
 		this.setMaxStackSize(1);
 		this.setCreativeTab(CreativeTabs.tabTools);
@@ -30,12 +31,12 @@ public class ToolPaxel extends ItemTool {
 	
 	public boolean canHarvestBlock(Block par1Block)
 	{
-		return null != null;
+		return Block.blocksList != null;
 	}
 	
 	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
 	{
-		return par2Block != null && (par2Block.blockMaterial == Material.iron || par2Block.blockMaterial == Material.wood || par2Block.blockMaterial == Material.web || par2Block.blockMaterial == Material.anvil || par2Block.blockMaterial == Material.rock) ? this.efficiencyOnProperMaterial : super.getStrVsBlock(par1ItemStack, par2Block);
+		return par2Block != null && (par2Block.blockMaterial == Material.grass || par2Block.blockMaterial == Material.ground || par2Block.blockMaterial == Material.iron || par2Block.blockMaterial == Material.wood || par2Block.blockMaterial == Material.web || par2Block.blockMaterial == Material.anvil || par2Block.blockMaterial == Material.rock) ? this.efficiencyOnProperMaterial : super.getStrVsBlock(par1ItemStack, par2Block);
 	}
 	
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)

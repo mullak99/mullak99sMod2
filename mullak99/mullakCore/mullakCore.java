@@ -1,5 +1,8 @@
 package mullak99.mullakCore;
 
+import java.io.File;
+
+import mullak99.Addons.nuclear.NAutil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -25,7 +28,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod (modid="mullakCore", name="mullakCore", version="Alpha 0.1.0 Pre-Release 1", dependencies="before:*")
+@Mod (modid="mullakCore", name="mullakCore", version="Alpha 0.1.0 Pre-Release 2")
 @NetworkMod (clientSideRequired=true, serverSideRequired=false)
 
 
@@ -80,8 +83,9 @@ public class mullakCore {
 		Minecraft.getMinecraft().thePlayer.addChatMessage(message);
 	}
 	
-	public static void RegisterPaxel(Item paxel, int harvestLevel) {
+	public static void RegisterPaxel(Item paxel, int harvestLevel, String PaxelName) {
 		MinecraftForge.setToolClass(paxel, "pickaxe", harvestLevel);
+		LanguageRegistry.addName(paxel, PaxelName);
 	}
 
 	
@@ -96,9 +100,10 @@ public class mullakCore {
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event) {
 	
-		System.out.println(CoreUtil.mullakCoreString + "Loaded!");
 		
-		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		System.out.println(CoreUtil.mullakCoreString + "Loaded " + CoreVersionInfo.LongVersion);
+		
+		Configuration config = new Configuration(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "mullak99" + File.separator + CoreUtil.ModID + ".mullak99cfg"));
 
 		try {
 			config.load();
@@ -115,7 +120,7 @@ public class mullakCore {
 				config.save();
 			}
 			else {
-				
+				return;
 			}
 		}	
 
@@ -126,6 +131,8 @@ public class mullakCore {
 		
 		if(SuperHardModeCore) {
 			System.out.println(CoreUtil.mullakCoreString + "Super Hardmode is still in developement!");
+		} else {
+			return;
 		}
 		
 	}

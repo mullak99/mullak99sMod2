@@ -32,7 +32,6 @@ public class ClientProxy extends CommonProxy
     {
     	
 		MinecraftForge.EVENT_BUS.register(new CapeCore());
-		MinecraftForge.EVENT_BUS.register(new registerMullak99Sounds());
 		RenderingRegistry.registerEntityRenderingHandler(mullak99Mob.class, new RenderMullak99Mob(new ModelBiped(), 0.5F, 0));
 		RenderingRegistry.registerEntityRenderingHandler(lucozade_wallerMob.class, new RenderLucozade_wallerMob(new ModelBiped(), 0.5F, 0));
 		RenderingRegistry.registerEntityRenderingHandler(ThundercoyoteMob.class, new RenderThundercoyoteMob(new ModelBiped(), 0.5F, 0));
@@ -45,6 +44,11 @@ public class ClientProxy extends CommonProxy
     {
         return RenderingRegistry.addNewArmourRendererPrefix(armor);
     }
+    
+    @Override
+	public void registerSound() {
+		MinecraftForge.EVENT_BUS.register(new registerMullak99Sounds());
+	}
     
 	
 	public void setupCapes()

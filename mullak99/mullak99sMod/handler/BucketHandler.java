@@ -35,29 +35,29 @@ public class BucketHandler {
         	
         	if(fullBottle == null) return;
         	
-        	event.world.setBlockToAir(event.target.blockX, event.target.blockY, event.target.blockZ);
         	event.result = fullBottle;
-        	event.setResult(Result.ALLOW);
+        	event.setResult(Result.DENY);
         }
-        
+    	
         
         
         private ItemStack getFluidBucket(World world, MovingObjectPosition pos) {
+        	ItemStack k = new ItemStack(Item.bucketEmpty);
         	int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
         	if(blockID == mullak99.bloodLiquid.blockID) return new ItemStack(mullak99.bloodBucket);
-
+        	if(k.equals(k)) {
+        		k.stackSize--;
+        	}
         	
         	return null;
         }
         
-        private ItemStack getFluidBottle(World world, MovingObjectPosition pos) {
-        	ItemStack k = new ItemStack(Item.potion, 1);
+        
+		private ItemStack getFluidBottle(World world, MovingObjectPosition pos) {
         	int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
-        	if(blockID == mullak99.bloodLiquid.blockID) return new ItemStack(mullak99.blood);
-    	
-    	if(k.equals(k)) {
-    		k.stackSize--;
-    	}
-        	return null;
-        }
+        	if(blockID == mullak99.bloodLiquid.blockID) return null;
+        	else return null;
+        	
+		}
+        	
 }

@@ -159,7 +159,7 @@ public class ProNinjaGamerMob extends EntityMob
 
 	    protected String getHurtSound()
 	    {
-	        return "mullak99:mobs/Pro_Ninja_GamerHurt";
+	        return "mullak99:mobs.Pro_Ninja_GamerHurt";
 	    }
 
 
@@ -205,6 +205,6 @@ public class ProNinjaGamerMob extends EntityMob
 	    @Override
 	    protected float getSoundVolume()
 	    {
-	        return 0.4F;
+	        return 1.0F;
 	    }
 }

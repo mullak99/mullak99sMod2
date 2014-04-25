@@ -45,6 +45,7 @@ public class enchantedMelon extends ItemFood
             par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 24000, 1));
             par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 6000, 1));
             par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 6000, 1));
+            par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.id, 6000, 1));
         }
 
         else

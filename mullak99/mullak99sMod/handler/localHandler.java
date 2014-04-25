@@ -1,10 +1,12 @@
 package mullak99.mullak99sMod.handler;
 
 import mullak99.mullak99sMod.mullak99;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class localHandler implements ICraftingHandler {
@@ -69,6 +71,19 @@ public class localHandler implements ICraftingHandler {
 						craftMatrix.setInventorySlotContents(i, k);
 					}
 				}
+				if(craftMatrix.getStackInSlot(i) != null) {
+					ItemStack j = craftMatrix.getStackInSlot(i);
+					
+					if(j.getItem() != null && j.getItem() == mullak99.enditeHammer) {
+						ItemStack k = new ItemStack(mullak99.enditeHammer, 2, (j.getItemDamage() + 1));
+						
+						if(k.getItemDamage() >= k.getMaxDamage()) {
+							k.stackSize--;
+						}
+						
+						craftMatrix.setInventorySlotContents(i, k);
+					}
+				}
 				
 				/*if(craftMatrix.getStackInSlot(i) != null) {
 					ItemStack j = craftMatrix.getStackInSlotOnClosing(i);
@@ -95,5 +110,7 @@ public class localHandler implements ICraftingHandler {
 	public void onSmelting(EntityPlayer player, ItemStack item) {
 
 	}
+	
+	
 
 }

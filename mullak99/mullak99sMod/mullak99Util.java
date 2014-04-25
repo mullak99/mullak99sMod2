@@ -16,20 +16,8 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class mullak99Util {
-	
-	public static boolean isDevVersionBoolean = true;
 
 	public static String ModID = "mullak99's Mod 2";
-	public static String VersionTitle = "Alpha";
-	public static String VersionTitleS = "A";
-	public static String VersionNo = "0.1.0";
-	public static String Version = VersionTitle + " " + VersionNo;
-	
-	public static String DevState = "Pre-Release ";
-	public static String DevStateNo = "1";
-	
-	public static String LongVersion = VersionTitle + " " + VersionNo;
-	public static String ShortVersion = VersionTitleS + VersionNo;
 	
 	public static String DevCapePicURL = "https://raw.github.com/mullak99/mullak99sMod2/master/capes/DevCape/DevCape.png";
 	public static String DevCapeTXTURL = "https://raw.github.com/mullak99/mullak99sMod2/master/capes/DevCape/DevCapes.txt";
@@ -59,7 +47,7 @@ public class mullak99Util {
 	public static String currentVersionText;
 	
 	
-	public static String mullak99sMod2String = "[mullak99's Mod 2] ";
+	public static String mullak99sMod2String = "[" + ModID +"] ";
 	public static String MTNTDisabledMSG = mullak99sMod2String + "Mullite TNT explosion is currently disabled on this client/server, but you can still place it";
 	public static String MTNTWARNING = mullak99sMod2String + "Mullite TNT could cause lag, crashes, corruption and massive destruction, use with caution!";
 	

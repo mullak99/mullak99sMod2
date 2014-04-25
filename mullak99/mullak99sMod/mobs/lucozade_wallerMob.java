@@ -161,19 +161,19 @@ public class lucozade_wallerMob extends EntityMob
     
 	    protected String getLivingSound()
 	    {
-	        return null;
+	        return "mullak99:mobs.lucozade_wallerLiving";
 	    }
 
 
 	    protected String getHurtSound()
 	    {
-	        return "mullak99:mobs/lucozade_wallerHurt";
+	        return "mullak99:mobs.lucozade_wallerHurt";
 	    }
 
 
 	    protected String getDeathSound()
 	    {
-	        return null;
+	        return "mullak99:mobs.lucozade_wallerDeath";
 	    }
 
 	    @Override
@@ -213,6 +213,6 @@ public class lucozade_wallerMob extends EntityMob
 	    @Override
 	    protected float getSoundVolume()
 	    {
-	        return 0.4F;
+	        return 1.0F;
 	    }
 }

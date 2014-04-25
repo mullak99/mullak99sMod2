@@ -167,7 +167,7 @@ public class mullak99Mob extends EntityMob
 
 	    protected String getHurtSound()
 	    {
-	        return "mullak99:mobs/mullak99Hurt";
+	        return "mullak99:mobs.mullak99Hurt";
 	    }
 
 
@@ -213,6 +213,6 @@ public class mullak99Mob extends EntityMob
 	    @Override
 	    protected float getSoundVolume()
 	    {
-	        return 0.4F;
+	        return 1.0F;
 	    }
 }

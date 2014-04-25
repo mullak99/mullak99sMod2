@@ -2,7 +2,7 @@ package mullak99.mullak99sMod.blocks;
 
 import java.util.List;
 import java.util.Random;
-
+import mullak99.mullak99sMod.mullak99;
 import mullak99.mullak99sMod.mullak99CT;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
@@ -48,9 +48,13 @@ public class clearGlassPane extends BlockPane
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return !this.canDropItself ? 0 : super.idDropped(par1, par2Random, par3);
+        return mullak99.thinClearGlass.blockID;
     }
     
+    public int quantityDropped(Random par1Random)
+    {
+        return 1;
+    }
 
     /**
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two

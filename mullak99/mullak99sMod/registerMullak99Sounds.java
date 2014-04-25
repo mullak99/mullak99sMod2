@@ -11,6 +11,11 @@ public class registerMullak99Sounds {
 		event.manager.addSound("mullak99:mobs/ThundercoyoteHurt.ogg");
 		event.manager.addSound("mullak99:mobs/Pro_Ninja_GamerHurt.ogg");
 		event.manager.addSound("mullak99:mobs/lucozade_wallerHurt.ogg");
+		
+		event.manager.addSound("mullak99:mobs/lucozade_wallerLiving1.ogg");
+		event.manager.addSound("mullak99:mobs/lucozade_wallerLiving2.ogg");
+		event.manager.addSound("mullak99:mobs/lucozade_wallerDeath.ogg");
+		event.manager.addSound("mullak99:explosion/MTNT.ogg");
 	}
 
 }

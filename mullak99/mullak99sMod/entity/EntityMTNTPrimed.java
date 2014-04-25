@@ -30,7 +30,7 @@ public class EntityMTNTPrimed extends Entity
         this.motionX = (double)(-((float)Math.sin((double)f)) * 0.02F);
         this.motionY = 0.20000000298023224D;
         this.motionZ = (double)(-((float)Math.cos((double)f)) * 0.02F);
-        this.fuse = 80;
+        this.fuse = 225;
         this.prevPosX = par2;
         this.prevPosY = par4;
         this.prevPosZ = par6;
@@ -75,6 +75,10 @@ public class EntityMTNTPrimed extends Entity
             this.motionX *= 0.699999988079071D;
             this.motionZ *= 0.699999988079071D;
             this.motionY *= -0.5D;
+        }
+        
+        if (this.fuse-- == 225) {
+        	this.worldObj.playSoundAtEntity(this, "mullak99:explosion.MTNT", 100.0F, 1.0F);
         }
 
         if (this.fuse-- <= 0)

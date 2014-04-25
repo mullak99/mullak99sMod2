@@ -32,6 +32,7 @@ public class IWeight {
 	private float WeightModifierWorkout(EntityPlayer player) {
 		
 		player.getFoodStats().setFoodSaturationLevel(-WeightModifier);
+		player.addExhaustion(WeightModifier);
 		return WeightModifier;
 	}
 }

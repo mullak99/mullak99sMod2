@@ -2,6 +2,7 @@ package mullak99.mullak99sMod.blocks;
 
 import java.util.Random;
 
+import mullak99.mullak99sMod.mullak99;
 import mullak99.mullak99sMod.mullak99CT;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -21,9 +22,13 @@ public class clearGlass extends BlockBreakable
      */
     public int quantityDropped(Random par1Random)
     {
-        return 0;
+        return 1;
     }
-
+    
+    public int idDropped(int par1, Random par2Random, int par3)
+    {
+        return mullak99.clearGlass.blockID;
+    }
     @SideOnly(Side.CLIENT)
 
     /**

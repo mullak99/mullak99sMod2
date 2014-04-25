@@ -1,7 +1,8 @@
 package mullak99.mullak99sMod.handler;
 
-import mullak99.mullak99sMod.mullak99Util;
 import mullak99.mullak99sMod.mullak99;
+import mullak99.mullak99sMod.mullak99Util;
+import mullak99.mullak99sMod.mullak99VersionInfo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.NetLoginHandler;
@@ -18,20 +19,39 @@ public class PlayerHandler implements IConnectionHandler, IPlayerTracker {
 
 	@Override
 	public void playerLoggedIn(Player player, NetHandler netHandler, INetworkManager manager) {
-		if(mullak99.ShortHand) {
-			if(mullak99Util.isDevVersionBoolean) {
-				netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "- " + mullak99Util.ModID + ", " + mullak99Util.ShortVersion + mullak99Util.DevState + mullak99Util.DevStateNo + " -");
+		if (mullak99.JoinMsg) {
+			if(mullak99VersionInfo.isDevVersion && !mullak99VersionInfo.isPreVersion) {
+				if(mullak99.ShortHand) {
+					netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "= " + mullak99Util.ModID + ", " + mullak99VersionInfo.ShortVersion + mullak99VersionInfo.DevStateS + mullak99VersionInfo.DevStateNo + " =");
+				} else {
+					netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "= " + mullak99Util.ModID + ", " + mullak99VersionInfo.LongVersion + " " + mullak99VersionInfo.DevState + mullak99VersionInfo.DevStateNo + " =");
+				}
+			}
+			else if(!mullak99VersionInfo.isDevVersion && mullak99VersionInfo.isPreVersion) {
+				if(mullak99.ShortHand) {
+					netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "= " + mullak99Util.ModID + ", " + mullak99VersionInfo.ShortVersion + mullak99VersionInfo.PreStateS + mullak99VersionInfo.PreStateNo + " =");
+				} else {
+					netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "= " + mullak99Util.ModID + ", " + mullak99VersionInfo.LongVersion + " " + mullak99VersionInfo.PreState + mullak99VersionInfo.PreStateNo + " =");
+				}
+			} 
+			else if(mullak99VersionInfo.isDevVersion && mullak99VersionInfo.isPreVersion) {
+				if(mullak99.ShortHand) {
+					netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "= " + mullak99Util.ModID + ", " + mullak99VersionInfo.ShortVersion + mullak99VersionInfo.PreStateS + mullak99VersionInfo.PreStateNo + " - " + mullak99VersionInfo.DevStateS + mullak99VersionInfo.DevStateNo + " =");
+				} else {
+					netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "= " + mullak99Util.ModID + ", " + mullak99VersionInfo.LongVersion + " " + mullak99VersionInfo.PreState + mullak99VersionInfo.PreStateNo + " - " + mullak99VersionInfo.DevState + mullak99VersionInfo.DevStateNo + " =");
+				}
+			} else if(!mullak99VersionInfo.isDevVersion && !mullak99VersionInfo.isPreVersion) {
+				if(mullak99.ShortHand) {
+					netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "= " + mullak99Util.ModID + ", " + mullak99VersionInfo.ShortVersion + " =");
+				} else {
+					netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "= " + mullak99Util.ModID + ", " + mullak99VersionInfo.LongVersion + " =");
+				}
 			} else {
-				netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "- " + mullak99Util.ModID + ", " + mullak99Util.ShortVersion + " -");
+				System.out.println(mullak99Util.mullak99sMod2String + "Error in playerLoggedIn, PlayerHandler.class - Please report this to mullak99");
 			}
 		} else {
-			if(mullak99Util.isDevVersionBoolean) {
-				netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "- " + mullak99Util.ModID + ", " + mullak99Util.LongVersion + " " + mullak99Util.DevState + mullak99Util.DevStateNo + " -");
-			} else {
-				netHandler.getPlayer().addChatMessage(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.AQUA.toString() + "- " + mullak99Util.ModID + ", " + mullak99Util.LongVersion + " -");
-			}
+			return;
 		}
-	
 	}
 
 	@Override
@@ -78,5 +98,7 @@ public class PlayerHandler implements IConnectionHandler, IPlayerTracker {
 	public void onPlayerRespawn(EntityPlayer player) {
 		
 	}
+	
+	
 
 }
