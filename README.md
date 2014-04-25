@@ -4,7 +4,7 @@ mullak99's Mod 2
 CALCLAVIA CORE API AND UNIVERSAL ELECTRICITY API IS LICENCED TO CALCLAVIA AND NOT ME (MULLAK99), ALL RIGHTS GO TO CALCLAVIA.
 
 
-~~ Insalling/Using Source Code~~
+~~ Insalling/Using Source Code ~~
 
 Requirements:
 - Java Development Kit (JDK)
@@ -17,7 +17,7 @@ click "Download Zip" on the right on Github (For my mod SRC)
 - 4) Once its finished go to "/mcp/src/minecraft" and drag the all the files from my mod SRC into there
 
 ~ Optional if you want to tweak the mod ~
-- 5) Launch eclipse (Or what ever you used)
+- 5) Launch eclipse (Or what ever you use)
 - 6) *If you used Eclipse* The workspace you will need is the location of the "eclipse" folder (root/mcp/eclipse)
 
 ~ Then Compile the mod ~
