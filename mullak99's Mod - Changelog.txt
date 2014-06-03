@@ -135,6 +135,12 @@
 - Added Blood Bucket
 - Added Ender Battery (Infinitly lasting Battery)
 - Added Mullite TNT
+- Added Silver
+- Added Sulfur
+- Ore Dictionary changes
+- Thors Hammer
+- Endite (Ore in the End)
+- Nether Sulfur (Ore in the Nether)
 - Rearranged source code so its neater
 - Displays mod info when loading into a SP or MP game
 
